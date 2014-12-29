@@ -6,6 +6,6 @@ import java.sql.Statement;
 public class ConnectionStatus {
 
 	static Connection connection;
-	public static Statement statement;
+	static Statement statement;
 
 }
