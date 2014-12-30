@@ -10,7 +10,7 @@ public class QueryParams {
     private final int resultCount;
 
     private List<String> columnList;
-    private List<String> sortColumns;
+    private List<Sort> sortColumns;
     private Filter filter;
 
     public QueryParams(String tableId, int firstResult, int resultCount) {
