@@ -15,8 +15,6 @@ public class App {
 	
 	public static void main(String[] args) throws SQLException {
 		
-		Statement statement = null;
-		
 		
 		// hello world
 		System.out.println("Hello World and fuck yourself!");
