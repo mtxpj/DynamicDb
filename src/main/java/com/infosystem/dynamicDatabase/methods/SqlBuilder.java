@@ -46,14 +46,14 @@ public class SqlBuilder {
 		return sqlCommand.toString();
 	}
 
-	public String deleteTable(String tableId) {
+	public static String deleteTable(String tableId) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("DROP TABLE ");
 		sb.append(tableId);
 		return sb.toString();
 	}
 
-	public String existsTable(String tableId) {
+	public static String existsTable(String tableId) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT 1 FROM ");
 		sb.append(tableId);
@@ -61,13 +61,15 @@ public class SqlBuilder {
 		return sb.toString();
 	}
 
-	public String insertDataRow(DataRow row) {
+	public static String insertDataRow(DataRow row) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO ");
 		sb.append(row.getTableId() + " ( ");
 		Map<String, DataHolder> dataHolder = row.getData();
 		// skąd wziąć nazwy kolumn które mamy updatować?
-
+for (int i = 0; i < dataHolder.size(); i++) {
+	sb.append(dataHolder)
+}
 		sb.append(" )\nVALUES\n( ");
 		for (int i = 0; i < dataHolder.size(); i++) {
 			sb.append(dataHolder.get(i).getString() + ", ");
