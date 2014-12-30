@@ -15,13 +15,33 @@ public class DynamicDatabaseManagerCommands implements DynamicDatabaseManager {
 	public String create(TableDefinition tableDefinition) {
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("CREATE TABLE ");
-		sqlCommand.append(tableDefinition.getId() + "(\n");
+		sqlCommand.append(tableDefinition.getId() + " (\n");
 		sqlCommand.append("id INT NOT NULL AUTO_INCREMENT, \n");
 		List<ColumnDefinition> listaKolumn = tableDefinition.getColumnList();
 		for (ColumnDefinition columnDefinition : listaKolumn) {
 			sqlCommand.append(columnDefinition.getId() + " ");
-			sqlCommand.append(columnDefinition.getDataType() + " ");
+			switch (columnDefinition.getDataType()) {
+			case NUMBER:
+				sqlCommand.append("INT (255) ");
+				break;
+			case STRING:
+				sqlCommand.append("VARCHAR (255) ");
+				break;
+			case DATE:
+				sqlCommand.append("DATE ");
+				break;
+			case PREDEFINED_VALUE:
+				sqlCommand.append("VARCHAR (255) ");
+				break;
+			case SUB_SET:
+				sqlCommand.append("DATE ");
+				break;
+			default:
+				sqlCommand.append("VARCHAR (255) ");
+				break;
+			}
 			sqlCommand.append(columnDefinition.getColumnDef() + ", \n");
+
 			// co z labelami?
 		}
 		sqlCommand.append("PRIMARY KEY ( id )\n);");
@@ -70,8 +90,8 @@ public class DynamicDatabaseManagerCommands implements DynamicDatabaseManager {
 		sb.append(" FROM ");
 		sb.append(queryParams.getTableId());
 		sb.append("WHERE ");
-		
-		//do filter interface interpreter
+
+		// do filter interface interpreter
 		sb.append(queryParams.getFilter());
 		sb.append(" ORDER BY ");
 		List<String> sortColumns = queryParams.getSortColumns();

@@ -1,7 +1,5 @@
 package com.infosystem.dynamicDatabase;
 
-import java.util.List;
-
 import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.TableDefinition;

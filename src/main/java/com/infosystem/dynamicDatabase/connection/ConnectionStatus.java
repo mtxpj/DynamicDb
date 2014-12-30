@@ -5,7 +5,7 @@ import java.sql.Statement;
 
 public class ConnectionStatus {
 
-	static Connection connection;
-	static Statement statement;
+	public static Connection connection;
+	public static Statement statement;
 
 }
