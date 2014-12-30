@@ -10,7 +10,9 @@ import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 
 public class SqlBuilder {
-	public static String create(TableDefinition tableDefinition) {
+	
+	public static String createOrUpdate(TableDefinition tableDefinition) {
+		
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("CREATE TABLE ");
 		sqlCommand.append(tableDefinition.getId() + " (\n");
@@ -46,19 +48,16 @@ public class SqlBuilder {
 		return sqlCommand.toString();
 	}
 
-	public String deleteTable(String tableId) {
+	public static String deleteTable(String tableId) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("DROP TABLE ");
 		sb.append(tableId);
 		return sb.toString();
 	}
 
-	public String existsTable(String tableId) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT 1 FROM ");
-		sb.append(tableId);
-		sb.append(" LIMIT 1");
-		return sb.toString();
+	public static String existsTable(String tableId) {
+		// replaced by TableExist method
+		return null;
 	}
 
 	public String insertDataRow(DataRow row) {

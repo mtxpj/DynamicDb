@@ -2,9 +2,9 @@ package com.infosystem.dynamicDatabase.connection;
 
 public class MaintainConnection {
 
-	public static void connect(String db) {
+	public static void connect(String DB_NAME) {
 		if (ConnectionStatus.connection == null) {
-			LocalhostConnector.openConnection(db);
+			LocalhostConnector.openConnection(DB_NAME);
 		}
 	}
 }
