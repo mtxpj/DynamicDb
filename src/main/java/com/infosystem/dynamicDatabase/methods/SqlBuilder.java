@@ -73,7 +73,7 @@ public class SqlBuilder {
 		// deklaracja wiersza
 		Map<String, DataHolder> dataHolder = row.getData();
 		
-		// wywo≥anie tabeli do ktÛrek wk≥adamy
+		// wywo≈Çanie tabeli do kt√≥rek wk≈Çadamy
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("INSERT INTO ");
 		sqlCommand.append(row.getTableId());
@@ -85,7 +85,7 @@ public class SqlBuilder {
 //		}
 //		sqlCommand.append(" )");
 		
-		// podanie wartoúci
+		// podanie warto≈õci
 		sqlCommand.append("\nVALUES ( ");
 		Random random = new Random();
 		int val = random.nextInt(100);
@@ -106,7 +106,7 @@ public class SqlBuilder {
 				sqlCommand.append(dataHolder.get("kolumna_"+(i+1)).getBool() + ", ");
 				break;
 			case SUB_SET:
-				// coú napewno :)
+				// co≈õ na pewno :)
 				break;
 			}
 		}

@@ -16,20 +16,20 @@ public class Methods implements DynamicDatabaseManager {
 	
 	public String createOrUpdate(TableDefinition tableDefinition) {
 		
-		// zapewnienie po³¹czenia
+		// zapewnienie poÅ‚Ä…czenia
 		MaintainConnection.connect(App.DB_NAME);
 		
 		// przygotowanie komendy
 		String command = SqlBuilder.createOrUpdate(tableDefinition);
 		
-		// obs³uga komendy
+		// obsÅ‚uga komendy
 		try {
 			ConnectionStatus.statement.executeUpdate(command);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("b³¹d polecenia SQL w metodzie createOrUpdate");
-			return "b³¹d polecenia SQL w metodzie createOrUpdate";
+			System.out.println("bï¿½ï¿½d polecenia SQL w metodzie createOrUpdate");
+			return "bï¿½ï¿½d polecenia SQL w metodzie createOrUpdate";
 		}
 		
 		return null;
@@ -38,19 +38,19 @@ public class Methods implements DynamicDatabaseManager {
 	
 	public boolean deleteTable(String tableId) {
 		
-		// zapewnienie po³¹czenia
+		// zapewnienie poÅ‚Ä…czenia
 		MaintainConnection.connect(App.DB_NAME);
 		
 		// przygotowanie komendy
 		String command = SqlBuilder.deleteTable(tableId);
 		
-		// obs³uga komendy
+		// obsÅ‚uga komendy
 		try {
 			ConnectionStatus.statement.executeUpdate(command);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("b³¹d polecenia SQL w metodzie deleteTable");
+			System.out.println("bï¿½ï¿½d polecenia SQL w metodzie deleteTable");
 			return false;
 		}
 		
@@ -60,16 +60,16 @@ public class Methods implements DynamicDatabaseManager {
 	
 	public boolean existsTable(String tableId) {
 		
-		// zapewnienie po³¹czenia
+		// zapewnienie poÅ‚Ä…czenia
 		MaintainConnection.connect(App.DB_NAME);
 		
-		// obs³uga komendy
+		// obsÅ‚uga komendy
 		try {
 			return TableExist.ifExist(tableId);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("b³¹d polecenia SQL w metodzie existsTable");
+			System.out.println("bï¿½ï¿½d polecenia SQL w metodzie existsTable");
 		}
 		
 		return false;
@@ -78,13 +78,13 @@ public class Methods implements DynamicDatabaseManager {
 	
 	public Long insertDataRow(DataRow row) {
 		
-		// zapewnienie po³¹czenia
+		// zapewnienie poÅ‚Ä…czenia
 		MaintainConnection.connect(App.DB_NAME);
 
 		// przygotowanie komendy
 		String command = SqlBuilder.insertDataRow(row);
 
-		// obs³uga komendy
+		// obsÅ‚uga komendy
 		try {
 			ConnectionStatus.statement.executeUpdate(command);
 			
@@ -106,19 +106,19 @@ public class Methods implements DynamicDatabaseManager {
 	
 	public boolean deleteDataRow(String tableId, Long rowId) {
 		
-		// zapewnienie po³¹czenia
+		// zapewnienie poÅ‚Ä…czenia
 		MaintainConnection.connect(App.DB_NAME);
 				
 		// przygotowanie komendy
 		String command = SqlBuilder.deleteDataRow(tableId, rowId);
 		
-		// obs³uga komendy
+		// obsÅ‚uga komendy
 		try {
 			ConnectionStatus.statement.executeUpdate(command);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("b³¹d polecenia SQL w metodzie deleteDataRow");
+			System.out.println("bï¿½ï¿½d polecenia SQL w metodzie deleteDataRow");
 			return false;
 		}
 		

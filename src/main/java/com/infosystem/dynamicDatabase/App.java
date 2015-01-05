@@ -28,7 +28,7 @@ public class App {
 		Methods komendy = new Methods();
 
 		if (komendy.createOrUpdate(tableDefinition) == null) {
-			System.out.println("stworzono tablicê " + TABLE_NAME);
+			System.out.println("stworzono tablicÄ™ " + TABLE_NAME);
 		}
 
 		if (komendy.existsTable(tableDefinition.getId()) == true) {
@@ -37,7 +37,7 @@ public class App {
 			System.out.println("tablica o nazwie " + TABLE_NAME + " nie istnieje");
 		}
 
-		// wype³nianie tabeli losowymi liczbami
+		// wypeÅ‚nianie tabeli losowymi liczbami
 		for (int i=0; i<15; i+=1){
 			DataRow wierszLiczby = CreateSample.fillRowJeden();
 			komendy.insertDataRow(wierszLiczby);
@@ -46,7 +46,7 @@ public class App {
 		
 		// usuwanie tabeli
 //		if (komendy.deleteTable(tableDefinition.getId()) == true) {
-//			System.out.println("tablica o nazwie " + TABLE_NAME + " zosta³a usuniêta");
+//			System.out.println("tablica o nazwie " + TABLE_NAME + " zostaÅ‚a usuniÄ™ta");
 //		}
 //
 //		if (komendy.existsTable(tableDefinition.getId()) == true) {
