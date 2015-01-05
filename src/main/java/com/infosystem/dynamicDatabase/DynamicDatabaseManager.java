@@ -10,20 +10,20 @@ public interface DynamicDatabaseManager {
 
     /**
      * @param tableDefinition
-     * @return null if operation is succesful, errorDescription if operation
-     *         failed;
+     * @return null if operation is successful, 
+     * errorDescription if operation failed;
      */
     public String createOrUpdate(TableDefinition tableDefinition);
 
     /**
      * @param tableId
-     * @return true if delete was succesful
+     * @return true if delete was successful
      */
     public boolean deleteTable(String tableId);
 
     /**
      * @param tableId
-     * @return true if table exsits in warehouse
+     * @return true if table exists in warehouse
      */
     public boolean existsTable(String tableId);
 
@@ -35,7 +35,7 @@ public interface DynamicDatabaseManager {
 
     /**
      * @param queryParams
-     * @return list rows which fullfill QueryParams criteria
+     * @return list rows which fulfill QueryParams criteria
      */
     public List<DataRow> getDataRows(QueryParams queryParams);
 
@@ -47,7 +47,7 @@ public interface DynamicDatabaseManager {
     public boolean deleteDataRow(String tableId, Long rowId);
 
     /**
-     * Udpates row
+     * Updates row
      * @param row
      */
     public void updateDataRow(DataRow row);

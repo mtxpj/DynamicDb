@@ -10,7 +10,9 @@ import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 
 public class SqlBuilder {
-	public static String create(TableDefinition tableDefinition) {
+	
+	public static String createOrUpdate(TableDefinition tableDefinition) {
+		
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("CREATE TABLE ");
 		sqlCommand.append(tableDefinition.getId() + " (\n");
