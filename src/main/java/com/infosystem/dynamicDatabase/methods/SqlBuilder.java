@@ -7,12 +7,13 @@ import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.QueryParams;
+import com.infosystem.dynamicDatabase.model.Sort;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 
 public class SqlBuilder {
-	
+
 	public static String createOrUpdate(TableDefinition tableDefinition) {
-		
+
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("CREATE TABLE ");
 		sqlCommand.append(tableDefinition.getId() + " (\n");
@@ -69,9 +70,9 @@ public class SqlBuilder {
 		sb.append(row.getTableId() + " ( ");
 		Map<String, DataHolder> dataHolder = row.getData();
 		// skąd wziąć nazwy kolumn które mamy updatować?
-for (int i = 0; i < dataHolder.size(); i++) {
-	sb.append(dataHolder)
-}
+		for (int i = 0; i < dataHolder.size(); i++) {
+			// sb.append(dataHolder)
+		}
 		sb.append(" )\nVALUES\n( ");
 		for (int i = 0; i < dataHolder.size(); i++) {
 			sb.append(dataHolder.get(i).getString() + ", ");
@@ -96,8 +97,8 @@ for (int i = 0; i < dataHolder.size(); i++) {
 		// do filter interface interpreter
 		sb.append(queryParams.getFilter());
 		sb.append(" ORDER BY ");
-		List<String> sortColumns = queryParams.getSortColumns();
-		for (String column : sortColumns) {
+		List<Sort> sortColumns = queryParams.getSortColumns();
+		for (Sort column : sortColumns) {
 			sb.append(column + ", ");
 		}
 		sb.substring(0, sb.length() - 2);

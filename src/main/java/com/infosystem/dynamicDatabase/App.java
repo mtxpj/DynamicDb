@@ -4,18 +4,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.LocalhostConnector;
-import com.infosystem.dynamicDatabase.methods.DynDataManCheckExist;
-import com.infosystem.dynamicDatabase.methods.DynamicDatabaseManagerCommands;
-import com.infosystem.dynamicDatabase.methods.DynDataManCheckExist;
+import com.infosystem.dynamicDatabase.methods.Methods;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataType;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 
 public class App {
 
-	private static final String TABLICA_PROBNA = "tablica_probna";
+	public static String DB_NAME = "test";
+	public static String TABLE_NAME = "tablica_probna";
 
 	public static void main(String[] args) throws SQLException {
 
@@ -24,7 +22,7 @@ public class App {
 
 		// create sample material
 		TableDefinition tableDefinition = new TableDefinition();
-		tableDefinition.setId(TABLICA_PROBNA);
+		tableDefinition.setId(DB_NAME);
 
 		List<ColumnDefinition> exampleColumnList = new ArrayList<ColumnDefinition>();
 
@@ -42,28 +40,26 @@ public class App {
 		LocalhostConnector.openConnection("test");
 
 		// probne komendy
-		DynamicDatabaseManagerCommands komendy = new DynamicDatabaseManagerCommands();
+		Methods komendy = new Methods();
 
-		// tworzy tabele z TableDefinition
-		System.out.println(komendy.create(tableDefinition));
-		ConnectionStatus.statement.executeUpdate(komendy.create(tableDefinition));
-
-		// sprawdza czy tabela o zapodanej nazwie istnieje
-		if (DynDataManCheckExist.tableExist(ConnectionStatus.connection, TABLICA_PROBNA)) {
-			System.out.println("tablica " + TABLICA_PROBNA + " istnieje.");
-		} else {
-			System.out.println("tablica " + TABLICA_PROBNA + " nie istnieje.");
+		if (komendy.createOrUpdate(tableDefinition) == null) {
+			System.out.println("stworzono tablicê " + TABLE_NAME);
 		}
 
-		// usuwa tabele
-		System.out.println(komendy.deleteTable(TABLICA_PROBNA));
-		ConnectionStatus.statement.executeUpdate(komendy.deleteTable(TABLICA_PROBNA));
-
-		// sprawdza czy tabela o zapodanej nazwie istnieje
-		if (DynDataManCheckExist.tableExist(ConnectionStatus.connection, TABLICA_PROBNA)) {
-			System.out.println("tablica " + TABLICA_PROBNA + " istnieje.");
+		if (komendy.existsTable(tableDefinition.getId()) == true) {
+			System.out.println("tablica o nazwie " + TABLE_NAME + " istnieje");
 		} else {
-			System.out.println("tablica " + TABLICA_PROBNA + " nie istnieje.");
+			System.out.println("tablica o nazwie " + TABLE_NAME + " nie istnieje");
+		}
+
+		if (komendy.deleteTable(tableDefinition.getId()) == true) {
+			System.out.println("tablica o nazwie " + TABLE_NAME + " zosta³a usuniêta");
+		}
+
+		if (komendy.existsTable(tableDefinition.getId()) == true) {
+			System.out.println("tablica o nazwie " + TABLE_NAME + " istnieje");
+		} else {
+			System.out.println("tablica o nazwie " + TABLE_NAME + " nie istnieje");
 		}
 
 		// close connection

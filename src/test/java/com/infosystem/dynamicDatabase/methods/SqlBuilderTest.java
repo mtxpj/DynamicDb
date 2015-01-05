@@ -59,7 +59,7 @@ public class SqlBuilderTest {
 				+ "kolumna_2 DATE null, \n" + "kolumna_3 DATE null, \n" + "kolumna_4 DATE null, \n" + "kolumna_5 DATE null, \n"
 				+ "kolumna_6 DATE null, \n" + "kolumna_7 DATE null, \n" + "kolumna_8 DATE null, \n" + "kolumna_9 DATE null, \n"
 				+ "kolumna_10 DATE null, \n" + "PRIMARY KEY ( id )\n" + ");";
-		String actual = SqlBuilder.create(tableDefinition);
+		String actual = SqlBuilder.createOrUpdate(tableDefinition);
 		assertEquals(expected, actual);
 	}
 
