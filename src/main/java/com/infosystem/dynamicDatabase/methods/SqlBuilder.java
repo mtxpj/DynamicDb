@@ -2,6 +2,7 @@ package com.infosystem.dynamicDatabase.methods;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataHolder;
@@ -17,7 +18,7 @@ public class SqlBuilder {
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("CREATE TABLE ");
 		sqlCommand.append(tableDefinition.getId() + " (\n");
-		sqlCommand.append("id INT NOT NULL AUTO_INCREMENT, \n");
+		sqlCommand.append("id INT NOT NULL AUTO_INCREMENT,\n");
 		List<ColumnDefinition> listaKolumn = tableDefinition.getColumnList();
 		for (ColumnDefinition columnDefinition : listaKolumn) {
 			sqlCommand.append(columnDefinition.getId() + " ");
@@ -46,6 +47,7 @@ public class SqlBuilder {
 			// co z labelami?
 		}
 		sqlCommand.append("PRIMARY KEY ( id )\n);");
+		System.out.println(sqlCommand.toString());
 		return sqlCommand.toString();
 	}
 
@@ -53,6 +55,7 @@ public class SqlBuilder {
 		StringBuilder sb = new StringBuilder();
 		sb.append("DROP TABLE ");
 		sb.append(tableId);
+		sb.append(" ;");
 		return sb.toString();
 	}
 
@@ -61,25 +64,61 @@ public class SqlBuilder {
 		sb.append("SELECT 1 FROM ");
 		sb.append(tableId);
 		sb.append(" LIMIT 1");
+		sb.append(" ;");
 		return sb.toString();
 	}
 
 	public static String insertDataRow(DataRow row) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("INSERT INTO ");
-		sb.append(row.getTableId() + " ( ");
+		
+		// deklaracja wiersza
 		Map<String, DataHolder> dataHolder = row.getData();
-		// skÄ…d wziÄ…Ä‡ nazwy kolumn ktÃ³re mamy updatowaÄ‡?
+		
+		// wywo³anie tabeli do którek wk³adamy
+		StringBuilder sqlCommand = new StringBuilder();
+		sqlCommand.append("INSERT INTO ");
+		sqlCommand.append(row.getTableId());
+		
+		// podanie listy kolumn
+//		sqlCommand.append(" ( ");
+//		for (String key : dataHolder.keySet()){
+//			sqlCommand.append(key + ", ");
+//		}
+//		sqlCommand.append(" )");
+		
+		// podanie wartoœci
+		sqlCommand.append("\nVALUES ( ");
+		Random random = new Random();
+		int val = random.nextInt(100);
+		sqlCommand.append((row.getRowId() + val)  + ", ");
 		for (int i = 0; i < dataHolder.size(); i++) {
-			// sb.append(dataHolder)
+			
+			switch (dataHolder.get("kolumna_"+(i+1)).getDataType()) {
+			case NUMBER:
+				sqlCommand.append(dataHolder.get("kolumna_"+(i+1)).getNumber() + ", ");
+				break;
+			case DATE:
+				sqlCommand.append(dataHolder.get("kolumna_"+(i+1)).getDate() + ", ");
+				break;
+			case STRING:
+				sqlCommand.append(dataHolder.get("kolumna_"+(i+1)).getString() + ", ");
+				break;
+			case PREDEFINED_VALUE:
+				sqlCommand.append(dataHolder.get("kolumna_"+(i+1)).getBool() + ", ");
+				break;
+			case SUB_SET:
+				// coœ napewno :)
+				break;
+			}
 		}
-		sb.append(" )\nVALUES\n( ");
-		for (int i = 0; i < dataHolder.size(); i++) {
-			sb.append(dataHolder.get(i).getString() + ", ");
-		}
-		sb.substring(0, sb.length() - 2);
-		sb.append(" )");
-		return sb.toString();
+		
+		String substring = sqlCommand.substring(0, (sqlCommand.length() - 2));
+		sqlCommand = new StringBuilder();
+		sqlCommand.append(substring);
+		sqlCommand.append(" );");
+		
+		// wydruk komendy i zwrot
+		System.out.println(sqlCommand.toString());
+		return sqlCommand.toString();
 	}
 
 	public String getDataRows(QueryParams queryParams) {
@@ -109,12 +148,13 @@ public class SqlBuilder {
 		return sb.toString();
 	}
 
-	public String deleteDataRow(String tableId, Long rowId) {
+	public static String deleteDataRow(String tableId, Long rowId) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("DELETE FROM ");
 		sb.append(tableId);
 		sb.append(" WHERE id=");
 		sb.append(rowId);
+		sb.append(" ;");
 		return sb.toString();
 	}
 

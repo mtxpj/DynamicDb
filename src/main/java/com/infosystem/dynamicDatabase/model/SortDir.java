@@ -1,5 +1,5 @@
 package com.infosystem.dynamicDatabase.model;
 
-public enum SORTDIR {
+public enum SortDir {
 	ASC, DESC
 }
