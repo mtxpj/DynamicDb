@@ -43,7 +43,7 @@ public class App {
 		Methods komendy = new Methods();
 
 		if (komendy.createOrUpdate(tableDefinition) == null) {
-			System.out.println("stworzono tablicÃª " + TABLE_NAME);
+			System.out.println("stworzono tablicê " + TABLE_NAME);
 		}
 
 		if (komendy.existsTable(tableDefinition.getId()) == true) {
@@ -53,7 +53,7 @@ public class App {
 		}
 
 		if (komendy.deleteTable(tableDefinition.getId()) == true) {
-			System.out.println("tablica o nazwie " + TABLE_NAME + " zostaÂ³a usuniÃªta");
+			System.out.println("tablica o nazwie " + TABLE_NAME + " zosta³a usuniêta");
 		}
 
 		if (komendy.existsTable(tableDefinition.getId()) == true) {
