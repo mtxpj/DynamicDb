@@ -1,13 +1,10 @@
 package com.infosystem.dynamicDatabase;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.infosystem.dynamicDatabase.connection.LocalhostConnector;
 import com.infosystem.dynamicDatabase.methods.Methods;
-import com.infosystem.dynamicDatabase.model.ColumnDefinition;
-import com.infosystem.dynamicDatabase.model.DataType;
+import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 
 public class App {
@@ -18,33 +15,21 @@ public class App {
 	public static void main(String[] args) throws SQLException {
 
 		// hello world
-		System.out.println("Hello World and fuck yourself!");
+		System.out.println("Hello World");
 
 		// create sample material
 		TableDefinition tableDefinition = new TableDefinition();
-		tableDefinition.setId(DB_NAME);
-
-		List<ColumnDefinition> exampleColumnList = new ArrayList<ColumnDefinition>();
-
-		for (int i = 0; i < 10; i += 1) {
-			ColumnDefinition exampleColumnDefinition = new ColumnDefinition();
-			exampleColumnDefinition.setId("kolumna_" + (i + 1));
-			exampleColumnDefinition.setDataType(DataType.DATE);
-			exampleColumnList.add(i, exampleColumnDefinition);
-			System.out.println(exampleColumnList.get(i).getId());
-		}
-
-		tableDefinition.setColumnList(exampleColumnList);
+		tableDefinition = CreateSample.createSampleTable();
 
 		// connect to database
 		LocalhostConnector.openConnection(DB_NAME);
 
-		// probne komendy
+		// tworzenie tabeli
 		Methods komendy = new Methods();
 
 		if (komendy.createOrUpdate(tableDefinition) == null) {
-			System.out.println("stworzono tablicê " + TABLE_NAME);
-		}
+			System.out.println("stworzono tablicę " + TABLE_NAME);
+		 }
 
 		if (komendy.existsTable(tableDefinition.getId()) == true) {
 			System.out.println("tablica o nazwie " + TABLE_NAME + " istnieje");
@@ -52,15 +37,24 @@ public class App {
 			System.out.println("tablica o nazwie " + TABLE_NAME + " nie istnieje");
 		}
 
-		if (komendy.deleteTable(tableDefinition.getId()) == true) {
-			System.out.println("tablica o nazwie " + TABLE_NAME + " zosta³a usuniêta");
+		// wypełnianie tabeli losowymi liczbami
+		for (int i = 0; i < 15; i += 1) {
+			DataRow wierszLiczby = CreateSample.fillRowJeden();
+			komendy.insertDataRow(wierszLiczby);
 		}
 
-		if (komendy.existsTable(tableDefinition.getId()) == true) {
-			System.out.println("tablica o nazwie " + TABLE_NAME + " istnieje");
-		} else {
-			System.out.println("tablica o nazwie " + TABLE_NAME + " nie istnieje");
-		}
+		// usuwanie tabeli
+		// if (komendy.deleteTable(tableDefinition.getId()) == true) {
+		// System.out.println("tablica o nazwie " + TABLE_NAME +
+		// " została usunięta");
+		// }
+		//
+		// if (komendy.existsTable(tableDefinition.getId()) == true) {
+		// System.out.println("tablica o nazwie " + TABLE_NAME + " istnieje");
+		// } else {
+		// System.out.println("tablica o nazwie " + TABLE_NAME +
+		// " nie istnieje");
+		// }
 
 		// close connection
 		LocalhostConnector.closeConnection();
