@@ -79,26 +79,26 @@ public class SqlBuilder {
 		sqlCommand.append("INSERT INTO ");
 		sqlCommand.append(row.getTableId());
 
-		// podanie listy kolumn
+		// wywołanie listy kolumn
 		sqlCommand.append(" ( ");
 		ArrayList<String> columnList = GetColumnNames.fromMetaData(row.getTableId());
-
 		for (String string : columnList) {
 			sqlCommand.append(string + ", ");
 		}
+		
+		// przycięcie listy kolumn
 		String substring = sqlCommand.substring(0, (sqlCommand.length() - 2));
 		sqlCommand = new StringBuilder();
 		sqlCommand.append(substring);
 		sqlCommand.append(" )");
 
-		// podanie wartości
+		// podanie wartości dla kolumn
 		sqlCommand.append("\nVALUES ( ");
 		Random random = new Random();
 		int val = random.nextInt(100);
 		sqlCommand.append((row.getRowId() + val) + ", ");
 		for (int i = 0; i < dataHolder.size(); i++) {
-			String column = columnList.get(i + 1); // i+1 żeby ominąć kolumnę
-													// 'id'
+			String column = columnList.get(i + 1); // i+1 żeby ominąć kolumnę 'id'									
 			switch (dataHolder.get(column).getDataType()) {
 			case NUMBER:
 				sqlCommand.append(dataHolder.get(column).getNumber() + ", ");
@@ -112,12 +112,38 @@ public class SqlBuilder {
 			case PREDEFINED_VALUE:
 				sqlCommand.append(dataHolder.get(column).getBool() + ", ");
 				break;
+				
 			case SUB_SET:
-				// coś na pewno :)
+				
+				// zakres nie testowany
+				List<DataHolder> subSet = dataHolder.get(column).getSubSet();
+				for (int j = 0; j < subSet.size(); j++) {
+					// pozostajemy w tej samej kolumnie
+					switch (dataHolder.get(column).getDataType()) {
+					case NUMBER:
+						sqlCommand.append(dataHolder.get(column).getNumber() + "| ");
+						break;
+					case DATE:
+						sqlCommand.append(dataHolder.get(column).getDate() + "| ");
+						break;
+					case STRING:
+						sqlCommand.append(dataHolder.get(column).getString() + "| ");
+						break;
+					case PREDEFINED_VALUE:
+						sqlCommand.append(dataHolder.get(column).getBool() + "| ");
+						break;
+					case SUB_SET: // nie zakładamy podwójnego zagnieżdżenia
+						break;
+					}
+				}
+				sqlCommand.append(", ");
+				// zakres nie testowany
+				
 				break;
 			}
 		}
 
+		// przyciecie wartosci
 		substring = sqlCommand.substring(0, (sqlCommand.length() - 2));
 		sqlCommand = new StringBuilder();
 		sqlCommand.append(substring);
