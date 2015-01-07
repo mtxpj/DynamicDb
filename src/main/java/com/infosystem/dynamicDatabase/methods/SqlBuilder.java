@@ -112,33 +112,7 @@ public class SqlBuilder {
 			case PREDEFINED_VALUE:
 				sqlCommand.append(dataHolder.get(column).getBool() + ", ");
 				break;
-				
 			case SUB_SET:
-				
-				// zakres nie testowany
-				List<DataHolder> subSet = dataHolder.get(column).getSubSet();
-				for (int j = 0; j < subSet.size(); j++) {
-					// pozostajemy w tej samej kolumnie
-					switch (dataHolder.get(column).getDataType()) {
-					case NUMBER:
-						sqlCommand.append(dataHolder.get(column).getNumber() + "| ");
-						break;
-					case DATE:
-						sqlCommand.append(dataHolder.get(column).getDate() + "| ");
-						break;
-					case STRING:
-						sqlCommand.append(dataHolder.get(column).getString() + "| ");
-						break;
-					case PREDEFINED_VALUE:
-						sqlCommand.append(dataHolder.get(column).getBool() + "| ");
-						break;
-					case SUB_SET: // nie zakładamy podwójnego zagnieżdżenia
-						break;
-					}
-				}
-				sqlCommand.append(", ");
-				// zakres nie testowany
-				
 				break;
 			}
 		}

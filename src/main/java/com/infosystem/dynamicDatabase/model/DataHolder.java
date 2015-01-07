@@ -9,7 +9,25 @@ public class DataHolder {
     private Date date;
     private Integer number;
     private Boolean bool;
-    private List<DataHolder> subSet;
+    
+    
+    public DataHolder() {
+		super();
+	}
+
+	public DataHolder(String string) {
+		super();
+		this.string = string;
+	}
+
+
+	public DataHolder(Integer number) {
+		super();
+		this.number = number;
+	}
+
+
+	private List<DataHolder> subSet;
 
     public String getString() {
         return string;
