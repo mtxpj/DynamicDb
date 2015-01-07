@@ -28,8 +28,8 @@ public class Methods implements DynamicDatabaseManager {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("b��d polecenia SQL w metodzie createOrUpdate");
-			return "b��d polecenia SQL w metodzie createOrUpdate";
+			System.out.println("błąd polecenia SQL w metodzie createOrUpdate");
+			return "błąd polecenia SQL w metodzie createOrUpdate";
 		}
 		
 		return null;

@@ -1,5 +1,6 @@
 package com.infosystem.dynamicDatabase.methods;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -69,53 +70,59 @@ public class SqlBuilder {
 	}
 
 	public static String insertDataRow(DataRow row) {
-		
+
 		// deklaracja wiersza
 		Map<String, DataHolder> dataHolder = row.getData();
-		
+
 		// wywołanie tabeli do którek wkładamy
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("INSERT INTO ");
 		sqlCommand.append(row.getTableId());
-		
+
 		// podanie listy kolumn
-//		sqlCommand.append(" ( ");
-//		for (String key : dataHolder.keySet()){
-//			sqlCommand.append(key + ", ");
-//		}
-//		sqlCommand.append(" )");
-		
+		sqlCommand.append(" ( ");
+		ArrayList<String> columnList = GetColumnNames.fromMetaData(row.getTableId());
+
+		for (String string : columnList) {
+			sqlCommand.append(string + ", ");
+		}
+		String substring = sqlCommand.substring(0, (sqlCommand.length() - 2));
+		sqlCommand = new StringBuilder();
+		sqlCommand.append(substring);
+		sqlCommand.append(" )");
+
 		// podanie wartości
 		sqlCommand.append("\nVALUES ( ");
 		Random random = new Random();
 		int val = random.nextInt(100);
-		sqlCommand.append((row.getRowId() + val)  + ", ");
+		sqlCommand.append((row.getRowId() + val) + ", ");
 		for (int i = 0; i < dataHolder.size(); i++) {
-			
-			switch (dataHolder.get("kolumna_"+(i+1)).getDataType()) {
+			String column = columnList.get(i + 1); // i+1 żeby ominąć kolumnę
+													// 'id'
+			switch (dataHolder.get(column).getDataType()) {
 			case NUMBER:
-				sqlCommand.append(dataHolder.get("kolumna_"+(i+1)).getNumber() + ", ");
+				sqlCommand.append(dataHolder.get(column).getNumber() + ", ");
 				break;
 			case DATE:
-				sqlCommand.append(dataHolder.get("kolumna_"+(i+1)).getDate() + ", ");
+				sqlCommand.append(dataHolder.get(column).getDate() + ", ");
 				break;
 			case STRING:
-				sqlCommand.append(dataHolder.get("kolumna_"+(i+1)).getString() + ", ");
+				sqlCommand.append(dataHolder.get(column).getString() + ", ");
 				break;
 			case PREDEFINED_VALUE:
-				sqlCommand.append(dataHolder.get("kolumna_"+(i+1)).getBool() + ", ");
+				sqlCommand.append(dataHolder.get(column).getBool() + ", ");
 				break;
 			case SUB_SET:
 				// coś na pewno :)
 				break;
 			}
 		}
-		
-		String substring = sqlCommand.substring(0, (sqlCommand.length() - 2));
+
+		substring = sqlCommand.substring(0, (sqlCommand.length() - 2));
 		sqlCommand = new StringBuilder();
 		sqlCommand.append(substring);
 		sqlCommand.append(" );");
-		
+
 		// wydruk komendy i zwrot
 		System.out.println(sqlCommand.toString());
 		return sqlCommand.toString();

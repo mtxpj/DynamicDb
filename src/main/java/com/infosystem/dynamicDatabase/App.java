@@ -15,12 +15,12 @@ public class App {
 	public static void main(String[] args) throws SQLException {
 
 		// hello world
-		System.out.println("Hello World and fuck yourself!");
+		System.out.println("Hello World");
 
 		// create sample material
 		TableDefinition tableDefinition = new TableDefinition();
 		tableDefinition = CreateSample.createSampleTable();
-		
+
 		// connect to database
 		LocalhostConnector.openConnection("test");
 
@@ -38,22 +38,23 @@ public class App {
 		}
 
 		// wypełnianie tabeli losowymi liczbami
-		for (int i=0; i<15; i+=1){
+		for (int i = 0; i < 15; i += 1) {
 			DataRow wierszLiczby = CreateSample.fillRowJeden();
 			komendy.insertDataRow(wierszLiczby);
 		}
-		
-		
+
 		// usuwanie tabeli
-//		if (komendy.deleteTable(tableDefinition.getId()) == true) {
-//			System.out.println("tablica o nazwie " + TABLE_NAME + " została usunięta");
-//		}
-//
-//		if (komendy.existsTable(tableDefinition.getId()) == true) {
-//			System.out.println("tablica o nazwie " + TABLE_NAME + " istnieje");
-//		} else {
-//			System.out.println("tablica o nazwie " + TABLE_NAME + " nie istnieje");
-//		}
+		// if (komendy.deleteTable(tableDefinition.getId()) == true) {
+		// System.out.println("tablica o nazwie " + TABLE_NAME +
+		// " została usunięta");
+		// }
+		//
+		// if (komendy.existsTable(tableDefinition.getId()) == true) {
+		// System.out.println("tablica o nazwie " + TABLE_NAME + " istnieje");
+		// } else {
+		// System.out.println("tablica o nazwie " + TABLE_NAME +
+		// " nie istnieje");
+		// }
 
 		// close connection
 		LocalhostConnector.closeConnection();
