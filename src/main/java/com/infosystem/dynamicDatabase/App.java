@@ -27,9 +27,9 @@ public class App {
 		// tworzenie tabeli
 		Methods komendy = new Methods();
 
-		if (komendy.createOrUpdate(tableDefinition) == null) {
-			System.out.println("stworzono tablicę " + TABLE_NAME);
-		}
+		 if (komendy.createOrUpdate(tableDefinition) == null) {
+		 System.out.println("stworzono tablicę " + TABLE_NAME);
+		 }
 
 		if (komendy.existsTable(tableDefinition.getId()) == true) {
 			System.out.println("tablica o nazwie " + TABLE_NAME + " istnieje");

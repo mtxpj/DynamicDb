@@ -33,7 +33,7 @@ public class SqlBuilderTest {
 		for (int i = 0; i < 10; i += 1) {
 			exampleColumnDefinition = new ColumnDefinition();
 			exampleColumnDefinition.setId("kolumna_" + (i + 1));
-			exampleColumnDefinition.setDataType(DataType.DATE);
+			exampleColumnDefinition.setDataType(DataType.STRING);
 			exampleColumnList.add(i, exampleColumnDefinition);
 		}
 		tableDefinition.setColumnList(exampleColumnList);
@@ -50,7 +50,6 @@ public class SqlBuilderTest {
 		dataRow.setRowId((long) 1);
 		dataRow.setTableId(TABLICA_PROBNA);
 		dataRow.setData(data);
-
 	}
 
 	@Test
@@ -81,6 +80,7 @@ public class SqlBuilderTest {
 	public final void testInsertDataRow() {
 		String expected = "INSERT INTO tablica_probna (  )\nVALUES\n( l, k, j )";
 		String actual = SqlBuilder.insertDataRow(dataRow);
+		System.out.println(actual); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		assertEquals(expected, actual);
 	}
 

@@ -13,71 +13,70 @@ import com.infosystem.dynamicDatabase.model.TableDefinition;
 
 public class Methods implements DynamicDatabaseManager {
 
-	
 	public String createOrUpdate(TableDefinition tableDefinition) {
-		
+
 		// zapewnienie połączenia
 		MaintainConnection.connect(App.DB_NAME);
-		
+
+		// sprawdzenie czy table o podanej nazwie istnieje
+		if (existsTable(tableDefinition.getId())) {
+			return "tabela o podanej nazwie już istnieje";
+		}
+
 		// przygotowanie komendy
 		String command = SqlBuilder.createOrUpdate(tableDefinition);
-		
+
 		// obsługa komendy
 		try {
 			ConnectionStatus.statement.executeUpdate(command);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("błąd polecenia SQL w metodzie createOrUpdate");
 			return "błąd polecenia SQL w metodzie createOrUpdate";
 		}
-		
+
 		return null;
 	}
 
-	
 	public boolean deleteTable(String tableId) {
-		
+
 		// zapewnienie połączenia
 		MaintainConnection.connect(App.DB_NAME);
-		
+
 		// przygotowanie komendy
 		String command = SqlBuilder.deleteTable(tableId);
-		
+
 		// obsługa komendy
 		try {
 			ConnectionStatus.statement.executeUpdate(command);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("b��d polecenia SQL w metodzie deleteTable");
 			return false;
 		}
-		
+
 		return true;
 	}
 
-	
 	public boolean existsTable(String tableId) {
-		
+
 		// zapewnienie połączenia
 		MaintainConnection.connect(App.DB_NAME);
-		
+
 		// obsługa komendy
 		try {
 			return TableExist.ifExist(tableId);
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("b��d polecenia SQL w metodzie existsTable");
 		}
-		
 		return false;
 	}
 
-	
 	public Long insertDataRow(DataRow row) {
-		
+
 		// zapewnienie połączenia
 		MaintainConnection.connect(App.DB_NAME);
 
@@ -87,45 +86,40 @@ public class Methods implements DynamicDatabaseManager {
 		// obsługa komendy
 		try {
 			ConnectionStatus.statement.executeUpdate(command);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return (long)-1;
+			return (long) -1;
 		}
-		
+
 		return (long) row.getRowId();
 	}
 
-	
 	public List<DataRow> getDataRows(QueryParams queryParams) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
-	
 	public boolean deleteDataRow(String tableId, Long rowId) {
-		
+
 		// zapewnienie połączenia
 		MaintainConnection.connect(App.DB_NAME);
-				
+
 		// przygotowanie komendy
 		String command = SqlBuilder.deleteDataRow(tableId, rowId);
-		
+
 		// obsługa komendy
 		try {
 			ConnectionStatus.statement.executeUpdate(command);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("b��d polecenia SQL w metodzie deleteDataRow");
 			return false;
 		}
-		
+
 		return true;
 	}
-	
-	
 
 	public void updateDataRow(DataRow row) {
 		// TODO Auto-generated method stub
