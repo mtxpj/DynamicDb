@@ -1,89 +1,55 @@
 package com.infosystem.dynamicDatabase.methods;
 
+import static com.infosystem.dynamicDatabase.methods.SampleTableDefinitionProvider.TABLICA_PROBNA;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import com.infosystem.dynamicDatabase.model.ColumnDefinition;
-import com.infosystem.dynamicDatabase.model.DataHolder;
-import com.infosystem.dynamicDatabase.model.DataRow;
-import com.infosystem.dynamicDatabase.model.DataType;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 
 public class SqlBuilderTest {
-	private static final String TABLICA_PROBNA = "tablica_probna";
-	private static TableDefinition tableDefinition;
-	private static DataRow dataRow;
-	private static DataHolder dataHolder;
-	private static ColumnDefinition exampleColumnDefinition;
-
-	@BeforeClass
-	public static void oneTimeSetUp() {
-		tableDefinition = new TableDefinition();
-		tableDefinition.setId(TABLICA_PROBNA);
-		List<ColumnDefinition> exampleColumnList = new ArrayList<ColumnDefinition>();
-		for (int i = 0; i < 10; i += 1) {
-			exampleColumnDefinition = new ColumnDefinition();
-			exampleColumnDefinition.setId("kolumna_" + (i + 1));
-			exampleColumnDefinition.setDataType(DataType.STRING);
-			exampleColumnList.add(i, exampleColumnDefinition);
-		}
-		tableDefinition.setColumnList(exampleColumnList);
-
-		DataType dataType = DataType.STRING;
-		dataHolder = new DataHolder();
-		dataHolder.setDataType(dataType);
-		Map<String, DataHolder> data = new HashMap<String, DataHolder>();
-		for (int i = 0; i < 10; i++) {
-			dataHolder.setString("dane " + String.valueOf(i));
-			data.put(exampleColumnList.get(i).getId(), dataHolder);
-		}
-		dataRow = new DataRow();
-		dataRow.setRowId((long) 1);
-		dataRow.setTableId(TABLICA_PROBNA);
-		dataRow.setData(data);
-	}
 
 	@Test
 	public final void testCreate() {
-		String expected = "CREATE TABLE tablica_probna (\n" + "id INT NOT NULL AUTO_INCREMENT, \n" + "kolumna_1 DATE null, \n"
-				+ "kolumna_2 DATE null, \n" + "kolumna_3 DATE null, \n" + "kolumna_4 DATE null, \n" + "kolumna_5 DATE null, \n"
-				+ "kolumna_6 DATE null, \n" + "kolumna_7 DATE null, \n" + "kolumna_8 DATE null, \n" + "kolumna_9 DATE null, \n"
-				+ "kolumna_10 DATE null, \n" + "PRIMARY KEY ( id )\n" + ");";
-		String actual = SqlBuilder.createOrUpdate(tableDefinition);
+		String expected = "CREATE TABLE tablica_probna (\n" + "id INT NOT NULL AUTO_INCREMENT,\n" + "kolumna_1 VARCHAR (255) null, \n"
+				+ "kolumna_2 VARCHAR (255) null, \n" + "kolumna_3 VARCHAR (255) null, \n" + "kolumna_4 VARCHAR (255) null, \n"
+				+ "kolumna_5 VARCHAR (255) null, \n" + "kolumna_6 VARCHAR (255) null, \n" + "kolumna_7 VARCHAR (255) null, \n"
+				+ "kolumna_8 VARCHAR (255) null, \n" + "kolumna_9 VARCHAR (255) null, \n" + "kolumna_10 VARCHAR (255) null, \n"
+				+ "PRIMARY KEY ( id )\n" + ");";
+		TableDefinition tabelDef = SampleTableDefinitionProvider.createSampleTableDefinition();
+		String actual = SqlBuilder.createOrUpdate(tabelDef);
+		assertEquals(expected, actual);
+		tabelDef.getColumnList().remove(0);
+		actual = SqlBuilder.createOrUpdate(tabelDef);
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public final void testDeleteTable() {
-		String expected = "DROP TABLE tablica_probna";
+		String expected = "DROP TABLE tablica_probna ;";
 		String actual = SqlBuilder.deleteTable(TABLICA_PROBNA);
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public final void testExistsTable() {
-		String expected = "SELECT 1 FROM tablica_probna LIMIT 1";
+		String expected = "SELECT 1 FROM tablica_probna LIMIT 1 ;";
 		String actual = SqlBuilder.existsTable(TABLICA_PROBNA);
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public final void testInsertDataRow() {
-		String expected = "INSERT INTO tablica_probna (  )\nVALUES\n( l, k, j )";
-		String actual = SqlBuilder.insertDataRow(dataRow);
-		System.out.println(actual); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		String expected = "INSERT INTO tablica_probna (  )\nVALUES\n( l, k, j );";
+		String actual = SqlBuilder.insertDataRow(SampleTableDefinitionProvider.getDataRow());
+		System.out.println(actual);
 		assertEquals(expected, actual);
 	}
 
+	@Ignore
 	@Test
 	public final void testGetDataRows() {
 		fail("Not yet implemented");
@@ -91,11 +57,12 @@ public class SqlBuilderTest {
 
 	@Test
 	public final void testDeleteDataRow() {
-		String expected = "DELETE FROM tablica_probna WHERE id=1";
+		String expected = "DELETE FROM tablica_probna WHERE id=1 ;";
 		String actual = SqlBuilder.deleteDataRow(TABLICA_PROBNA, (long) 1);
 		assertEquals(expected, actual);
 	}
 
+	@Ignore
 	@Test
 	public final void testUpdateDataRow() {
 		fail("Not yet implemented");
