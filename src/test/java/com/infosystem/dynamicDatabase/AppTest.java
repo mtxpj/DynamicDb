@@ -38,12 +38,9 @@ public class AppTest extends TestCase {
 		// connect to database
 		LocalhostConnector.openConnection("test");
 
-		// probne komendy
-		SqlBuilder komendy = new SqlBuilder();
-
 		// tworzy tabele z TableDefinition
-		System.out.println(komendy.createOrUpdate(tableDefinition));
-		ConnectionStatus.statement.executeUpdate(komendy.createOrUpdate(tableDefinition));
+		System.out.println(SqlBuilder.createOrUpdate(tableDefinition));
+		ConnectionStatus.statement.executeUpdate(SqlBuilder.createOrUpdate(tableDefinition));
 
 		// sprawdza czy tabela o zapodanej nazwie istnieje
 		if (TableExist.ifExist(TABLICA_PROBNA)) {
@@ -53,8 +50,8 @@ public class AppTest extends TestCase {
 		}
 
 		// usuwa tabele
-		System.out.println(komendy.deleteTable(TABLICA_PROBNA));
-		ConnectionStatus.statement.executeUpdate(komendy.deleteTable(TABLICA_PROBNA));
+		System.out.println(SqlBuilder.deleteTable(TABLICA_PROBNA));
+		ConnectionStatus.statement.executeUpdate(SqlBuilder.deleteTable(TABLICA_PROBNA));
 
 		// close connection
 		LocalhostConnector.closeConnection();

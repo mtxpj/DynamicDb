@@ -37,7 +37,7 @@ public class App {
 		tableDefinition.setColumnList(exampleColumnList);
 
 		// connect to database
-		LocalhostConnector.openConnection("test");
+		LocalhostConnector.openConnection(DB_NAME);
 
 		// probne komendy
 		Methods komendy = new Methods();

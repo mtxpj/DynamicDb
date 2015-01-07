@@ -69,9 +69,7 @@ public class SqlBuilder {
 		sb.append("INSERT INTO ");
 		sb.append(row.getTableId() + " ( ");
 		Map<String, DataHolder> dataHolder = row.getData();
-		// skąd wziąć nazwy kolumn które mamy updatować?
 		for (int i = 0; i < dataHolder.size(); i++) {
-			// sb.append(dataHolder)
 		}
 		sb.append(" )\nVALUES\n( ");
 		for (int i = 0; i < dataHolder.size(); i++) {
@@ -109,7 +107,7 @@ public class SqlBuilder {
 		return sb.toString();
 	}
 
-	public String deleteDataRow(String tableId, Long rowId) {
+	public static String deleteDataRow(String tableId, Long rowId) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("DELETE FROM ");
 		sb.append(tableId);

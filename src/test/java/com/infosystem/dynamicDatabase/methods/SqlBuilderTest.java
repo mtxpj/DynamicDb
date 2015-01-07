@@ -42,8 +42,8 @@ public class SqlBuilderTest {
 		dataHolder = new DataHolder();
 		dataHolder.setDataType(dataType);
 		Map<String, DataHolder> data = new HashMap<String, DataHolder>();
-		for (int i = 0; i < 5; i++) { // każdy submit ma dane dla 5 kolumn
-			dataHolder.setString("dane " + i);
+		for (int i = 0; i < 10; i++) {
+			dataHolder.setString("dane " + String.valueOf(i));
 			data.put(exampleColumnList.get(i).getId(), dataHolder);
 		}
 		dataRow = new DataRow();
@@ -91,7 +91,9 @@ public class SqlBuilderTest {
 
 	@Test
 	public final void testDeleteDataRow() {
-		fail("Not yet implemented");
+		String expected = "DELETE FROM tablica_probna WHERE id=1";
+		String actual = SqlBuilder.deleteDataRow(TABLICA_PROBNA, (long) 1);
+		assertEquals(expected, actual);
 	}
 
 	@Test
