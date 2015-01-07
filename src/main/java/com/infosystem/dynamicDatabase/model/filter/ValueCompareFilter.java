@@ -2,13 +2,21 @@ package com.infosystem.dynamicDatabase.model.filter;
 
 import com.infosystem.dynamicDatabase.model.DataHolder;
 
-public class ValueCompareFilter {
+public class ValueCompareFilter implements Filter {
 
     private String columnId;
     private Comparator comparator;
     private DataHolder dataHolder;
 
-    public String getColumnId() {
+    public ValueCompareFilter(String columnId, Comparator comparator,
+			DataHolder dataHolder) {
+		super();
+		this.columnId = columnId;
+		this.comparator = comparator;
+		this.dataHolder = dataHolder;
+	}
+
+	public String getColumnId() {
         return columnId;
     }
 
