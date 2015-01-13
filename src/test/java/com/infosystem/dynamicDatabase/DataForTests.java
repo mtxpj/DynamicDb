@@ -3,7 +3,6 @@ package com.infosystem.dynamicDatabase;
 import java.sql.SQLException;
 
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
-import com.infosystem.dynamicDatabase.connection.LocalhostConnector;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 
 public class DataForTests {

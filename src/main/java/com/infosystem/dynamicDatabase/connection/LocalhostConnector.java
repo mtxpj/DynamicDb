@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class LocalhostConnector {
 	
 	private static final String dbClass = "com.mysql.jdbc.Driver";
-	private static final String hostUrl = "jdbc:mysql://localhost/";
+	public static final String hostUrl = "jdbc:mysql://localhost/";
 	private static String databaseUrl;
 	
 	private static Connection connection;

@@ -5,10 +5,10 @@ import java.sql.SQLException;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 
-public class AddNewTable {
-	public void addTable(String newTableName, String db) {
+public class MetaTableManager {
+	public void addTable(String db, String metaTableName, String newTableName) {
 		MaintainConnection.connect(db);
-		String sql = NewTableSqlQuery.addTable(newTableName);
+		String sql = MetaTableManagerSqlQuery.addTable(metaTableName, newTableName);
 		try {
 			ConnectionStatus.statement.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -16,9 +16,10 @@ public class AddNewTable {
 		}
 	}
 
-	public void removeTable(String tableName, String db) {
+	public void removeTable(String db, String metaTableName, String newTableName) {
 		MaintainConnection.connect(db);
-		String sql = NewTableSqlQuery.removeTable(tableName);
+		String sql = MetaTableManagerSqlQuery.removeTable(metaTableName,
+				newTableName);
 		try {
 			ConnectionStatus.statement.executeUpdate(sql);
 		} catch (SQLException e) {
