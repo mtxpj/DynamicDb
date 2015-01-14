@@ -18,7 +18,7 @@ public class MetaTableManagerSqlQuery {
 		sb.append(tableName);
 		sb.append(" WHERE table_name=");
 		sb.append(tableId);
-		sb.append(";");
+		sb.append(" ;");
 		return sb.toString();
 	}
 

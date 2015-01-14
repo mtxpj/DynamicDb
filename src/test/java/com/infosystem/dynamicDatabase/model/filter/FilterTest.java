@@ -1,4 +1,4 @@
-package com.infosystem.dynamicDatabase;
+package com.infosystem.dynamicDatabase.model.filter;
 
 import java.util.ArrayList;
 import java.util.List;

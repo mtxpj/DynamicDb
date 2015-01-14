@@ -29,4 +29,10 @@ public class ColumnManagerSqlQuery {
 		return sb.toString();
 	}
 
+	public static String getColumnFromMetaTable(
+			String metaColumnsTableName, String columnId) {
+
+		return null;
+	}
+
 }

@@ -53,7 +53,7 @@ public class Methods implements DynamicDatabaseManager {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("b��d polecenia SQL w metodzie deleteTable");
+			System.out.println("błąd polecenia SQL w metodzie deleteTable");
 			return false;
 		}
 
@@ -70,7 +70,7 @@ public class Methods implements DynamicDatabaseManager {
 			return TableExist.ifExist(tableId);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("b��d polecenia SQL w metodzie existsTable");
+			System.out.println("błąd polecenia SQL w metodzie existsTable");
 		}
 		return false;
 	}
@@ -114,7 +114,7 @@ public class Methods implements DynamicDatabaseManager {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("b��d polecenia SQL w metodzie deleteDataRow");
+			System.out.println("błąd polecenia SQL w metodzie deleteDataRow");
 			return false;
 		}
 
