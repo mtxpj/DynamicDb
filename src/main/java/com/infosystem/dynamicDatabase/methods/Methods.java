@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.infosystem.dynamicDatabase.App;
 import com.infosystem.dynamicDatabase.DynamicDatabaseManager;
+import com.infosystem.dynamicDatabase.SqlBuilder.SqlBuilder;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.model.DataRow;

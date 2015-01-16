@@ -1,7 +1,8 @@
-package com.infosystem.dynamicDatabase.dbMetadata;
+package com.infosystem.dynamicDatabase.dbSchema;
 
 import java.sql.SQLException;
 
+import com.infosystem.dynamicDatabase.SqlBuilder.MetaTableManagerSqlQuery;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 

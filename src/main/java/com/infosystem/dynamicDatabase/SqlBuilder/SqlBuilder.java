@@ -1,10 +1,11 @@
-package com.infosystem.dynamicDatabase.methods;
+package com.infosystem.dynamicDatabase.SqlBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.infosystem.dynamicDatabase.methods.GetColumnNames;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataRow;

@@ -1,4 +1,4 @@
-package com.infosystem.dynamicDatabase.dbMetadata;
+package com.infosystem.dynamicDatabase.SqlBuilder;
 
 public class MetaTableManagerSqlQuery {
 

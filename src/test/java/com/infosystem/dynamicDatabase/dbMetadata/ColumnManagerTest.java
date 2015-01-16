@@ -3,6 +3,8 @@ package com.infosystem.dynamicDatabase.dbMetadata;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.infosystem.dynamicDatabase.dbSchema.ColumnManager;
+
 public class ColumnManagerTest {
 
 	@Test

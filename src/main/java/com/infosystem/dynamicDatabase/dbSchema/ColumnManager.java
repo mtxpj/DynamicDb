@@ -1,9 +1,10 @@
-package com.infosystem.dynamicDatabase.dbMetadata;
+package com.infosystem.dynamicDatabase.dbSchema;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager;
+import com.infosystem.dynamicDatabase.SqlBuilder.ColumnManagerSqlQuery;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;

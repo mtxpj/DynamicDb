@@ -4,77 +4,78 @@ import java.util.Date;
 import java.util.List;
 
 public class DataHolder {
-    private DataType dataType;
-    private String string;
-    private Date date;
-    private Integer number;
-    private Boolean bool;
-    
-    
-    public DataHolder() {
+	private DataType dataType;
+	private String string;
+	private Date date;
+	private Integer number;
+	private Boolean bool;
+	private List<DataHolder> subSet;
+
+	public DataHolder() {
 		super();
 	}
 
 	public DataHolder(String string) {
 		super();
-		this.string = string;
+		setString(string);
 	}
-
 
 	public DataHolder(Integer number) {
 		super();
-		this.number = number;
+		setNumber(number);
 	}
 
+	public String getString() {
+		return string;
+	}
 
-	private List<DataHolder> subSet;
+	public void setString(String string) {
+		this.string = string;
+		this.dataType = DataType.STRING;
+	}
 
-    public String getString() {
-        return string;
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public void setString(String string) {
-        this.string = string;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+		this.dataType = DataType.DATE;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public Integer getNumber() {
+		return number;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setNumber(Integer number) {
+		this.number = number;
+		this.dataType = DataType.NUMBER;
+	}
 
-    public Integer getNumber() {
-        return number;
-    }
+	public Boolean getBool() {
+		return bool;
+	}
 
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
+	public void setBool(Boolean bool) {
+		this.bool = bool;
+		this.dataType = DataType.PREDEFINED_VALUE;
+	}
 
-    public Boolean getBool() {
-        return bool;
-    }
+	public DataType getDataType() {
+		return dataType;
+	}
 
-    public void setBool(Boolean bool) {
-        this.bool = bool;
-    }
+	public void setDataType(DataType dataType) {
+		this.dataType = dataType;
+	}
 
-    public DataType getDataType() {
-        return dataType;
-    }
+	public List<DataHolder> getSubSet() {
+		return subSet;
+	}
 
-    public void setDataType(DataType dataType) {
-        this.dataType = dataType;
-    }
-
-    public List<DataHolder> getSubSet() {
-        return subSet;
-    }
-
-    public void setSubSet(List<DataHolder> subSet) {
-        this.subSet = subSet;
-    }
+	public void setSubSet(List<DataHolder> subSet) {
+		this.subSet = subSet;
+		this.dataType = DataType.SUB_SET;
+	}
 
 }

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.infosystem.dynamicDatabase.dbSchema.DbManager;
+
 public class DbManagerTest {
 	@Test
 	public void shouldCreateDbProperlyTest() {

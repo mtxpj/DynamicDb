@@ -1,4 +1,4 @@
-package com.infosystem.dynamicDatabase.dbMetadata;
+package com.infosystem.dynamicDatabase.SqlBuilder;
 
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 

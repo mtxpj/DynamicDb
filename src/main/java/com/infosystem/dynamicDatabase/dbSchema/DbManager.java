@@ -1,16 +1,19 @@
-package com.infosystem.dynamicDatabase.dbMetadata;
+package com.infosystem.dynamicDatabase.dbSchema;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.infosystem.dynamicDatabase.SqlBuilder.DbManagerSqlQuery;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.LocalhostConnector;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 
 public class DbManager {
 
+	private static final String DB_TO_CONNECT = "test";
+
 	public static void createDb(String dbName) {
-		MaintainConnection.connect("test");
+		MaintainConnection.connect(DB_TO_CONNECT);
 		String sql = DbManagerSqlQuery.createDb(dbName);
 		try {
 			ConnectionStatus.statement.executeUpdate(sql);

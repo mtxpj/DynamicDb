@@ -19,7 +19,7 @@ public class FilterTest {
 	private static final String LICZBOWA = "liczbowa";
 	private static final String WARTOSC_TEKSTOWA = "wartosc%";
 	private static final String TEKSTOWA_KOLUMNA = "tekstowaKolumna";
-	private static final String EXPECTED_SQL = TEKSTOWA_KOLUMNA + " like '"
+	private static final String EXPECTED_SQL = TEKSTOWA_KOLUMNA + " LIKE '"
 			+ WARTOSC_TEKSTOWA + "' AND " + LICZBOWA + " = " + NUMBER_VAL;
 
 	@Test

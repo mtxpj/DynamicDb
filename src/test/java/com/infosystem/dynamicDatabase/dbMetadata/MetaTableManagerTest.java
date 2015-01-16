@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
+import com.infosystem.dynamicDatabase.dbSchema.MetaTableManager;
 import com.infosystem.dynamicDatabase.methods.TableExist;
 
 public class MetaTableManagerTest {

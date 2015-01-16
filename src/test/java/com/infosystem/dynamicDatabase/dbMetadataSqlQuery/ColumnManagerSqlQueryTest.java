@@ -3,7 +3,7 @@ package com.infosystem.dynamicDatabase.dbMetadataSqlQuery;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.infosystem.dynamicDatabase.dbMetadata.ColumnManagerSqlQuery;
+import com.infosystem.dynamicDatabase.SqlBuilder.ColumnManagerSqlQuery;
 import com.infosystem.dynamicDatabase.dbMetadata.Metadata;
 
 public class ColumnManagerSqlQueryTest {
