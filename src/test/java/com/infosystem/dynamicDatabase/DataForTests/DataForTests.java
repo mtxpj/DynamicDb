@@ -1,18 +1,18 @@
-package com.infosystem.dynamicDatabase.dbMetadata;
+package com.infosystem.dynamicDatabase.DataForTests;
 
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataType;
 
-public class Metadata {
+public class DataForTests {
 
 	final static String LOCALHOST = "";
-	private static final String TEST_DB = "tdd_db";
-	private static final String COLUMNS_TABLE_NAME = "meta_columns";
-	private static final String TABLES_TABLE_NAME = "meta_tables";
-	private static final String SAMPLE_TABLE = "new_table_name";
-	private static final String COLUMN_ID = "name_id";
+	private static final String TEST_DB_NAME = "tdd_db";
+	private static final String COLUMNS_TABLE_NAME = "all_columns";
+	private static final String TABLES_TABLE_NAME = "all_tables";
+	private static final String SAMPLE_TABLE = "sample_table_name";
+	private static final String COLUMN_ID = "column_name_id";
 
-	public static ColumnDefinition createColumnDefinition() {
+	public static ColumnDefinition createSampleColumnDefinition() {
 		ColumnDefinition columnDefinition = new ColumnDefinition();
 		columnDefinition.setId(COLUMN_ID);
 		columnDefinition.setOrder(1);
@@ -33,7 +33,7 @@ public class Metadata {
 	}
 
 	public static String getTestDb() {
-		return TEST_DB;
+		return TEST_DB_NAME;
 	}
 
 	public static String getColumnsTableName() {

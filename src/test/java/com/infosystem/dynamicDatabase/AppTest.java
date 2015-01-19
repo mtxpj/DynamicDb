@@ -42,7 +42,7 @@ public class AppTest extends TestCase {
 		System.out.println(SqlBuilder.createOrUpdate(tableDefinition));
 		ConnectionStatus.statement.executeUpdate(SqlBuilder.createOrUpdate(tableDefinition));
 
-		// sprawdza czy tabela o zapodanej nazwie istnieje
+		// sprawdza czy tabela o podanej nazwie istnieje
 		if (TableExist.ifExist(TABLICA_PROBNA)) {
 			System.out.println("tablica " + TABLICA_PROBNA + " istnieje.");
 		} else {

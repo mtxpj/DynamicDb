@@ -5,19 +5,19 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
-import com.infosystem.dynamicDatabase.dbMetadata.ColumnManagerTest;
-import com.infosystem.dynamicDatabase.dbMetadata.DbManagerTest;
-import com.infosystem.dynamicDatabase.dbMetadata.MetaTableManagerTest;
-import com.infosystem.dynamicDatabase.dbMetadata.Metadata;
+import com.infosystem.dynamicDatabase.dbStructure.ColumnManagerTest;
+import com.infosystem.dynamicDatabase.dbStructure.DbManagerTest;
+import com.infosystem.dynamicDatabase.dbStructure.TableManagerTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ DbManagerTest.class, ColumnManagerTest.class,
-		MetaTableManagerTest.class })
+		TableManagerTest.class })
 public class AllLocalhostTest {
 	@BeforeClass
 	public static void method() {
-		MaintainConnection.connect(Metadata.getTestDb());
+		MaintainConnection.connect(DataForTests.getTestDb());
 
 	}
 }

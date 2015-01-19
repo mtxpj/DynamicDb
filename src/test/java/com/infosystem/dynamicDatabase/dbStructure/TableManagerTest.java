@@ -1,26 +1,27 @@
-package com.infosystem.dynamicDatabase.dbMetadata;
+package com.infosystem.dynamicDatabase.dbStructure;
 
 import java.sql.SQLException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
-import com.infosystem.dynamicDatabase.dbSchema.MetaTableManager;
+import com.infosystem.dynamicDatabase.dbSchema.TableManager;
 import com.infosystem.dynamicDatabase.methods.TableExist;
 
-public class MetaTableManagerTest {
-	private static final String TEST_DB = Metadata.getTestDb();
-	private static final String TABLES_TABLE_NAME = Metadata
+public class TableManagerTest {
+	private static final String TEST_DB = DataForTests.getTestDb();
+	private static final String TABLES_TABLE_NAME = DataForTests
 			.getTablesTableName();
-	private static final String SAMPLE_TABLE = Metadata.getSampleTable();
+	private static final String SAMPLE_TABLE = DataForTests.getSampleTable();
 
 	@Test
 	public void shouldAddTableProperlyTest() {
 		// given
 		MaintainConnection.connect("");
 		// when
-		MetaTableManager mtm = new MetaTableManager();
+		TableManager mtm = new TableManager();
 		mtm.addTable(TEST_DB, TABLES_TABLE_NAME, SAMPLE_TABLE);
 		// then
 		try {
@@ -35,7 +36,7 @@ public class MetaTableManagerTest {
 		// given
 		MaintainConnection.connect("");
 		// when
-		MetaTableManager mtm = new MetaTableManager();
+		TableManager mtm = new TableManager();
 		mtm.removeTable(TEST_DB, TABLES_TABLE_NAME, SAMPLE_TABLE);
 		// then
 		try {

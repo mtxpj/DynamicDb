@@ -5,10 +5,10 @@ import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 public class ColumnManagerSqlQuery {
 	static StringBuilder sb = new StringBuilder();
 
-	public static String addColumnToMetaTable(String metaTableName,
+	public static String addColumnToTable(String tableName,
 			ColumnDefinition columnDefinition) {
 		sb.append("INSERT INTO ");
-		sb.append(metaTableName);
+		sb.append(tableName);
 		sb.append(" ( column_name, order, column_definition, html_label, plain_label, datatype )\nVALUES\n( ");
 		sb.append(columnDefinition.getId());
 		sb.append(", ");
@@ -29,9 +29,9 @@ public class ColumnManagerSqlQuery {
 		return sb.toString();
 	}
 
-	public static String getColumnFromMetaTable(
-			String metaColumnsTableName, String columnId) {
-
+	public static String getColumnFromTable(String columnsTableName,
+			String columnId) {
+		// TODO
 		return null;
 	}
 

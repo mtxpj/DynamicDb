@@ -3,8 +3,8 @@ package com.infosystem.dynamicDatabase.dbMetadataSqlQuery;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.SqlBuilder.DbManagerSqlQuery;
-import com.infosystem.dynamicDatabase.dbMetadata.Metadata;
 
 public class DbManagerSqlQueryTest {
 
@@ -13,7 +13,7 @@ public class DbManagerSqlQueryTest {
 		// given
 		String expected = "CREATE DATABASE tdd_db;";
 		// when
-		String actual = DbManagerSqlQuery.createDb(Metadata.getTestDb());
+		String actual = DbManagerSqlQuery.createDb(DataForTests.getTestDb());
 		// then
 		Assert.assertEquals(expected, actual);
 	}
@@ -23,7 +23,7 @@ public class DbManagerSqlQueryTest {
 		// given
 		String actual = "DROP DATABASE tdd_db;";
 		// when
-		String expected = DbManagerSqlQuery.dropDb(Metadata.getTestDb());
+		String expected = DbManagerSqlQuery.dropDb(DataForTests.getTestDb());
 		// then
 		Assert.assertEquals(expected, actual);
 	}

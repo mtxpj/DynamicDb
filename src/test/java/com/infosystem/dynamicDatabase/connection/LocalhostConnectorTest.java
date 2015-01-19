@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.infosystem.dynamicDatabase.dbMetadata.Metadata;
+import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 
 public class LocalhostConnectorTest {
 
@@ -14,7 +14,7 @@ public class LocalhostConnectorTest {
 
 	@Test
 	public void testOpenConnection() {
-		LocalhostConnector.openConnection(Metadata.getLocalhost());
+		LocalhostConnector.openConnection(DataForTests.getLocalhost());
 		String actual = null;
 		String expected = null;
 		Assert.assertEquals(expected, actual);

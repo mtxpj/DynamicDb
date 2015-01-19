@@ -1,6 +1,6 @@
 package com.infosystem.dynamicDatabase.SqlBuilder;
 
-public class MetaTableManagerSqlQuery {
+public class TableManagerSqlQuery {
 
 	public static String addTable(String tableName, String tableId) {
 		StringBuilder sb = new StringBuilder();

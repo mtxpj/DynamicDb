@@ -13,11 +13,11 @@ public class ColumnManager {
 
 	private ResultSet rs;
 
-	public void addColumnToMetaTable(String db, String metaColumnsTableName,
+	public void addColumnToTable(String db, String tableName,
 			ColumnDefinition columnDefinition) {
 		MaintainConnection.connect(db);
 		ColumnManagerSqlQuery query = new ColumnManagerSqlQuery();
-		ColumnManagerSqlQuery.addColumnToMetaTable(metaColumnsTableName,
+		ColumnManagerSqlQuery.addColumnToTable(tableName,
 				columnDefinition);
 		String sql = query.getSb();
 		try {
@@ -27,11 +27,11 @@ public class ColumnManager {
 		}
 	}
 
-	public ColumnDefinition getColumnFromMetaTable(String db,
-			String metaColumnsTableName, String columnId) {
+	public ColumnDefinition getColumnFromTable(String db,
+			String columnsTableName, String columnId) {
 		MaintainConnection.connect(db);
 		ColumnManagerSqlQuery query = new ColumnManagerSqlQuery();
-		ColumnManagerSqlQuery.getColumnFromMetaTable(metaColumnsTableName,
+		ColumnManagerSqlQuery.getColumnFromTable(columnsTableName,
 				columnId);
 		String sql = query.getSb();
 		try {
