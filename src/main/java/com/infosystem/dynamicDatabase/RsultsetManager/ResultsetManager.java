@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataType;
+import com.infosystem.dynamicDatabase.model.Null;
 
 public class ResultsetManager {
 
@@ -13,7 +14,7 @@ public class ResultsetManager {
 		try {
 			cd.setId(rs.getString(2));
 			cd.setOrder(rs.getInt(3));
-			cd.setColumnDef(rs.getString(4));
+			cd.setColumnDef(Null.valueOf(rs.getString(4)));
 			cd.setHtmlLabel(rs.getString(5));
 			cd.setPlainLabel(rs.getString(6));
 			cd.setDataType(DataType.valueOf(rs.getString(7)));

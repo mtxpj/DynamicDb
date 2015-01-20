@@ -9,7 +9,7 @@ public class ColumnManagerSqlQuery {
 			ColumnDefinition columnDefinition) {
 		sb.append("INSERT INTO ");
 		sb.append(tableName);
-		sb.append(" ( column_name, order, column_definition, html_label, plain_label, datatype )\nVALUES\n( ");
+		sb.append(" ( id, column_order, column_definition, html_label, plain_label, datatype )\nVALUES\n( ");
 		sb.append(columnDefinition.getId());
 		sb.append(", ");
 		sb.append(String.valueOf(columnDefinition.getOrder()));

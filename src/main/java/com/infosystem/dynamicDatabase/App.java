@@ -3,9 +3,9 @@ package com.infosystem.dynamicDatabase;
 import java.sql.SQLException;
 
 import com.infosystem.dynamicDatabase.connection.LocalhostConnector;
-import com.infosystem.dynamicDatabase.methods.Methods;
 import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
+import com.infosystem.dynamicDatabase.modelMethods.DynamicDatabaseManagerMethods;
 
 public class App {
 
@@ -25,7 +25,7 @@ public class App {
 		LocalhostConnector.openConnection(DB_NAME);
 
 		// tworzenie tabeli
-		Methods komendy = new Methods();
+		DynamicDatabaseManagerMethods komendy = new DynamicDatabaseManagerMethods();
 
 		if (komendy.createOrUpdate(tableDefinition) == null) {
 			System.out.println("stworzono tablicę " + TABLE_NAME);

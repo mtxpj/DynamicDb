@@ -5,19 +5,20 @@ import org.junit.Test;
 
 import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.SqlBuilder.ColumnManagerSqlQuery;
+import com.infosystem.dynamicDatabase.model.TableDefinitionTest;
 
 public class ColumnManagerSqlQueryTest {
 
 	@Test
 	public void shouldProperlyReturnAddColumnQuery() {
 		// given
-		String expected = "INSERT INTO meta_columns "
+		String expected = "INSERT INTO all_columns "
 				+ "( column_name, order, column_definition, html_label, plain_label, datatype )"
-				+ "\nVALUES\n( name_id, 1, definition_column, www.form.com/12345, label_plain, STRING );";
+				+ "\nVALUES\n( column_1, 1, NULL, html://label.1, plainLabel1, DATE );";
 		// when
 		String actual = ColumnManagerSqlQuery.addColumnToTable(
 				DataForTests.getColumnsTableName(),
-				DataForTests.createSampleColumnDefinition());
+				TableDefinitionTest.createColumnDefinitionWithStupidData(1));
 		// then
 		Assert.assertEquals(expected, actual);
 	}

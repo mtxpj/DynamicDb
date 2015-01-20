@@ -14,8 +14,8 @@ public class ColumnManager {
 	private ResultSet rs;
 
 	public void addColumnToTable(String db, String tableName,
-			ColumnDefinition columnDefinition) {
-		MaintainConnection.connect(db);
+			ColumnDefinition columnDefinition) throws SQLException {
+		MaintainConnection.connectLocalhostWithUserAndPassword(db);
 		ColumnManagerSqlQuery query = new ColumnManagerSqlQuery();
 		ColumnManagerSqlQuery.addColumnToTable(tableName,
 				columnDefinition);
@@ -29,7 +29,11 @@ public class ColumnManager {
 
 	public ColumnDefinition getColumnFromTable(String db,
 			String columnsTableName, String columnId) {
-		MaintainConnection.connect(db);
+		try {
+			MaintainConnection.connectLocalhostWithUserAndPassword(db);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		ColumnManagerSqlQuery query = new ColumnManagerSqlQuery();
 		ColumnManagerSqlQuery.getColumnFromTable(columnsTableName,
 				columnId);

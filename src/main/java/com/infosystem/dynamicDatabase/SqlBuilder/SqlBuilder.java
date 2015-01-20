@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.infosystem.dynamicDatabase.methods.GetColumnNames;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.Sort;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
+import com.infosystem.dynamicDatabase.modelMethods.GetColumnNames;
 
 public class SqlBuilder {
 

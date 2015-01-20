@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 import com.infosystem.dynamicDatabase.dbSchema.TableManager;
-import com.infosystem.dynamicDatabase.methods.TableExist;
+import com.infosystem.dynamicDatabase.modelMethods.TableExist;
 
 public class TableManagerTest {
 	private static final String TEST_DB = DataForTests.getTestDb();

@@ -1,4 +1,4 @@
-package com.infosystem.dynamicDatabase.methods;
+package com.infosystem.dynamicDatabase.modelMethods;
 
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataType;

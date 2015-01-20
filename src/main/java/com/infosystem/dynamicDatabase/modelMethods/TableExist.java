@@ -1,4 +1,4 @@
-package com.infosystem.dynamicDatabase.methods;
+package com.infosystem.dynamicDatabase.modelMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

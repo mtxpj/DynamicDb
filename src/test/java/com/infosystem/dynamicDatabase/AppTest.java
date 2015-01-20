@@ -11,10 +11,10 @@ import junit.framework.TestSuite;
 import com.infosystem.dynamicDatabase.SqlBuilder.SqlBuilder;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.LocalhostConnector;
-import com.infosystem.dynamicDatabase.methods.TableExist;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataType;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
+import com.infosystem.dynamicDatabase.modelMethods.TableExist;
 
 /**
  * Unit test for simple App.
