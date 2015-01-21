@@ -3,7 +3,6 @@ package com.infosystem.dynamicDatabase.SqlBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataHolder;
@@ -49,7 +48,6 @@ public class SqlBuilder {
 			// co z labelami?
 		}
 		sqlCommand.append("PRIMARY KEY ( id )\n);");
-		System.out.println(sqlCommand.toString());
 		return sqlCommand.toString();
 	}
 
@@ -71,35 +69,31 @@ public class SqlBuilder {
 	}
 
 	public static String insertDataRow(DataRow row) {
-
-		// deklaracja wiersza
 		Map<String, DataHolder> dataHolder = row.getData();
 
-		// wywołanie tabeli do którek wkładamy
+		// wywołanie tabeli do której wkładamy
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("INSERT INTO ");
 		sqlCommand.append(row.getTableId());
 
 		// wywołanie listy kolumn
 		sqlCommand.append(" ( ");
-		ArrayList<String> columnList = GetColumnNames.fromMetaData(row.getTableId());
+		ArrayList<String> columnList = GetColumnNames.fromMetaData(row
+				.getTableId());
 		for (String string : columnList) {
 			sqlCommand.append(string + ", ");
 		}
-		
 		// przycięcie listy kolumn
 		String substring = sqlCommand.substring(0, (sqlCommand.length() - 2));
 		sqlCommand = new StringBuilder();
 		sqlCommand.append(substring);
 		sqlCommand.append(" )");
-
 		// podanie wartości dla kolumn
 		sqlCommand.append("\nVALUES ( ");
-		Random random = new Random();
-		int val = random.nextInt(100);
-		sqlCommand.append((row.getRowId() + val) + ", ");
+		sqlCommand.append((row.getRowId()) + ", ");
 		for (int i = 0; i < dataHolder.size(); i++) {
-			String column = columnList.get(i + 1); // i+1 żeby ominąć kolumnę 'id'									
+			String column = columnList.get(i + 1); // i+1 żeby ominąć kolumnę
+													// 'id'
 			switch (dataHolder.get(column).getDataType()) {
 			case NUMBER:
 				sqlCommand.append(dataHolder.get(column).getNumber() + ", ");
@@ -108,7 +102,7 @@ public class SqlBuilder {
 				sqlCommand.append(dataHolder.get(column).getDate() + ", ");
 				break;
 			case STRING:
-				sqlCommand.append(dataHolder.get(column).getString() + ", ");
+				sqlCommand.append("'"+dataHolder.get(column).getString() + "', ");
 				break;
 			case PREDEFINED_VALUE:
 				sqlCommand.append(dataHolder.get(column).getBool() + ", ");
@@ -129,7 +123,7 @@ public class SqlBuilder {
 		return sqlCommand.toString();
 	}
 
-	public String getDataRows(QueryParams queryParams) {
+	public static String getDataRows(QueryParams queryParams) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT ");
 		List<String> columnList = queryParams.getColumnList();
@@ -162,7 +156,7 @@ public class SqlBuilder {
 		sb.append(tableId);
 		sb.append(" WHERE id=");
 		sb.append(rowId);
-		sb.append(" ;");
+		sb.append(";");
 		return sb.toString();
 	}
 

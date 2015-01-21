@@ -13,8 +13,8 @@ public class ColumnManagerSqlQueryTest {
 	public void shouldProperlyReturnAddColumnQuery() {
 		// given
 		String expected = "INSERT INTO all_columns "
-				+ "( column_name, order, column_definition, html_label, plain_label, datatype )"
-				+ "\nVALUES\n( column_1, 1, NULL, html://label.1, plainLabel1, DATE );";
+				+ "( id, column_order, column_definition, html_label, plain_label, datatype )"
+				+ "\nVALUES\n( column_1, 1, NULL, html_label.1, plainLabel1, DATE );";
 		// when
 		String actual = ColumnManagerSqlQuery.addColumnToTable(
 				DataForTests.getColumnsTableName(),

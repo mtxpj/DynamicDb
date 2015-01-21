@@ -6,7 +6,7 @@ public class TableManagerSqlQuery {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO ");
 		sb.append(tableName);
-		sb.append(" VALUES ( ");
+		sb.append(" (table_id)  VALUES ( ");
 		sb.append(tableId);
 		sb.append(" );");
 		return sb.toString();

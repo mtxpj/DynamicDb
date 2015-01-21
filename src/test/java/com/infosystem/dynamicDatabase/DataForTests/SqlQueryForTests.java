@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
@@ -67,6 +68,7 @@ public class SqlQueryForTests {
 		statement.executeUpdate(FILL_DATATYPES_DB);
 	}
 
+	@Ignore
 	@Test
 	public void createNewTableTest() {
 		// create example filling

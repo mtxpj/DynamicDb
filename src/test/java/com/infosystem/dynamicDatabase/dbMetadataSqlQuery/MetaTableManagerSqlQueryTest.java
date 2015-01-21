@@ -11,7 +11,7 @@ public class MetaTableManagerSqlQueryTest {
 	@Test
 	public void testAddTable() {
 		// given
-		String expected = "INSERT INTO meta_tables VALUES ( new_table_name );";
+		String expected = "INSERT INTO all_tables VALUES ( sample_table_name );";
 		// when
 		String actual = TableManagerSqlQuery.addTable(DataForTests.getTablesTableName(),
 				DataForTests.getSampleTable());
@@ -23,7 +23,7 @@ public class MetaTableManagerSqlQueryTest {
 	@Test
 	public void testRemoveTable() {
 		// given
-		String expected = "DELETE FROM meta_tables WHERE table_name=new_table_name ;";
+		String expected = "DELETE FROM all_tables WHERE table_name=sample_table_name ;";
 		// when
 		String actual = TableManagerSqlQuery.removeTable(DataForTests.getTablesTableName(),
 				DataForTests.getSampleTable());

@@ -10,10 +10,8 @@ import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 
 public class DbManager {
 
-	private static final String DB_TO_CONNECT = "test";
-
-	public static void createDb(String dbName) {
-		MaintainConnection.connect(DB_TO_CONNECT);
+	public static void createDb(String dbName) throws SQLException {
+		MaintainConnection.connectLocalhostWithUserAndPassword(dbName);
 		String sql = DbManagerSqlQuery.createDb(dbName);
 		try {
 			ConnectionStatus.statement.executeUpdate(sql);

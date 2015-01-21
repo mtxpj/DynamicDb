@@ -1,10 +1,13 @@
 package com.infosystem.dynamicDatabase.modelMethods;
 
+import java.sql.ResultSet;
+
+import com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager;
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataType;
 
-public class GetCorrectDataFromDataHolder {
-	public static Object getData(DataHolder dh) {
+public class GetCorrectDataType {
+	public static Object getDataTypeFromDataHolder(DataHolder dh) {
 		Object data = new Object();
 		DataType dt = dh.getDataType();
 		switch (dt) {
@@ -27,5 +30,15 @@ public class GetCorrectDataFromDataHolder {
 			break;
 		}
 		return data;
+	}
+
+	public static DataHolder setAppropriateData(DataHolder dh, DataType dt) {
+		// todo
+		return dh;
+	}
+
+	public static DataType getDataTypeFromResultSet(ResultSet rs) {
+		DataType dt = ResultsetManager.getColumnDefinition(rs).getDataType();
+		return dt;
 	}
 }
