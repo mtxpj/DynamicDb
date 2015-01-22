@@ -2,11 +2,11 @@ package com.infosystem.dynamicDatabase.SqlBuilder;
 
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataType;
-import com.infosystem.dynamicDatabase.modelMethods.GetCorrectDataType;
+import com.infosystem.dynamicDatabase.modelMethods.DataHolderHandler;
 
 public class SyntaxCorrector {
 	public static String prepareDataForSqlQuery(DataHolder dh) {
-		String string = GetCorrectDataType.getDataTypeFromDataHolder(dh)
+		String string = DataHolderHandler.getDataTypeFromDataHolder(dh)
 				.toString();
 		if (dh.getDataType() == DataType.STRING) {
 			string = "'" + string + "'";

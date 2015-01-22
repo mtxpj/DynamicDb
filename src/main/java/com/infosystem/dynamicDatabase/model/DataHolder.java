@@ -20,9 +20,24 @@ public class DataHolder {
 		setString(string);
 	}
 
+	public DataHolder(Date date) {
+		super();
+		setDate(date);
+	}
+
 	public DataHolder(Integer number) {
 		super();
 		setNumber(number);
+	}
+
+	public DataHolder(boolean bool) {
+		super();
+		setBool(bool);
+	}
+
+	public DataHolder(List<DataHolder> subSet) {
+		super();
+		setSubSet(subSet);
 	}
 
 	public String getString() {

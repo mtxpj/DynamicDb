@@ -2,11 +2,13 @@ package com.infosystem.dynamicDatabase.modelMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.infosystem.dynamicDatabase.DynamicDatabaseManager;
 import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
+import com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager;
 import com.infosystem.dynamicDatabase.SqlBuilder.SqlBuilder;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
@@ -86,9 +88,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		return (long) row.getRowId();
 	}
 
-	@SuppressWarnings("null")
 	public List<DataRow> getDataRows(QueryParams qp) {
-		List<DataRow> list = null;
 		ResultSet rs = null;
 		String tableId = qp.getTableId();
 		int firstResult = qp.getFirstResult();
@@ -104,20 +104,12 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		List<DataRow> list = ResultsetManager.getRowsFromResultSet(rs,
+				columnList);
 		for (int i = 0; i < resultCount; i++) {
-			Map<String, DataHolder> data = null;
-			for (int j = 0; j < columnList.size(); j++) {
-				DataHolder dh = null;
-				dh.setDataType(GetCorrectDataType.getDataTypeFromResultSet(rs));
-				dh.
-				data.put(columnList.get(j), dh);
-				
-			}
-			DataRow dataRow = new DataRow();
-			dataRow.setRowId((long) (firstResult+i));
-			dataRow.setTableId(tableId);
-			dataRow.setData(data);
-			list.add(dataRow);
+			DataRow dr = list.get(i);
+			dr.setRowId((long) (firstResult + i));
+			dr.setTableId(tableId);
 		}
 		return list;
 	}
