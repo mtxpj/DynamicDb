@@ -102,7 +102,8 @@ public class SqlBuilder {
 				sqlCommand.append(dataHolder.get(column).getDate() + ", ");
 				break;
 			case STRING:
-				sqlCommand.append("'"+dataHolder.get(column).getString() + "', ");
+				sqlCommand.append("'" + dataHolder.get(column).getString()
+						+ "', ");
 				break;
 			case PREDEFINED_VALUE:
 				sqlCommand.append(dataHolder.get(column).getBool() + ", ");
@@ -126,6 +127,7 @@ public class SqlBuilder {
 	public static String getDataRows(QueryParams queryParams) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT ");
+		System.out.println(queryParams.getColumnList().size());
 		List<String> columnList = queryParams.getColumnList();
 		for (String column : columnList) {
 			sb.append(column + ", ");
@@ -147,6 +149,7 @@ public class SqlBuilder {
 		sb.append(queryParams.getFirstResult());
 		sb.append(", ");
 		sb.append(queryParams.getResultCount());
+		System.out.println("SqlBuilder.getDataRows:\n" + sb.toString());
 		return sb.toString();
 	}
 

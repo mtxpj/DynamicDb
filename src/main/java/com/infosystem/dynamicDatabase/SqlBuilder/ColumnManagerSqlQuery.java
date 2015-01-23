@@ -29,8 +29,7 @@ public class ColumnManagerSqlQuery {
 		return sb.toString();
 	}
 
-	public static String getColumnFromTable(String columnsTableName,
-			String columnId) {
+	public String getColumnFromTable(String columnsTableName, String columnId) {
 		// TODO
 		return null;
 	}

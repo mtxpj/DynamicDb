@@ -17,8 +17,7 @@ public class ColumnManager {
 			ColumnDefinition columnDefinition) throws SQLException {
 		MaintainConnection.connectLocalhostWithUserAndPassword(db);
 		ColumnManagerSqlQuery query = new ColumnManagerSqlQuery();
-		ColumnManagerSqlQuery.addColumnToTable(tableName,
-				columnDefinition);
+		query.addColumnToTable(tableName, columnDefinition);
 		String sql = query.getSb();
 		try {
 			ConnectionStatus.statement.executeUpdate(sql);
@@ -35,8 +34,7 @@ public class ColumnManager {
 			e1.printStackTrace();
 		}
 		ColumnManagerSqlQuery query = new ColumnManagerSqlQuery();
-		ColumnManagerSqlQuery.getColumnFromTable(columnsTableName,
-				columnId);
+		query.getColumnFromTable(columnsTableName, columnId);
 		String sql = query.getSb();
 		try {
 			rs = ConnectionStatus.statement.executeQuery(sql);

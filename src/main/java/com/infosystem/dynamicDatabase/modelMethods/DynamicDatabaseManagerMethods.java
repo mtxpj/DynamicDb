@@ -104,6 +104,15 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		if (qp.getColumnList()==null) {
+			try {
+				for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+					columnList.add(rs.getMetaData().getColumnName(i));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		List<DataRow> list = ResultsetManager.getRowsFromResultSet(rs,
 				columnList);
 		for (int i = 0; i < resultCount; i++) {
