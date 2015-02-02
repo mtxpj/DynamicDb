@@ -1,6 +1,6 @@
 package com.infosystem.dynamicDatabase.methods;
 
-import static com.infosystem.dynamicDatabase.methods.SampleTableDefinitionProvider.TABLICA_PROBNA;
+import static com.infosystem.dynamicDatabase.DataForTests.SampleTableDefinitionProvider.TABLICA_PROBNA;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -8,6 +8,7 @@ import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.infosystem.dynamicDatabase.DataForTests.SampleTableDefinitionProvider;
 import com.infosystem.dynamicDatabase.SqlBuilder.SqlBuilder;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 

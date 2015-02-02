@@ -4,7 +4,7 @@ public class DbManagerSqlQuery {
 
 	public static String createDb(String dbName) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("CREATE DATABASE ");
+		sb.append("CREATE DATABASE IF NOT EXISTS ");
 		sb.append(dbName);
 		sb.append(";");
 		return sb.toString();

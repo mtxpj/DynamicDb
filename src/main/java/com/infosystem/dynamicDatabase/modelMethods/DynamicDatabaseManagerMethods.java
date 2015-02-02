@@ -34,7 +34,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		String command = SqlBuilder.createOrUpdate(tableDefinition);
 		// obsługa komendy
 		try {
-			ConnectionStatus.statement.executeUpdate(command);
+			ConnectionStatus.getInstance().getStatement().executeUpdate(command);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("błąd polecenia SQL w metodzie createOrUpdate");
@@ -50,7 +50,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		String command = SqlBuilder.deleteTable(tableId);
 		// obsługa komendy
 		try {
-			ConnectionStatus.statement.executeUpdate(command);
+			ConnectionStatus.getInstance().getStatement().executeUpdate(command);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("błąd polecenia SQL w metodzie deleteTable");
@@ -80,7 +80,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		}
 		String command = SqlBuilder.insertDataRow(row);
 		try {
-			ConnectionStatus.statement.executeUpdate(command);
+			ConnectionStatus.getInstance().getStatement().executeUpdate(command);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return (long) -1;
@@ -100,7 +100,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		String command = SqlBuilder.getDataRows(qp);
 		try {
 			MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
-			rs = ConnectionStatus.statement.executeQuery(command);
+			rs = ConnectionStatus.getInstance().getStatement().executeQuery(command);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -134,7 +134,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		String command = SqlBuilder.deleteDataRow(tableId, rowId);
 		// obsługa komendy
 		try {
-			ConnectionStatus.statement.executeUpdate(command);
+			ConnectionStatus.getInstance().getStatement().executeUpdate(command);
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

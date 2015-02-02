@@ -14,9 +14,6 @@ public class LocalhostConnector {
 	public final static String USER = "eclipse";
 	private final static String PASS = "userdwa";
 
-	private static Connection connection;
-	private static Statement statement;
-
 	public static void openConnection(String dbName) {
 
 		databaseUrl = hostUrl + dbName;
@@ -25,9 +22,13 @@ public class LocalhostConnector {
 
 			Class.forName(dbClass);
 			System.out.println("Connecting to database...");
-			connection = DriverManager.getConnection(databaseUrl);
-			statement = connection.createStatement();
-
+			Connection connection = DriverManager.getConnection(databaseUrl);
+			Statement statement = connection.createStatement();
+			ConnectionStatus.getInstance().setConnection(connection);
+			ConnectionStatus.getInstance().setStatement(statement);
+			if (connection != null) {
+				System.out.println("Connected to: " + dbName);
+			}
 		} catch (ClassNotFoundException exc) {
 			System.out.println("SQL driver not found");
 			exc.printStackTrace();
@@ -35,31 +36,30 @@ public class LocalhostConnector {
 		} catch (SQLException sqle) {
 			System.out.println("Connection failed");
 			sqle.printStackTrace();
-
 		} catch (Exception exc) {
 			System.out.println("Connection failed");
 			exc.printStackTrace();
 		}
 
-		if (connection != null) {
-			System.out.println("Connected to: " + dbName);
-		}
-
-		ConnectionStatus.connection = connection;
-		ConnectionStatus.statement = statement;
 	}
 
-	public static void openConnectionWithUserAndPassword(String DB_NAME) {
-		databaseUrl = hostUrl + DB_NAME;
+	public static void openConnectionWithUserAndPassword(String dbName) {
+		databaseUrl = hostUrl + dbName;
 		Properties props = new Properties();
 		props.put("user", USER);
 		props.put("password", PASS);
+		Connection connection;
+		Statement statement;
 		try {
 			Class.forName(dbClass);
 			System.out.println("Connecting to database...");
 			connection = DriverManager.getConnection(databaseUrl, props);
 			statement = connection.createStatement();
-
+			ConnectionStatus.getInstance().setConnection(connection);
+			ConnectionStatus.getInstance().setStatement(statement);
+			if (connection != null) {
+				System.out.println("Connected to: " + dbName);
+			}
 		} catch (ClassNotFoundException exc) {
 			System.out.println("SQL driver not found");
 			exc.printStackTrace();
@@ -73,20 +73,14 @@ public class LocalhostConnector {
 			exc.printStackTrace();
 		}
 
-		if (connection != null) {
-			System.out.println("Connected to: " + DB_NAME);
-		}
-
-		ConnectionStatus.connection = connection;
-		ConnectionStatus.statement = statement;
 	}
 
 	public static void closeConnection() {
 
-		if (ConnectionStatus.connection != null) {
+		if (ConnectionStatus.getInstance().getConnection() != null) {
 
 			try {
-				ConnectionStatus.connection.close();
+				ConnectionStatus.getInstance().getConnection().close();
 
 			} catch (SQLException sqle) {
 				System.out.println("Failed to close connection");
@@ -94,10 +88,10 @@ public class LocalhostConnector {
 			}
 		}
 
-		if (ConnectionStatus.statement != null) {
+		if (ConnectionStatus.getInstance().getStatement() != null) {
 
 			try {
-				ConnectionStatus.statement.close();
+				ConnectionStatus.getInstance().getStatement().close();
 
 			} catch (SQLException sqle) {
 				System.out.println("Failed to close connection");

@@ -1,4 +1,4 @@
-package com.infosystem.dynamicDatabase.dbMetadataSqlQuery;
+package com.infosystem.dynamicDatabase.tablesTableSqlQuery;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -6,12 +6,12 @@ import org.junit.Test;
 import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.SqlBuilder.TableManagerSqlQuery;
 
-public class MetaTableManagerSqlQueryTest {
+public class TablesTableManagerSqlQueryTest {
 
 	@Test
 	public void testAddTable() {
 		// given
-		String expected = "INSERT INTO all_tables VALUES ( sample_table_name );";
+		String expected = "INSERT INTO all_tables (table_id)  VALUES ( sample_table_name );";
 		// when
 		String actual = TableManagerSqlQuery.addTable(DataForTests.getTablesTableName(),
 				DataForTests.getSampleTable());

@@ -1,4 +1,4 @@
-package com.infosystem.dynamicDatabase.dbMetadataSqlQuery;
+package com.infosystem.dynamicDatabase.tablesTableSqlQuery;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -19,7 +19,7 @@ public class GetColumnNames {
 		ArrayList<String> columnNames = new ArrayList<String>();
 		MaintainConnection.connect(tableName);
 		try {
-			Statement stmt = ConnectionStatus.connection.createStatement();
+			Statement stmt = ConnectionStatus.getInstance().getConnection().createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName);
 			ResultSetMetaData rsMd = rs.getMetaData();
 			for (int i = 1; i <= rsMd.getColumnCount(); i++) {

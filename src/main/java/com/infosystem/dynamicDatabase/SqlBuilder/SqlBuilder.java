@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.infosystem.dynamicDatabase.SqlBuilder.strategia.FabrykaStrategiiSqlowych;
+import com.infosystem.dynamicDatabase.SqlBuilder.strategia.StrategiaSqlowa;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataRow;
@@ -23,26 +25,27 @@ public class SqlBuilder {
 		List<ColumnDefinition> listaKolumn = tableDefinition.getColumnList();
 		for (ColumnDefinition columnDefinition : listaKolumn) {
 			sqlCommand.append(columnDefinition.getId() + " ");
-			switch (columnDefinition.getDataType()) {
-			case NUMBER:
-				sqlCommand.append("INT (255) ");
-				break;
-			case STRING:
-				sqlCommand.append("VARCHAR (255) ");
-				break;
-			case DATE:
-				sqlCommand.append("DATE ");
-				break;
-			case PREDEFINED_VALUE:
-				sqlCommand.append("VARCHAR (255) ");
-				break;
-			case SUB_SET:
-				sqlCommand.append("DATE ");
-				break;
-			default:
-				sqlCommand.append("VARCHAR (255) ");
-				break;
-			}
+			sqlCommand.append(FabrykaStrategiiSqlowych.getStartegiaSqlowa(columnDefinition.getDataType()).przygotujSqlDoTworzeniaKolumny());
+			// switch (columnDefinition.getDataType()) {
+			// case NUMBER:
+			// sqlCommand.append("INT (255) ");
+			// break;
+			// case STRING:
+			// sqlCommand.append("VARCHAR (255) ");
+			// break;
+			// case DATE:
+			// sqlCommand.append("DATE ");
+			// break;
+			// case PREDEFINED_VALUE:
+			// sqlCommand.append("VARCHAR (255) ");
+			// break;
+			// case SUB_SET:
+			// sqlCommand.append("VARCHAR (255) ");
+			// break;
+			// default:
+			// sqlCommand.append("VARCHAR (255) ");
+			// break;
+			// }
 			sqlCommand.append(columnDefinition.getColumnDef() + ", \n");
 
 			// co z labelami?
@@ -93,24 +96,26 @@ public class SqlBuilder {
 		sqlCommand.append((row.getRowId()) + ", ");
 		for (int i = 0; i < dataHolder.size(); i++) {
 			String column = columnList.get(i + 1); // i+1 żeby ominąć kolumnę
-													// 'id'
-			switch (dataHolder.get(column).getDataType()) {
-			case NUMBER:
-				sqlCommand.append(dataHolder.get(column).getNumber() + ", ");
-				break;
-			case DATE:
-				sqlCommand.append(dataHolder.get(column).getDate() + ", ");
-				break;
-			case STRING:
-				sqlCommand.append("'" + dataHolder.get(column).getString()
-						+ "', ");
-				break;
-			case PREDEFINED_VALUE:
-				sqlCommand.append(dataHolder.get(column).getBool() + ", ");
-				break;
-			case SUB_SET:
-				break;
-			}
+			StrategiaSqlowa strategia = FabrykaStrategiiSqlowych.getStartegiaSqlowa(dataHolder.get(column).getDataType());
+													// 'id's
+			sqlCommand.append(strategia.przygotujFragmentSQlZwiazanyZWstawianieWartosciDoInserta(dataHolder.get(column)));
+//			switch (dataHolder.get(column).getDataType()) {
+//			case NUMBER:
+//				sqlCommand.append(dataHolder.get(column).getNumber() + ", ");
+//				break;
+//			case DATE:
+//				sqlCommand.append(dataHolder.get(column).getDate() + ", ");
+//				break;
+//			case STRING:
+//				sqlCommand.append("'" + dataHolder.get(column).getString()
+//						+ "', ");
+//				break;
+//			case PREDEFINED_VALUE:
+//				sqlCommand.append(dataHolder.get(column).getBool() + ", ");
+//				break;
+//			case SUB_SET:
+//				break;
+//			}
 		}
 
 		// przyciecie wartosci

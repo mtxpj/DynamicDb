@@ -40,7 +40,7 @@ public class AppTest extends TestCase {
 
 		// tworzy tabele z TableDefinition
 		System.out.println(SqlBuilder.createOrUpdate(tableDefinition));
-		ConnectionStatus.statement.executeUpdate(SqlBuilder.createOrUpdate(tableDefinition));
+		ConnectionStatus.getInstance().getStatement().executeUpdate(SqlBuilder.createOrUpdate(tableDefinition));
 
 		// sprawdza czy tabela o podanej nazwie istnieje
 		if (TableExist.ifExist(TABLICA_PROBNA)) {
@@ -51,7 +51,7 @@ public class AppTest extends TestCase {
 
 		// usuwa tabele
 		System.out.println(SqlBuilder.deleteTable(TABLICA_PROBNA));
-		ConnectionStatus.statement.executeUpdate(SqlBuilder.deleteTable(TABLICA_PROBNA));
+		ConnectionStatus.getInstance().getStatement().executeUpdate(SqlBuilder.deleteTable(TABLICA_PROBNA));
 
 		// close connection
 		LocalhostConnector.closeConnection();

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.infosystem.dynamicDatabase.SqlBuilder.strategia.FabrykaStrategiiSqlowych;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataRow;
@@ -39,28 +40,33 @@ public class ResultsetManager {
 				DataRow dataRow = new DataRow();
 				Map<String, DataHolder> data = new HashMap<String, DataHolder>();
 				for (int i = 1; i < columnList.size(); i++) {
-					DataHolder dh = new DataHolder();
-					dh.setDataType(DataHolderHandler
-							.getDataTypeFromResultSet(rs));
-					switch (dh.getDataType()) {
-					case STRING:
-						dh.setString(rs.getString(i));
-						break;
-					case DATE:
-						dh.setDate(rs.getDate(i));
-						break;
-					case NUMBER:
-						dh.setNumber(rs.getInt(i));
-						break;
-					case PREDEFINED_VALUE:
-						dh.setBool(rs.getBoolean(i));
-						break;
+					DataType dt = DataHolderHandler
+							.getDataTypeFromResultSet(rs);
+					DataHolder dh = FabrykaStrategiiSqlowych
+							.getStartegiaSqlowa(dt)
+							.przygotujDataHolderZResultSet(rs, i);
+					// DataHolder dh = new DataHolder();
+					// dh.setDataType(DataHolderHandler
+					// .getDataTypeFromResultSet(rs));
+					// switch (dh.getDataType()) {
+					// case STRING:
+					// dh.setString(rs.getString(i));
+					// break;
+					// case DATE:
+					// dh.setDate(rs.getDate(i));
+					// break;
+					// case NUMBER:
+					// dh.setNumber(rs.getInt(i));
+					// break;
+					// case PREDEFINED_VALUE:
+					// dh.setBool(rs.getBoolean(i));
+					// break;
 					// case SUB_SET:
 					// dh.setSubSet(rs.getString(i));// bollocks
 					// break;
-					default:
-						break;
-					}
+					// default:
+					// break;
+					// }
 					data.put(columnList.get(i), dh);
 				}
 				dataRow.setData(data);

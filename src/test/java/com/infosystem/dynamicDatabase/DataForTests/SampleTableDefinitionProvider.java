@@ -1,4 +1,4 @@
-package com.infosystem.dynamicDatabase.methods;
+package com.infosystem.dynamicDatabase.DataForTests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,12 +29,12 @@ public class SampleTableDefinitionProvider {
 		return exampleColumnList;
 	}
 
-	static ColumnDefinition getSampleColumn(List<ColumnDefinition> exampleColumnList, int dataSeed) {
+	static ColumnDefinition getSampleColumn(
+			List<ColumnDefinition> exampleColumnList, int dataSeed) {
 		ColumnDefinition exampleColumnDefinition = new ColumnDefinition();
 		exampleColumnDefinition.setId("kolumna_" + (dataSeed + 1));
 		exampleColumnDefinition.setDataType(getDataType(dataSeed));
 		return exampleColumnDefinition;
-
 	}
 
 	static DataType getDataType(int dataSeed) {
@@ -60,7 +60,6 @@ public class SampleTableDefinitionProvider {
 		dataRow.setRowId((long) 1);
 		dataRow.setTableId(TABLICA_PROBNA);
 		dataRow.setData(data);
-		// TODO Auto-generated method stub
 		return dataRow;
 	}
 }

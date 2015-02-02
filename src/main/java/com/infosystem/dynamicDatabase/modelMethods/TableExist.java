@@ -9,7 +9,7 @@ public class TableExist {
 
 	public static boolean ifExist(String tableName) throws SQLException {
 		
-		java.sql.DatabaseMetaData dbm = ConnectionStatus.connection.getMetaData();
+		java.sql.DatabaseMetaData dbm = ConnectionStatus.getInstance().getConnection().getMetaData();
 		ResultSet tables = dbm.getTables(null, null, tableName, null);
 		
 		if (tables.next()) {

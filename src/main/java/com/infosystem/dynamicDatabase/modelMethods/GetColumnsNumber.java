@@ -17,7 +17,7 @@ public class GetColumnsNumber {
 		int columnsNumber = -1;
 		MaintainConnection.connect(tableName);
 		try {
-			Statement stmt = ConnectionStatus.connection.createStatement();
+			Statement stmt = ConnectionStatus.getInstance().getConnection().createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName);
 			ResultSetMetaData rsMd = rs.getMetaData();
 			columnsNumber = rsMd.getColumnCount();

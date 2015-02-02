@@ -17,10 +17,10 @@ public class ColumnManager {
 			ColumnDefinition columnDefinition) throws SQLException {
 		MaintainConnection.connectLocalhostWithUserAndPassword(db);
 		ColumnManagerSqlQuery query = new ColumnManagerSqlQuery();
-		query.addColumnToTable(tableName, columnDefinition);
+		ColumnManagerSqlQuery.addColumnToTable(tableName, columnDefinition);
 		String sql = query.getSb();
 		try {
-			ConnectionStatus.statement.executeUpdate(sql);
+			ConnectionStatus.getInstance().getStatement().executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -37,7 +37,7 @@ public class ColumnManager {
 		query.getColumnFromTable(columnsTableName, columnId);
 		String sql = query.getSb();
 		try {
-			rs = ConnectionStatus.statement.executeQuery(sql);
+			rs = ConnectionStatus.getInstance().getStatement().executeQuery(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -1,7 +1,7 @@
 package com.infosystem.dynamicDatabase.model.filter;
 
 public class NotFilter implements Filter {
-	public final static String NOT = " NOT ";
+	public final static String NOT = "NOT ";
 	
 	private Filter filterToBeNegated;
 

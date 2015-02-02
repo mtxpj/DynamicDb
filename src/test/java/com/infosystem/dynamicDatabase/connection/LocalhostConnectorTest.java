@@ -12,42 +12,39 @@ public class LocalhostConnectorTest {
 	private static final String WRONG_DB_NAME = "'wrong db name, wrong as shit'";
 
 	@Test
-	public void testOpenConnection() throws SQLException {
+	public void shouldConnectToDbTest() throws SQLException {
 		// given
 		boolean expected = true;
 		boolean actual;
 		// when
 		LocalhostConnector.openConnectionWithUserAndPassword(DataForTests
 				.getTestDb());
-		actual = ConnectionStatus.connection.isValid(0);
+		actual = ConnectionStatus.getInstance().getConnection().isValid(0);
 		// than
 		Assert.assertEquals(expected, actual);
-		ConnectionStatus.connection.close();
+		ConnectionStatus.getInstance().getConnection().close();
 	}
 
 	@Test
-	public void shouldNotConnectToDb() throws SQLException {
+	public void shouldNotConnectToDbTest() throws SQLException {
 		// given
-		boolean expected = false;
-		boolean actual;
 		// when
 		LocalhostConnector.openConnection(WRONG_DB_NAME);
-		actual = ConnectionStatus.connection.isValid(0);
-		// than
-		Assert.assertEquals(expected, actual);
+		// then
+		Assert.assertNull(ConnectionStatus.getInstance().getConnection());
 	}
 
 	@Test
-	public void testCloseConnection() throws SQLException {
+	public void shouldCloseConnectionTest() throws SQLException {
 		// given
 		boolean closed;
 		boolean connected;
 		// when
 		LocalhostConnector.openConnectionWithUserAndPassword(DataForTests
 				.getTestDb());
-		connected = ConnectionStatus.connection.isValid(0);
+		connected = ConnectionStatus.getInstance().getConnection().isValid(0);
 		LocalhostConnector.closeConnection();
-		closed = ConnectionStatus.connection.isValid(0);
+		closed = ConnectionStatus.getInstance().getConnection().isValid(0);
 		// than
 		Assert.assertNotEquals(closed, connected);
 	}

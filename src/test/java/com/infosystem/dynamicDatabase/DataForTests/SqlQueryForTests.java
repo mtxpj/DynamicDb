@@ -1,8 +1,7 @@
 package com.infosystem.dynamicDatabase.DataForTests;
 
-import static com.infosystem.dynamicDatabase.connection.ConnectionStatus.statement;
-
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,6 +14,7 @@ import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 public class SqlQueryForTests {
 	@BeforeClass
 	public static void createDbs() throws SQLException {
+		Statement statement = ConnectionStatus.getInstance().getStatement();
 		final String CREATE_DB = "CREATE DATABASE " + DataForTests.getTestDb()
 				+ ";";
 		final String DROP_DB = "DROP DATABASE " + DataForTests.getTestDb()
@@ -85,6 +85,6 @@ public class SqlQueryForTests {
 
 	@AfterClass
 	public static void after() throws SQLException {
-		ConnectionStatus.connection.close();
+		ConnectionStatus.getInstance().getConnection().close();
 	}
 }

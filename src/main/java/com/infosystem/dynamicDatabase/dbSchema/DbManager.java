@@ -14,7 +14,7 @@ public class DbManager {
 		MaintainConnection.connectLocalhostWithUserAndPassword(dbName);
 		String sql = DbManagerSqlQuery.createDb(dbName);
 		try {
-			ConnectionStatus.statement.executeUpdate(sql);
+			ConnectionStatus.getInstance().getStatement().executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -24,26 +24,27 @@ public class DbManager {
 		MaintainConnection.connect(LocalhostConnector.hostUrl);
 		String sql = DbManagerSqlQuery.dropDb(dbName);
 		try {
-			ConnectionStatus.statement.executeUpdate(sql);
+			ConnectionStatus.getInstance().getStatement().executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static boolean ifDbExists(String dbName) {
+		boolean existence = false;
 		MaintainConnection.connect(LocalhostConnector.hostUrl);
 		java.sql.DatabaseMetaData dbm;
 		try {
-			dbm = ConnectionStatus.connection.getMetaData();
+			dbm = ConnectionStatus.getInstance().getConnection().getMetaData();
 			ResultSet rs = dbm.getCatalogs();
 			while (rs.next()) {
 				if (rs.getString(1) == dbName) {
-					return true;
+					existence = true;
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return existence;
 	}
 }
