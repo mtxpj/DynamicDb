@@ -23,4 +23,14 @@ public class StrategiaSqlowaDlaStringa implements StrategiaSqlowa {
 		return dataHolder;
 	}
 
+	public Object wyciagnijDaneZDataHoldera(DataHolder dataHolder) {
+		return dataHolder.getString();
+	}
+
+	public DataHolder wstawDaneWOdpowiednieMijsceWDataHolderze(Object object) {
+		DataHolder dh = new DataHolder();
+		dh.setString((String) object);
+		return dh;
+	}
+
 }

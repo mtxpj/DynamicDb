@@ -2,6 +2,7 @@ package com.infosystem.dynamicDatabase.SqlBuilder.strategia;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.infosystem.dynamicDatabase.model.DataHolder;
 
@@ -21,6 +22,17 @@ public class StrategiaSqlowaDlaSubSet implements StrategiaSqlowa {
 		DataHolder dataHolder = new DataHolder(
 				resultSet.getString(columnNumber));
 		return dataHolder;
+	}
+
+	public Object wyciagnijDaneZDataHoldera(DataHolder dataHolder) {
+		return dataHolder.getSubSet();
+	}
+
+	@SuppressWarnings("unchecked")
+	public DataHolder wstawDaneWOdpowiednieMijsceWDataHolderze(Object object) {
+		DataHolder dh = new DataHolder();
+		dh.setSubSet((List<DataHolder>) object);
+		return dh;
 	}
 
 }

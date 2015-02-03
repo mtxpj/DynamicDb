@@ -2,6 +2,7 @@ package com.infosystem.dynamicDatabase.SqlBuilder.strategia;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import com.infosystem.dynamicDatabase.model.DataHolder;
 
@@ -20,6 +21,16 @@ public class StrategiaSqlowaDlaDaty implements StrategiaSqlowa {
 			int columnNumber) throws SQLException {
 		DataHolder dataHolder = new DataHolder(resultSet.getDate(columnNumber));
 		return dataHolder;
+	}
+
+	public Object wyciagnijDaneZDataHoldera(DataHolder dataHolder) {
+		return dataHolder.getDate();
+	}
+
+	public DataHolder wstawDaneWOdpowiednieMijsceWDataHolderze(Object object) {
+		DataHolder dh = new DataHolder();
+		dh.setDate((Date) object);
+		return dh;
 	}
 
 }

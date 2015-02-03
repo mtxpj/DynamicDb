@@ -23,4 +23,13 @@ public class StrategiaSqlowaDlaPredefinedValue implements StrategiaSqlowa {
 		return dataHolder;
 	}
 
+	public Object wyciagnijDaneZDataHoldera(DataHolder dataHolder) {
+		return dataHolder.getBool();
+	}
+
+	public DataHolder wstawDaneWOdpowiednieMijsceWDataHolderze(Object object) {
+		DataHolder dh = new DataHolder();
+		dh.setBool((Boolean) object);
+		return dh;
+	}
 }

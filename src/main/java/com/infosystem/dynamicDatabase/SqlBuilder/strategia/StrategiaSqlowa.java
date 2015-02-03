@@ -11,6 +11,11 @@ public interface StrategiaSqlowa {
 			DataHolder dataHolder);
 
 	String przygotujSqlDoTworzeniaKolumny();
-	
-	DataHolder przygotujDataHolderZResultSet(ResultSet resultSet, int columnNumber) throws SQLException;
+
+	DataHolder przygotujDataHolderZResultSet(ResultSet resultSet,
+			int columnNumber) throws SQLException;
+
+	Object wyciagnijDaneZDataHoldera(DataHolder dataHolder);
+
+	DataHolder wstawDaneWOdpowiednieMijsceWDataHolderze(Object object);
 }

@@ -21,4 +21,14 @@ public class StartegiaSqlowaNumerowa implements StrategiaSqlowa {
 		return dataHolder;
 	}
 
+	public Object wyciagnijDaneZDataHoldera(DataHolder dataHolder) {
+		return dataHolder.getNumber();
+	}
+
+	public DataHolder wstawDaneWOdpowiednieMijsceWDataHolderze(Object object) {
+		DataHolder dh = new DataHolder();
+		dh.setNumber((Integer) object);
+		return dh;
+	}
+
 }

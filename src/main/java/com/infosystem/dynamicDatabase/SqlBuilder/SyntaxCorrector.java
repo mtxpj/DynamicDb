@@ -6,7 +6,7 @@ import com.infosystem.dynamicDatabase.modelMethods.DataHolderHandler;
 
 public class SyntaxCorrector {
 	public static String prepareDataForSqlQuery(DataHolder dh) {
-		String string = DataHolderHandler.getDataTypeFromDataHolder(dh)
+		String string = DataHolderHandler.getDataFromDataHolder(dh)
 				.toString();
 		if (dh.getDataType() == DataType.STRING) {
 			string = "'" + string + "'";
