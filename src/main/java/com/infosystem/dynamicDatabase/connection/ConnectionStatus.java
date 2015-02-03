@@ -8,7 +8,6 @@ public class ConnectionStatus {
 	private Connection connection;
 	private Statement statement;
 
-	// create an object of SingleObject
 	private static ConnectionStatus instance = new ConnectionStatus();
 
 	private ConnectionStatus() {

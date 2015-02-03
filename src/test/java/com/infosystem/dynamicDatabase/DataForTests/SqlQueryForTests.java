@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
+import com.infosystem.dynamicDatabase.constant.ConnectorData;
 
 public class SqlQueryForTests {
 	@BeforeClass
@@ -36,13 +37,13 @@ public class SqlQueryForTests {
 				+ "VALUES (\"STRING\"),(\"DATE\"),(\"NUMBER\"),(\"PREDEFINED_VALUE\"),(\"SUB_SET\");";
 
 		final String CREATE_TABLE_STORING_TABLES = "CREATE TABLE "
-				+ DataForTests.getTablesTableName()
+				+ ConnectorData.TABLES_TABLE_NAME
 				+ "(\nt_id INT NOT NULL AUTO_INCREMENT,\n"
 				+ "table_id VARCHAR(100) NOT NULL,\n"
 				+ "PRIMARY KEY ( t_id )\n) DEFAULT CHARSET=utf8;";
 
 		final String CREATE_TABLE_STORING_COLUMNS = "CREATE TABLE "
-				+ DataForTests.getColumnsTableName()
+				+ ConnectorData.COLUMNS_TABLE_NAME
 				+ "(\nc_id INT NOT NULL AUTO_INCREMENT,\n" + "t_id INT,\n"
 				+ "id VARCHAR(100) NOT NULL,\n"
 				+ "column_order INT(2) NOT NULL,\n"

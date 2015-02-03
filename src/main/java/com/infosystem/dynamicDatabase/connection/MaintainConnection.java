@@ -2,6 +2,8 @@ package com.infosystem.dynamicDatabase.connection;
 
 import java.sql.SQLException;
 
+import com.infosystem.dynamicDatabase.constant.ConnectorData;
+
 public class MaintainConnection {
 
 	public static void connect(String DB_NAME) {
@@ -17,7 +19,7 @@ public class MaintainConnection {
 		}
 		String conUser = ConnectionStatus.getInstance().getConnection()
 				.getMetaData().getUserName().toString();
-		String expectedUser = LocalhostConnector.USER + "@localhost";
+		String expectedUser = ConnectorData.USER + "@localhost";
 		if (!conUser.equals(expectedUser)) {
 			System.out.println("user is not '" + expectedUser + "' but '"
 					+ conUser + "'.");

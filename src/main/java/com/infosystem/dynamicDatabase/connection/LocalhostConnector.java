@@ -6,21 +6,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import com.infosystem.dynamicDatabase.constant.ConnectorData;
+
 public class LocalhostConnector {
-
-	private static final String dbClass = "com.mysql.jdbc.Driver";
-	public static final String hostUrl = "jdbc:mysql://localhost/";
-	private static String databaseUrl;
-	public final static String USER = "eclipse";
-	private final static String PASS = "userdwa";
-
 	public static void openConnection(String dbName) {
 
-		databaseUrl = hostUrl + dbName;
-
+		String databaseUrl = ConnectorData.hostUrl.concat(dbName);
+		
 		try {
 
-			Class.forName(dbClass);
+			Class.forName(ConnectorData.dbClass);
 			System.out.println("Connecting to database...");
 			Connection connection = DriverManager.getConnection(databaseUrl);
 			Statement statement = connection.createStatement();
@@ -44,14 +39,14 @@ public class LocalhostConnector {
 	}
 
 	public static void openConnectionWithUserAndPassword(String dbName) {
-		databaseUrl = hostUrl + dbName;
+		String databaseUrl = ConnectorData.hostUrl.concat(dbName);
 		Properties props = new Properties();
-		props.put("user", USER);
-		props.put("password", PASS);
+		props.put("user", ConnectorData.USER);
+		props.put("password", ConnectorData.PASS);
 		Connection connection;
 		Statement statement;
 		try {
-			Class.forName(dbClass);
+			Class.forName(ConnectorData.dbClass);
 			System.out.println("Connecting to database...");
 			connection = DriverManager.getConnection(databaseUrl, props);
 			statement = connection.createStatement();

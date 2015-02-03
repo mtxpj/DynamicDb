@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.SqlBuilder.TableManagerSqlQuery;
+import com.infosystem.dynamicDatabase.constant.ConnectorData;
 
 public class TablesTableManagerSqlQueryTest {
 
@@ -13,11 +14,11 @@ public class TablesTableManagerSqlQueryTest {
 		// given
 		String expected = "INSERT INTO all_tables (table_id)  VALUES ( sample_table_name );";
 		// when
-		String actual = TableManagerSqlQuery.addTable(DataForTests.getTablesTableName(),
-				DataForTests.getSampleTable());
+		String actual = TableManagerSqlQuery.addTable(
+				ConnectorData.TABLES_TABLE_NAME, DataForTests.getSampleTable());
 		// then
 		Assert.assertEquals(expected, actual);
-		
+
 	}
 
 	@Test
@@ -25,8 +26,8 @@ public class TablesTableManagerSqlQueryTest {
 		// given
 		String expected = "DELETE FROM all_tables WHERE table_name=sample_table_name ;";
 		// when
-		String actual = TableManagerSqlQuery.removeTable(DataForTests.getTablesTableName(),
-				DataForTests.getSampleTable());
+		String actual = TableManagerSqlQuery.removeTable(
+				ConnectorData.TABLES_TABLE_NAME, DataForTests.getSampleTable());
 		// then
 		Assert.assertEquals(expected, actual);
 	}

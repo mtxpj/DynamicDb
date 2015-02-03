@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
+import com.infosystem.dynamicDatabase.constant.ConnectorData;
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.DataType;
@@ -16,8 +17,7 @@ import com.infosystem.dynamicDatabase.modelMethods.DynamicDatabaseManagerMethods
 
 public class TableManagerTest {
 	private static final long ROW_ID = 20;
-	private static final String TABLES_TABLE_NAME = DataForTests
-			.getTablesTableName();
+	private static final String TABLES_TABLE_NAME = ConnectorData.TABLES_TABLE_NAME;
 	private static final String SAMPLE_TABLE_NAME = DataForTests
 			.getSampleTable();
 	private static final String COLUMN_NAME = "table_id";

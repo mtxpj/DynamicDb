@@ -2,9 +2,7 @@ package com.infosystem.dynamicDatabase.modelMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.infosystem.dynamicDatabase.DynamicDatabaseManager;
 import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
@@ -12,7 +10,6 @@ import com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager;
 import com.infosystem.dynamicDatabase.SqlBuilder.SqlBuilder;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
-import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.Sort;

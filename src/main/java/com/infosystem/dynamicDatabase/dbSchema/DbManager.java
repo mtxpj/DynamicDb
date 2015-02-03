@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 import com.infosystem.dynamicDatabase.SqlBuilder.DbManagerSqlQuery;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
-import com.infosystem.dynamicDatabase.connection.LocalhostConnector;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
+import com.infosystem.dynamicDatabase.constant.ConnectorData;
 
 public class DbManager {
 
@@ -21,7 +21,7 @@ public class DbManager {
 	}
 
 	public void deleteDb(String dbName) {
-		MaintainConnection.connect(LocalhostConnector.hostUrl);
+		MaintainConnection.connect(ConnectorData.hostUrl);
 		String sql = DbManagerSqlQuery.dropDb(dbName);
 		try {
 			ConnectionStatus.getInstance().getStatement().executeUpdate(sql);
@@ -32,7 +32,7 @@ public class DbManager {
 
 	public static boolean ifDbExists(String dbName) {
 		boolean existence = false;
-		MaintainConnection.connect(LocalhostConnector.hostUrl);
+		MaintainConnection.connect(ConnectorData.hostUrl);
 		java.sql.DatabaseMetaData dbm;
 		try {
 			dbm = ConnectionStatus.getInstance().getConnection().getMetaData();

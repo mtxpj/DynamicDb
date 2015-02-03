@@ -45,28 +45,6 @@ public class ResultsetManager {
 					DataHolder dh = FabrykaStrategiiSqlowych
 							.getStartegiaSqlowa(dt)
 							.przygotujDataHolderZResultSet(rs, i);
-					// DataHolder dh = new DataHolder();
-					// dh.setDataType(DataHolderHandler
-					// .getDataTypeFromResultSet(rs));
-					// switch (dh.getDataType()) {
-					// case STRING:
-					// dh.setString(rs.getString(i));
-					// break;
-					// case DATE:
-					// dh.setDate(rs.getDate(i));
-					// break;
-					// case NUMBER:
-					// dh.setNumber(rs.getInt(i));
-					// break;
-					// case PREDEFINED_VALUE:
-					// dh.setBool(rs.getBoolean(i));
-					// break;
-					// case SUB_SET:
-					// dh.setSubSet(rs.getString(i));// bollocks
-					// break;
-					// default:
-					// break;
-					// }
 					data.put(columnList.get(i), dh);
 				}
 				dataRow.setData(data);
