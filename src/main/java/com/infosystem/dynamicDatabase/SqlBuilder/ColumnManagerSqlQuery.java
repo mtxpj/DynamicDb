@@ -3,9 +3,9 @@ package com.infosystem.dynamicDatabase.SqlBuilder;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 
 public class ColumnManagerSqlQuery {
-	static StringBuilder sb = new StringBuilder();
+	StringBuilder sb = new StringBuilder();
 
-	public static String addColumnToTable(String tableName,
+	public String addColumnToTable(String tableName,
 			ColumnDefinition columnDefinition) {
 		sb.append("INSERT INTO ");
 		sb.append(tableName);

@@ -17,7 +17,7 @@ import com.infosystem.dynamicDatabase.dbStructure.TableManagerTest;
 public class AllLocalhostTest {
 	@BeforeClass
 	public static void method() {
-		MaintainConnection.connect(DataForTests.getTestDb());
+		MaintainConnection.connectLocalhostWithUserAndPassword(DataForTests.getTestDb());
 
 	}
 }

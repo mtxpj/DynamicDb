@@ -13,7 +13,6 @@ public class ConnectionStatus {
 	private ConnectionStatus() {
 	}
 
-	// Get the only object available
 	public static ConnectionStatus getInstance() {
 		return instance;
 	}

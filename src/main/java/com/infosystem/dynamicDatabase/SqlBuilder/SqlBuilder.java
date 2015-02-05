@@ -19,38 +19,19 @@ public class SqlBuilder {
 	public static String createOrUpdate(TableDefinition tableDefinition) {
 
 		StringBuilder sqlCommand = new StringBuilder();
-		sqlCommand.append("CREATE TABLE ");
-		sqlCommand.append(tableDefinition.getId() + " (\n");
-		sqlCommand.append("id INT NOT NULL AUTO_INCREMENT,\n");
+		sqlCommand.append("CREATE TABLE IF NOT EXISTS ");
+		sqlCommand.append(tableDefinition.getId());
+		sqlCommand.append(" (\nid INT NOT NULL AUTO_INCREMENT,\n");
 		List<ColumnDefinition> listaKolumn = tableDefinition.getColumnList();
 		for (ColumnDefinition columnDefinition : listaKolumn) {
 			sqlCommand.append(columnDefinition.getId() + " ");
-			sqlCommand.append(FabrykaStrategiiSqlowych.getStartegiaSqlowa(columnDefinition.getDataType()).przygotujSqlDoTworzeniaKolumny());
-			// switch (columnDefinition.getDataType()) {
-			// case NUMBER:
-			// sqlCommand.append("INT (255) ");
-			// break;
-			// case STRING:
-			// sqlCommand.append("VARCHAR (255) ");
-			// break;
-			// case DATE:
-			// sqlCommand.append("DATE ");
-			// break;
-			// case PREDEFINED_VALUE:
-			// sqlCommand.append("VARCHAR (255) ");
-			// break;
-			// case SUB_SET:
-			// sqlCommand.append("VARCHAR (255) ");
-			// break;
-			// default:
-			// sqlCommand.append("VARCHAR (255) ");
-			// break;
-			// }
-			sqlCommand.append(columnDefinition.getColumnDef() + ", \n");
-
-			// co z labelami?
+			sqlCommand.append(FabrykaStrategiiSqlowych.getStartegiaSqlowa(
+					columnDefinition.getDataType())
+					.przygotujSqlDoTworzeniaKolumny());
+			sqlCommand.append(new ColumnDefinitionSqlInterpreter()
+					.getProperSyntax(columnDefinition.getColumnDef()) + ", \n");
 		}
-		sqlCommand.append("PRIMARY KEY ( id )\n);");
+		sqlCommand.append("PRIMARY KEY ( id )\n) CHARSET=utf8;");
 		return sqlCommand.toString();
 	}
 
@@ -96,26 +77,13 @@ public class SqlBuilder {
 		sqlCommand.append((row.getRowId()) + ", ");
 		for (int i = 0; i < dataHolder.size(); i++) {
 			String column = columnList.get(i + 1); // i+1 żeby ominąć kolumnę
-			StrategiaSqlowa strategia = FabrykaStrategiiSqlowych.getStartegiaSqlowa(dataHolder.get(column).getDataType());
-													// 'id's
-			sqlCommand.append(strategia.przygotujFragmentSQlZwiazanyZWstawianieWartosciDoInserta(dataHolder.get(column)));
-//			switch (dataHolder.get(column).getDataType()) {
-//			case NUMBER:
-//				sqlCommand.append(dataHolder.get(column).getNumber() + ", ");
-//				break;
-//			case DATE:
-//				sqlCommand.append(dataHolder.get(column).getDate() + ", ");
-//				break;
-//			case STRING:
-//				sqlCommand.append("'" + dataHolder.get(column).getString()
-//						+ "', ");
-//				break;
-//			case PREDEFINED_VALUE:
-//				sqlCommand.append(dataHolder.get(column).getBool() + ", ");
-//				break;
-//			case SUB_SET:
-//				break;
-//			}
+			StrategiaSqlowa strategia = FabrykaStrategiiSqlowych
+					.getStartegiaSqlowa(dataHolder.get(column).getDataType());
+			// 'id's
+			sqlCommand
+					.append(strategia
+							.przygotujFragmentSQlZwiazanyZWstawianieWartosciDoInserta(dataHolder
+									.get(column)));
 		}
 
 		// przyciecie wartosci
@@ -182,6 +150,21 @@ public class SqlBuilder {
 		sb.append("\n WHERE id=");
 		sb.append(row.getRowId());
 		sb.toString();
+		return sb.toString();
+	}
+
+	public static String addForeignKey(String table, String column,
+			String refTable, String refColumn) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("ALTER TABLE ");
+		sb.append(table);
+		sb.append("\nADD FOREIGN KEY (");
+		sb.append(column);
+		sb.append(") REFERENCES ");
+		sb.append(refTable);
+		sb.append("(");
+		sb.append(refColumn);
+		sb.append(");");
 		return sb.toString();
 	}
 }

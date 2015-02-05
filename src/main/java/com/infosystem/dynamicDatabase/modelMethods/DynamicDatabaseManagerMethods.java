@@ -5,11 +5,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.infosystem.dynamicDatabase.DynamicDatabaseManager;
-import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager;
 import com.infosystem.dynamicDatabase.SqlBuilder.SqlBuilder;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
+import com.infosystem.dynamicDatabase.constant.ConnectorData;
 import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.Sort;
@@ -18,20 +18,18 @@ import com.infosystem.dynamicDatabase.model.filter.Filter;
 
 public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 
-	private static final String DB_NAME = DataForTests.getTestDb();
+	private static final String DB_NAME = ConnectorData.DB;
 
 	public String createOrUpdate(TableDefinition tableDefinition) {
-		// zapewnienie połączenia
-		MaintainConnection.connect(DB_NAME);
-		// sprawdzenie czy table o podanej nazwie istnieje
 		if (existsTable(tableDefinition.getId())) {
+			// update:
 			return "tabela o podanej nazwie już istnieje";
 		}
-		// przygotowanie komendy
 		String command = SqlBuilder.createOrUpdate(tableDefinition);
-		// obsługa komendy
 		try {
-			ConnectionStatus.getInstance().getStatement().executeUpdate(command);
+			MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
+			ConnectionStatus.getInstance().getStatement()
+					.executeUpdate(command);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("błąd polecenia SQL w metodzie createOrUpdate");
@@ -41,13 +39,11 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public boolean deleteTable(String tableId) {
-		// zapewnienie połączenia
-		MaintainConnection.connect(DB_NAME);
-		// przygotowanie komendy
+		MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
 		String command = SqlBuilder.deleteTable(tableId);
-		// obsługa komendy
 		try {
-			ConnectionStatus.getInstance().getStatement().executeUpdate(command);
+			ConnectionStatus.getInstance().getStatement()
+					.executeUpdate(command);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("błąd polecenia SQL w metodzie deleteTable");
@@ -57,9 +53,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public boolean existsTable(String tableId) {
-		// zapewnienie połączenia
-		MaintainConnection.connect(DB_NAME);
-		// obsługa komendy
+		MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
 		try {
 			return TableExist.ifExist(tableId);
 		} catch (SQLException e) {
@@ -70,14 +64,11 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public Long insertDataRow(DataRow row) {
-		try {
-			MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
 		String command = SqlBuilder.insertDataRow(row);
 		try {
-			ConnectionStatus.getInstance().getStatement().executeUpdate(command);
+			ConnectionStatus.getInstance().getStatement()
+					.executeUpdate(command);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return (long) -1;
@@ -97,11 +88,12 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		String command = SqlBuilder.getDataRows(qp);
 		try {
 			MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
-			rs = ConnectionStatus.getInstance().getStatement().executeQuery(command);
+			rs = ConnectionStatus.getInstance().getStatement()
+					.executeQuery(command);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (qp.getColumnList()==null) {
+		if (qp.getColumnList() == null) {
 			try {
 				for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
 					columnList.add(rs.getMetaData().getColumnName(i));
@@ -121,17 +113,11 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public boolean deleteDataRow(String tableId, Long rowId) {
-		// zapewnienie połączenia
-		try {
-			MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		// przygotowanie komendy
+		MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
 		String command = SqlBuilder.deleteDataRow(tableId, rowId);
-		// obsługa komendy
 		try {
-			ConnectionStatus.getInstance().getStatement().executeUpdate(command);
+			ConnectionStatus.getInstance().getStatement()
+					.executeUpdate(command);
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

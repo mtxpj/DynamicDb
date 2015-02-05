@@ -17,7 +17,7 @@ public class GetColumnNames {
 
 	public static ArrayList<String> fromMetaData(String tableName) {
 		ArrayList<String> columnNames = new ArrayList<String>();
-		MaintainConnection.connect(tableName);
+		MaintainConnection.connectLocalhostWithUserAndPassword(tableName);
 		try {
 			Statement stmt = ConnectionStatus.getInstance().getConnection().createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName);

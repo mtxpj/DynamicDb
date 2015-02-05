@@ -9,6 +9,21 @@ public class ColumnDefinition {
 	private String plainLabel;
 	private DataType dataType;
 
+	public ColumnDefinition() {
+		super();
+	}
+
+	public ColumnDefinition(String id, int order, Null columnDef,
+			String htmlLabel, String plainLabel, DataType dataType) {
+		super();
+		this.id = id;
+		this.order = order;
+		this.columnDef = columnDef;
+		this.htmlLabel = htmlLabel;
+		this.plainLabel = plainLabel;
+		this.dataType = dataType;
+	}
+
 	public String getId() {
 		return id;
 	}

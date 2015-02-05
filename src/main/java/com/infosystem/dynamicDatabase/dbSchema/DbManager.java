@@ -10,18 +10,17 @@ import com.infosystem.dynamicDatabase.constant.ConnectorData;
 
 public class DbManager {
 
-	public static void createDb(String dbName) throws SQLException {
-		MaintainConnection.connectLocalhostWithUserAndPassword(dbName);
-		String sql = DbManagerSqlQuery.createDb(dbName);
+	public static void createDb(String db) {
 		try {
-			ConnectionStatus.getInstance().getStatement().executeUpdate(sql);
+			ConnectionStatus.getInstance().getStatement()
+					.executeUpdate(DbManagerSqlQuery.createDb(db));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void deleteDb(String dbName) {
-		MaintainConnection.connect(ConnectorData.hostUrl);
+		MaintainConnection.connectLocalhostWithUserAndPassword(ConnectorData.hostUrl);
 		String sql = DbManagerSqlQuery.dropDb(dbName);
 		try {
 			ConnectionStatus.getInstance().getStatement().executeUpdate(sql);
@@ -32,7 +31,7 @@ public class DbManager {
 
 	public static boolean ifDbExists(String dbName) {
 		boolean existence = false;
-		MaintainConnection.connect(ConnectorData.hostUrl);
+		MaintainConnection.connectLocalhostWithUserAndPassword(ConnectorData.hostUrl);
 		java.sql.DatabaseMetaData dbm;
 		try {
 			dbm = ConnectionStatus.getInstance().getConnection().getMetaData();
@@ -46,5 +45,16 @@ public class DbManager {
 			e.printStackTrace();
 		}
 		return existence;
+	}
+
+	public static void useDb(String db) {
+		MaintainConnection.connectLocalhostWithUserAndPassword(db);
+		String sql = DbManagerSqlQuery.useDb(db);
+		try {
+			ConnectionStatus.getInstance().getStatement().execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Connected to: " + db);
 	}
 }

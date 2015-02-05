@@ -18,4 +18,12 @@ public class DbManagerSqlQuery {
 		return sb.toString();
 	}
 
+	public static String useDb(String db) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("USE ");
+		sb.append(db);
+		sb.append(";");
+		return sb.toString();
+	}
+
 }
