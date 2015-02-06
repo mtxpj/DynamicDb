@@ -14,23 +14,22 @@ import com.infosystem.dynamicDatabase.model.TableDefinition;
 public class SampleTableDefinitionProvider {
 	public static final String TABLICA_PROBNA = "tablica_probna";
 
-	public static TableDefinition createSampleTableDefinition() {
+	public static TableDefinition createSampleTableDefinition(int colNumber) {
 		TableDefinition tableDefinition = new TableDefinition();
 		tableDefinition.setId(TABLICA_PROBNA);
-		tableDefinition.setColumnList(getSampleColumnList());
+		tableDefinition.setColumnList(getSampleColumnList(colNumber));
 		return tableDefinition;
 	}
 
-	static List<ColumnDefinition> getSampleColumnList() {
+	static List<ColumnDefinition> getSampleColumnList(int colNumber) {
 		List<ColumnDefinition> exampleColumnList = new ArrayList<ColumnDefinition>();
-		for (int i = 0; i < 10; i += 1) {
-			exampleColumnList.add(getSampleColumn(exampleColumnList, i));
+		for (int i = 0; i < colNumber; i += 1) {
+			exampleColumnList.add(getSampleColumn(i));
 		}
 		return exampleColumnList;
 	}
 
-	static ColumnDefinition getSampleColumn(
-			List<ColumnDefinition> exampleColumnList, int dataSeed) {
+	static ColumnDefinition getSampleColumn(int dataSeed) {
 		ColumnDefinition exampleColumnDefinition = new ColumnDefinition();
 		exampleColumnDefinition.setId("kolumna_" + (dataSeed + 1));
 		exampleColumnDefinition.setDataType(getDataType(dataSeed));
@@ -41,21 +40,21 @@ public class SampleTableDefinitionProvider {
 		return DataType.values()[dataSeed % DataType.values().length];
 	}
 
-	static Map<String, DataHolder> getSampleDataHolder() {
-		List<ColumnDefinition> exampleColumnList = getSampleColumnList();
+	static Map<String, DataHolder> getSampleDataHolder(int colNumber) {
+		List<ColumnDefinition> exampleColumnList = getSampleColumnList(colNumber);
 		DataType dataType = DataType.STRING;
 		DataHolder dataHolder = new DataHolder();
 		dataHolder.setDataType(dataType);
 		Map<String, DataHolder> data = new HashMap<String, DataHolder>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < colNumber; i++) {
 			dataHolder.setString("dane " + String.valueOf(i));
 			data.put(exampleColumnList.get(i).getId(), dataHolder);
 		}
 		return data;
 	}
 
-	public static DataRow getDataRow() {
-		Map<String, DataHolder> data = getSampleDataHolder();
+	public static DataRow getDataRow(int colNumber) {
+		Map<String, DataHolder> data = getSampleDataHolder(colNumber);
 		DataRow dataRow = new DataRow();
 		dataRow.setRowId((long) 1);
 		dataRow.setTableId(TABLICA_PROBNA);

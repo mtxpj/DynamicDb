@@ -9,11 +9,11 @@ import com.infosystem.dynamicDatabase.model.Null;
 
 public class MetaTablesData {
 	public static final String ID = "name";
-	private static final String COLUMNS_ORDER = "column_order";
-	private static final String COLUMN_DEFINITION = "column_definition";
-	private static final String HTML_LABEL = "html_label";
-	private static final String PLAIN_LABEL = "plain_label";
-	private static final String DATA_TYPE = "data_type";
+	public static final String COLUMNS_ORDER = "column_order";
+	public static final String COLUMN_DEFINITION = "column_definition";
+	public static final String HTML_LABEL = "html_label";
+	public static final String PLAIN_LABEL = "plain_label";
+	public static final String DATA_TYPE = "data_type";
 	public static final String COLUMN_LIST = "column_list";
 
 	public List<ColumnDefinition> columnsCdl = new ArrayList<ColumnDefinition>();

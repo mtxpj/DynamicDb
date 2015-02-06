@@ -16,12 +16,21 @@ public class SqlBuilderTest {
 
 	@Test
 	public final void testCreate() {
-		String expected = "CREATE TABLE tablica_probna (\n" + "id INT NOT NULL AUTO_INCREMENT,\n" + "kolumna_1 VARCHAR (255) null, \n"
-				+ "kolumna_2 VARCHAR (255) null, \n" + "kolumna_3 VARCHAR (255) null, \n" + "kolumna_4 VARCHAR (255) null, \n"
-				+ "kolumna_5 VARCHAR (255) null, \n" + "kolumna_6 VARCHAR (255) null, \n" + "kolumna_7 VARCHAR (255) null, \n"
-				+ "kolumna_8 VARCHAR (255) null, \n" + "kolumna_9 VARCHAR (255) null, \n" + "kolumna_10 VARCHAR (255) null, \n"
-				+ "PRIMARY KEY ( id )\n" + ");";
-		TableDefinition tabelDef = SampleTableDefinitionProvider.createSampleTableDefinition();
+		String expected = "CREATE TABLE tablica_probna (\n"
+				+ "id INT NOT NULL AUTO_INCREMENT,\n"
+				+ "kolumna_1 VARCHAR (255) null, \n"
+				+ "kolumna_2 VARCHAR (255) null, \n"
+				+ "kolumna_3 VARCHAR (255) null, \n"
+				+ "kolumna_4 VARCHAR (255) null, \n"
+				+ "kolumna_5 VARCHAR (255) null, \n"
+				+ "kolumna_6 VARCHAR (255) null, \n"
+				+ "kolumna_7 VARCHAR (255) null, \n"
+				+ "kolumna_8 VARCHAR (255) null, \n"
+				+ "kolumna_9 VARCHAR (255) null, \n"
+				+ "kolumna_10 VARCHAR (255) null, \n" + "PRIMARY KEY ( id )\n"
+				+ ");";
+		TableDefinition tabelDef = SampleTableDefinitionProvider
+				.createSampleTableDefinition(10);
 		String actual = SqlBuilder.createOrUpdate(tabelDef);
 		assertEquals(expected, actual);
 		tabelDef.getColumnList().remove(0);
@@ -46,7 +55,8 @@ public class SqlBuilderTest {
 	@Test
 	public final void testInsertDataRow() {
 		String expected = "INSERT INTO tablica_probna (  )\nVALUES\n( l, k, j );";
-		String actual = SqlBuilder.insertDataRow(SampleTableDefinitionProvider.getDataRow());
+		String actual = SqlBuilder.insertDataRow(SampleTableDefinitionProvider
+				.getDataRow(10));
 		System.out.println(actual);
 		assertEquals(expected, actual);
 	}

@@ -20,6 +20,8 @@ public class MaintainConnection {
 				LocalhostConnector.closeConnection();
 				LocalhostConnector.openConnectionWithUserAndPassword(dbName);
 			}
+		} catch (com.mysql.jdbc.exceptions.MySQLNonTransientException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

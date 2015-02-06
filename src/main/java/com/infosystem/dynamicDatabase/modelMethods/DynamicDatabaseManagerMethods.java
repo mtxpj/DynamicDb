@@ -1,5 +1,7 @@
 package com.infosystem.dynamicDatabase.modelMethods;
 
+import static com.infosystem.dynamicDatabase.constant.ConnectorData.DB;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -9,7 +11,7 @@ import com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager;
 import com.infosystem.dynamicDatabase.SqlBuilder.SqlBuilder;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
-import com.infosystem.dynamicDatabase.constant.ConnectorData;
+import com.infosystem.dynamicDatabase.metaTablesMethods.MetaTablesHandler;
 import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.Sort;
@@ -18,28 +20,29 @@ import com.infosystem.dynamicDatabase.model.filter.Filter;
 
 public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 
-	private static final String DB_NAME = ConnectorData.DB;
-
 	public String createOrUpdate(TableDefinition tableDefinition) {
 		if (existsTable(tableDefinition.getId())) {
-			// update:
 			return "tabela o podanej nazwie już istnieje";
-		}
-		String command = SqlBuilder.createOrUpdate(tableDefinition);
-		try {
-			MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
-			ConnectionStatus.getInstance().getStatement()
-					.executeUpdate(command);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("błąd polecenia SQL w metodzie createOrUpdate");
-			return "błąd polecenia SQL w metodzie createOrUpdate";
+		} else {
+			MetaTablesHandler.createOrUpdate(tableDefinition);
+			String command = SqlBuilder.createOrUpdate(tableDefinition);
+			try {
+				MaintainConnection.connectLocalhostWithUserAndPassword(DB);
+				ConnectionStatus.getInstance().getStatement()
+						.executeUpdate(command);
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("błąd SQL w metodzie createOrUpdate");
+				return "błąd polecenia SQL w metodzie createOrUpdate";
+			}
 		}
 		return null;
 	}
 
 	public boolean deleteTable(String tableId) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
+		MaintainConnection.connectLocalhostWithUserAndPassword(DB);
 		String command = SqlBuilder.deleteTable(tableId);
 		try {
 			ConnectionStatus.getInstance().getStatement()
@@ -53,7 +56,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public boolean existsTable(String tableId) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
+		MaintainConnection.connectLocalhostWithUserAndPassword(DB);
 		try {
 			return TableExist.ifExist(tableId);
 		} catch (SQLException e) {
@@ -64,7 +67,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public Long insertDataRow(DataRow row) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
+		MaintainConnection.connectLocalhostWithUserAndPassword(DB);
 		String command = SqlBuilder.insertDataRow(row);
 		try {
 			ConnectionStatus.getInstance().getStatement()
@@ -86,34 +89,30 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		Filter filter = qp.getFilter();
 
 		String command = SqlBuilder.getDataRows(qp);
+		List<DataRow> list = ResultsetManager.getRowsFromResultSet(rs,
+				columnList);
 		try {
-			MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
+			MaintainConnection.connectLocalhostWithUserAndPassword(DB);
 			rs = ConnectionStatus.getInstance().getStatement()
 					.executeQuery(command);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		if (qp.getColumnList() == null) {
-			try {
+			if (qp.getColumnList() == null) {
 				for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
 					columnList.add(rs.getMetaData().getColumnName(i));
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
-		}
-		List<DataRow> list = ResultsetManager.getRowsFromResultSet(rs,
-				columnList);
-		for (int i = 0; i < resultCount; i++) {
-			DataRow dr = list.get(i);
-			dr.setRowId((long) (firstResult + i));
-			dr.setTableId(tableId);
+			for (int i = 0; i < resultCount; i++) {
+				DataRow dr = list.get(i);
+				dr.setRowId((long) (firstResult + i));
+				dr.setTableId(tableId);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return list;
 	}
 
 	public boolean deleteDataRow(String tableId, Long rowId) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(DB_NAME);
+		MaintainConnection.connectLocalhostWithUserAndPassword(DB);
 		String command = SqlBuilder.deleteDataRow(tableId, rowId);
 		try {
 			ConnectionStatus.getInstance().getStatement()

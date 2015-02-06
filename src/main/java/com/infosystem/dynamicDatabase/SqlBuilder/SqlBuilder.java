@@ -17,7 +17,6 @@ import com.infosystem.dynamicDatabase.modelMethods.GetColumnNames;
 public class SqlBuilder {
 
 	public static String createOrUpdate(TableDefinition tableDefinition) {
-
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("CREATE TABLE IF NOT EXISTS ");
 		sqlCommand.append(tableDefinition.getId());
@@ -54,45 +53,30 @@ public class SqlBuilder {
 
 	public static String insertDataRow(DataRow row) {
 		Map<String, DataHolder> dataHolder = row.getData();
-
-		// wywołanie tabeli do której wkładamy
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("INSERT INTO ");
 		sqlCommand.append(row.getTableId());
-
-		// wywołanie listy kolumn
 		sqlCommand.append(" ( ");
 		ArrayList<String> columnList = GetColumnNames.fromMetaData(row
 				.getTableId());
 		for (String string : columnList) {
 			sqlCommand.append(string + ", ");
 		}
-		// przycięcie listy kolumn
-		String substring = sqlCommand.substring(0, (sqlCommand.length() - 2));
-		sqlCommand = new StringBuilder();
-		sqlCommand.append(substring);
+		sqlCommand.substring(0, sqlCommand.length() - 2);
 		sqlCommand.append(" )");
-		// podanie wartości dla kolumn
 		sqlCommand.append("\nVALUES ( ");
 		sqlCommand.append((row.getRowId()) + ", ");
 		for (int i = 0; i < dataHolder.size(); i++) {
 			String column = columnList.get(i + 1); // i+1 żeby ominąć kolumnę
 			StrategiaSqlowa strategia = FabrykaStrategiiSqlowych
 					.getStartegiaSqlowa(dataHolder.get(column).getDataType());
-			// 'id's
 			sqlCommand
 					.append(strategia
 							.przygotujFragmentSQlZwiazanyZWstawianieWartosciDoInserta(dataHolder
 									.get(column)));
 		}
-
-		// przyciecie wartosci
-		substring = sqlCommand.substring(0, (sqlCommand.length() - 2));
-		sqlCommand = new StringBuilder();
-		sqlCommand.append(substring);
+		sqlCommand.substring(0, sqlCommand.length() - 2);
 		sqlCommand.append(" );");
-
-		// wydruk komendy i zwrot
 		System.out.println(sqlCommand.toString());
 		return sqlCommand.toString();
 	}
@@ -167,4 +151,5 @@ public class SqlBuilder {
 		sb.append(");");
 		return sb.toString();
 	}
+
 }
