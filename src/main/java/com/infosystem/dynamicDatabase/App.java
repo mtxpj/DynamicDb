@@ -3,7 +3,7 @@ package com.infosystem.dynamicDatabase;
 import static com.infosystem.dynamicDatabase.constant.ConnectorData.COLUMNS_TABLE_NAME;
 import static com.infosystem.dynamicDatabase.constant.ConnectorData.DB;
 import static com.infosystem.dynamicDatabase.constant.ConnectorData.TABLES_TABLE_NAME;
-import static com.infosystem.dynamicDatabase.constant.MetaTablesData.COLUMN_LIST;
+import static com.infosystem.dynamicDatabase.constant.MetaTablesData.TABLES_ID;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -35,8 +35,12 @@ public class App {
 	private static void createMetaTables() {
 		createTablesTable();
 		createColumnsTable();
-		new AlterTable().addForeignKey(TABLES_TABLE_NAME, COLUMN_LIST,
-				COLUMNS_TABLE_NAME, "id");
+		addForeignKeyToMetaTables();
+	}
+
+	private static void addForeignKeyToMetaTables() {
+		new AlterTable().addForeignKey(COLUMNS_TABLE_NAME, TABLES_ID,
+				TABLES_TABLE_NAME, "id");
 	}
 
 	private static void createTablesTable() {

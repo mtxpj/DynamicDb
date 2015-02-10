@@ -1,12 +1,13 @@
 package com.infosystem.dynamicDatabase.dbSchema;
 
+import static com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager.getColumnDefinition;
+import static com.infosystem.dynamicDatabase.connection.MaintainConnection.connectLocalhostWithUserAndPassword;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager;
 import com.infosystem.dynamicDatabase.SqlBuilder.ColumnManagerSqlQuery;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
-import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 import com.infosystem.dynamicDatabase.constant.ConnectorData;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 
@@ -14,7 +15,7 @@ public class ColumnManager {
 
 	public void addColumnToTable(String db, String tableName,
 			ColumnDefinition columnDefinition) throws SQLException {
-		MaintainConnection.connectLocalhostWithUserAndPassword(db);
+		connectLocalhostWithUserAndPassword(db);
 		new ColumnManagerSqlQuery().addColumnToTable(tableName,
 				columnDefinition);
 		String sql = new ColumnManagerSqlQuery().getSb();
@@ -28,17 +29,15 @@ public class ColumnManager {
 	public ColumnDefinition getColumnFromColumnsTable(String columnId) {
 		ResultSet rs = null;
 		try {
-			MaintainConnection
-					.connectLocalhostWithUserAndPassword(ConnectorData.DB);
-			rs = ConnectionStatus
-					.getInstance()
-					.getStatement()
-					.executeQuery(
-							new ColumnManagerSqlQuery().getColumnFromTable(
-									ConnectorData.COLUMNS_TABLE_NAME, columnId));
+			connectLocalhostWithUserAndPassword(ConnectorData.DB);
+			String columnFromTable = new ColumnManagerSqlQuery()
+					.getColumnFromTable(ConnectorData.COLUMNS_TABLE_NAME,
+							columnId);
+			rs = ConnectionStatus.getInstance().getStatement()
+					.executeQuery(columnFromTable);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ResultsetManager.getColumnDefinition(rs);
+		return getColumnDefinition(rs);
 	}
 }

@@ -15,6 +15,7 @@ public class MetaTablesData {
 	public static final String PLAIN_LABEL = "plain_label";
 	public static final String DATA_TYPE = "data_type";
 	public static final String COLUMN_LIST = "column_list";
+	public static final String TABLES_ID = "tables_id";
 
 	public List<ColumnDefinition> columnsCdl = new ArrayList<ColumnDefinition>();
 	public List<ColumnDefinition> tablesCdl = new ArrayList<ColumnDefinition>();
@@ -22,8 +23,6 @@ public class MetaTablesData {
 	public List<ColumnDefinition> createMetaTablesColDefList() {
 		tablesCdl.add(new ColumnDefinition(ID, 1, Null.NOT_NULL, "htmlLabel",
 				"plainLabel", DataType.STRING));
-		tablesCdl.add(new ColumnDefinition(COLUMN_LIST, 2, Null.NULL,
-				"htmlLabel", "plainLabel", DataType.NUMBER));
 		return tablesCdl;
 	}
 
@@ -40,6 +39,8 @@ public class MetaTablesData {
 				"htmlLabel", "plainLabel", DataType.STRING));
 		columnsCdl.add(new ColumnDefinition(DATA_TYPE, 6, Null.NOT_NULL,
 				"htmlLabel", "plainLabel", DataType.STRING));
+		columnsCdl.add(new ColumnDefinition(TABLES_ID, 7, Null.NULL,
+				"htmlLabel", "plainLabel", DataType.NUMBER));
 		return columnsCdl;
 	}
 }

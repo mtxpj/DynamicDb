@@ -1,9 +1,12 @@
 package com.infosystem.dynamicDatabase.SqlBuilder;
 
-import org.junit.Assert;
+import static com.infosystem.dynamicDatabase.DataForTests.SampleTableDefinitionProvider.createSampleTableDefinition;
+import static com.infosystem.dynamicDatabase.SqlBuilder.SqlBuilderForMetaTables.addNewColumnsToColumnsTable;
+import static com.infosystem.dynamicDatabase.SqlBuilder.SqlBuilderForMetaTables.addNewTableToTablesTable;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import com.infosystem.dynamicDatabase.DataForTests.SampleTableDefinitionProvider;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 
 public class SqlBuilderForMetaTablesTest {
@@ -11,22 +14,21 @@ public class SqlBuilderForMetaTablesTest {
 	@Test
 	public void testAddNewTableToTablesTable() {
 		// given
-		TableDefinition td = SampleTableDefinitionProvider
-				.createSampleTableDefinition(10);
+		TableDefinition td = createSampleTableDefinition(10);
 		String expected = "INSERT INTO all_tables FIELDS (  )" + "\nVALUES"
 				+ "\n(  );";
 		// when
-		String actual = SqlBuilderForMetaTables.addNewTableToTablesTable(td);
+		String actual = addNewTableToTablesTable(td);
 		// than
-		Assert.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testAddNewColumnsToColumnsTable() {
 		// given
-		TableDefinition td = SampleTableDefinitionProvider
-				.createSampleTableDefinition(10);
-		String expected = "INSERT INTO all_columns FIELDS ( name, column_order, column_definition, html_label, plain_label, data_type )"
+		TableDefinition td = createSampleTableDefinition(10);
+		String expected = "INSERT INTO all_columns FIELDS ( name, column_order, "
+				+ "column_definition, html_label, plain_label, data_type )"
 				+ "\nVALUES\n"
 				+ "(kolumna_1, 0, null, null, null, STRING ),\n"
 				+ "(kolumna_2, 0, null, null, null, DATE ),\n"
@@ -39,9 +41,9 @@ public class SqlBuilderForMetaTablesTest {
 				+ "(kolumna_9, 0, null, null, null, PREDEFINED_VALUE ),\n"
 				+ "(kolumna_10, 0, null, null, null, SUB_SET );";
 		// when
-		String actual = SqlBuilderForMetaTables.addNewColumnsToColumnsTable(td);
+		String actual = addNewColumnsToColumnsTable(td, 1);
 		// than
-		Assert.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 }
