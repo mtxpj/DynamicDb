@@ -18,7 +18,8 @@ public class ColumnManagerSqlQueryTest {
 		// when
 		ColumnManagerSqlQuery cmsq = new ColumnManagerSqlQuery();
 		cmsq.addColumnToTable(ConnectorData.COLUMNS_TABLE_NAME,
-				TableDefinitionTest.createColumnDefinitionWithStupidData(1));
+				TableDefinitionTest.createSampleColumnDefinition(1,
+						TableDefinitionTest.TABLE_ONE_PRIM_KEY));
 		String actual = cmsq.getSb();
 		// then
 		Assert.assertEquals(expected, actual);

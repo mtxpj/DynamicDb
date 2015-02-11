@@ -13,7 +13,7 @@ public class StrategiaSqlowaDlaPredefinedValue implements StrategiaSqlowa {
 	}
 
 	public String przygotujSqlDoTworzeniaKolumny() {
-		return "VARCHAR (255) ";
+		return "BOOLEAN ";
 	}
 
 	public DataHolder przygotujDataHolderZResultSet(ResultSet resultSet,

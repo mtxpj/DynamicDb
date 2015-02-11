@@ -6,10 +6,17 @@ import com.infosystem.dynamicDatabase.modelMethods.DataHolderHandler;
 
 public class SyntaxCorrector {
 	public static String prepareDataForSqlQuery(DataHolder dh) {
-		String string = DataHolderHandler.getDataFromDataHolder(dh)
-				.toString();
+		String string = DataHolderHandler.getDataFromDataHolder(dh).toString();
 		if (dh.getDataType() == DataType.STRING) {
 			string = "'" + string + "'";
+		}
+		return string;
+	}
+
+	public String getProperColumnDefinitionSyntax(boolean columnDef) {
+		String string = "NULL";
+		if (columnDef) {
+			string = "NOT NULL";
 		}
 		return string;
 	}

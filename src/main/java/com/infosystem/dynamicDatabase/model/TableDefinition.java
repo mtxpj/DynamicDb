@@ -5,23 +5,32 @@ import java.util.List;
 
 public class TableDefinition {
 
-    private String id;
-    private List<ColumnDefinition> columnList = new ArrayList<ColumnDefinition>();
+	private int key;
+	private String id;
+	private List<ColumnDefinition> columnList = new ArrayList<ColumnDefinition>();
 
-    public String getId() {
-        return id;
-    }
+	public int getKey() {
+		return key;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setKey(int key) {
+		this.key = key;
+	}
 
-    public List<ColumnDefinition> getColumnList() {
-        return columnList;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setColumnList(List<ColumnDefinition> columnList) {
-        this.columnList = columnList;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public List<ColumnDefinition> getColumnList() {
+		return columnList;
+	}
+
+	public void setColumnList(List<ColumnDefinition> columnList) {
+		this.columnList = columnList;
+	}
 
 }

@@ -16,9 +16,8 @@ public class ColumnManager {
 	public void addColumnToTable(String db, String tableName,
 			ColumnDefinition columnDefinition) throws SQLException {
 		connectLocalhostWithUserAndPassword(db);
-		new ColumnManagerSqlQuery().addColumnToTable(tableName,
+		String sql = new ColumnManagerSqlQuery().addColumnToTable(tableName,
 				columnDefinition);
-		String sql = new ColumnManagerSqlQuery().getSb();
 		try {
 			ConnectionStatus.getInstance().getStatement().executeUpdate(sql);
 		} catch (SQLException e) {

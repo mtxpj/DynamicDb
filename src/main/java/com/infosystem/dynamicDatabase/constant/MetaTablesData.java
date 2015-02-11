@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.DataType;
-import com.infosystem.dynamicDatabase.model.Null;
 
 public class MetaTablesData {
 	public static final String ID = "name";
@@ -21,26 +20,26 @@ public class MetaTablesData {
 	public List<ColumnDefinition> tablesCdl = new ArrayList<ColumnDefinition>();
 
 	public List<ColumnDefinition> createMetaTablesColDefList() {
-		tablesCdl.add(new ColumnDefinition(ID, 1, Null.NOT_NULL, "htmlLabel",
+		tablesCdl.add(new ColumnDefinition(ID, 1, true, "htmlLabel",
 				"plainLabel", DataType.STRING));
 		return tablesCdl;
 	}
 
 	public List<ColumnDefinition> createMetaColumnsColDefList() {
-		columnsCdl.add(new ColumnDefinition(ID, 1, Null.NOT_NULL, "htmlLabel",
+		columnsCdl.add(new ColumnDefinition(ID, 1, true, "htmlLabel",
 				"plainLabel", DataType.STRING));
-		columnsCdl.add(new ColumnDefinition(COLUMNS_ORDER, 2, Null.NULL,
+		columnsCdl.add(new ColumnDefinition(COLUMNS_ORDER, 2, false,
 				"htmlLabel", "plainLabel", DataType.NUMBER));
-		columnsCdl.add(new ColumnDefinition(COLUMN_DEFINITION, 3, Null.NULL,
+		columnsCdl.add(new ColumnDefinition(COLUMN_DEFINITION, 3, false,
 				"htmlLabel", "plainLabel", DataType.PREDEFINED_VALUE));
-		columnsCdl.add(new ColumnDefinition(HTML_LABEL, 4, Null.NULL,
-				"htmlLabel", "plainLabel", DataType.STRING));
-		columnsCdl.add(new ColumnDefinition(PLAIN_LABEL, 5, Null.NULL,
-				"htmlLabel", "plainLabel", DataType.STRING));
-		columnsCdl.add(new ColumnDefinition(DATA_TYPE, 6, Null.NOT_NULL,
-				"htmlLabel", "plainLabel", DataType.STRING));
-		columnsCdl.add(new ColumnDefinition(TABLES_ID, 7, Null.NULL,
-				"htmlLabel", "plainLabel", DataType.NUMBER));
+		columnsCdl.add(new ColumnDefinition(HTML_LABEL, 4, false, "htmlLabel",
+				"plainLabel", DataType.STRING));
+		columnsCdl.add(new ColumnDefinition(PLAIN_LABEL, 5, false, "htmlLabel",
+				"plainLabel", DataType.STRING));
+		columnsCdl.add(new ColumnDefinition(DATA_TYPE, 6, true, "htmlLabel",
+				"plainLabel", DataType.STRING));
+		columnsCdl.add(new ColumnDefinition(TABLES_ID, 7, false, "htmlLabel",
+				"plainLabel", DataType.NUMBER));
 		return columnsCdl;
 	}
 }

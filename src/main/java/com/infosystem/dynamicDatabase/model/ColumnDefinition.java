@@ -4,16 +4,17 @@ public class ColumnDefinition {
 
 	private String id;
 	private int order;
-	private Null columnDef;
+	private boolean columnDef; // true = NOT NULL, false = NULL
 	private String htmlLabel;
 	private String plainLabel;
 	private DataType dataType;
+	private int table_id;
 
 	public ColumnDefinition() {
 		super();
 	}
 
-	public ColumnDefinition(String id, int order, Null columnDef,
+	public ColumnDefinition(String id, int order, boolean columnDef,
 			String htmlLabel, String plainLabel, DataType dataType) {
 		super();
 		this.id = id;
@@ -32,11 +33,19 @@ public class ColumnDefinition {
 		this.id = id;
 	}
 
-	public Null getColumnDef() {
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	public boolean getColumnDef() {
 		return columnDef;
 	}
 
-	public void setColumnDef(Null columnDef) {
+	public void setColumnDef(boolean columnDef) {
 		this.columnDef = columnDef;
 	}
 
@@ -64,11 +73,11 @@ public class ColumnDefinition {
 		this.dataType = dataType;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getTable_id() {
+		return table_id;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setTable_id(int table_id) {
+		this.table_id = table_id;
 	}
 }

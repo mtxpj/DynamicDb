@@ -1,5 +1,7 @@
 package com.infosystem.dynamicDatabase.SqlBuilder;
 
+import static com.infosystem.dynamicDatabase.SqlBuilder.strategia.FabrykaStrategiiSqlowych.getStartegiaSqlowa;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +26,11 @@ public class SqlBuilder {
 		List<ColumnDefinition> listaKolumn = tableDefinition.getColumnList();
 		for (ColumnDefinition columnDefinition : listaKolumn) {
 			sqlCommand.append(columnDefinition.getId() + " ");
-			sqlCommand.append(FabrykaStrategiiSqlowych.getStartegiaSqlowa(
-					columnDefinition.getDataType())
-					.przygotujSqlDoTworzeniaKolumny());
-			sqlCommand.append(new ColumnDefinitionSqlInterpreter()
-					.getProperSyntax(columnDefinition.getColumnDef()) + ", \n");
+			sqlCommand
+					.append(getStartegiaSqlowa(columnDefinition.getDataType())
+							.przygotujSqlDoTworzeniaKolumny());
+			sqlCommand.append(new SyntaxCorrector()
+					.getProperColumnDefinitionSyntax(columnDefinition.getColumnDef()) + ", \n");
 		}
 		sqlCommand.append("PRIMARY KEY ( id )\n) CHARSET=utf8;");
 		return sqlCommand.toString();

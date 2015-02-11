@@ -30,8 +30,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 				MaintainConnection.connectLocalhostWithUserAndPassword(DB);
 				ConnectionStatus.getInstance().getStatement()
 						.executeUpdate(command);
-				
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("błąd SQL w metodzie createOrUpdate");

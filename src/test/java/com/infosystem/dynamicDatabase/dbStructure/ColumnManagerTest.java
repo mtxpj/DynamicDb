@@ -5,24 +5,32 @@ import java.sql.SQLException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.constant.ConnectorData;
 import com.infosystem.dynamicDatabase.dbSchema.ColumnManager;
+import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 import com.infosystem.dynamicDatabase.model.TableDefinitionTest;
 
 public class ColumnManagerTest {
 
 	@Test
 	public void shouldAddColumnProperly() throws SQLException {
+		// FAILS WHEN tables_id = 1 DOESN'T EXIST
 		// given
-		ColumnManager expected = new ColumnManager();
-		expected.addColumnToTable(DataForTests.getTestDb(),
-				ConnectorData.COLUMNS_TABLE_NAME,
-				TableDefinitionTest.createColumnDefinitionWithStupidData(1));
+		ColumnDefinition expected = TableDefinitionTest
+				.createSampleColumnDefinition(1,
+						TableDefinitionTest.TABLE_ONE_PRIM_KEY);
 		// when
-		ColumnManager actual = new ColumnManager();
-		actual.getColumnFromColumnsTable(DataForTests.getColumnId());
+		new ColumnManager().addColumnToTable(ConnectorData.DB,
+				ConnectorData.COLUMNS_TABLE_NAME, expected);
+		ColumnDefinition actual = new ColumnManager()
+				.getColumnFromColumnsTable("column_1");
 		// then
-		Assert.assertEquals(expected, actual);
+		Assert.assertEquals(actual.getTable_id(), expected.getTable_id());
+		Assert.assertEquals(actual.getId(), expected.getId());
+		Assert.assertEquals(actual.getOrder(), expected.getOrder());
+		Assert.assertEquals(actual.getColumnDef(), expected.getColumnDef());
+		Assert.assertEquals(actual.getHtmlLabel(), expected.getHtmlLabel());
+		Assert.assertEquals(actual.getPlainLabel(), expected.getPlainLabel());
+		Assert.assertEquals(actual.getDataType(), expected.getDataType());
 	}
 }
