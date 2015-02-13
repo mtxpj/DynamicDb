@@ -15,7 +15,7 @@ public class GetColumnsNumber {
 
 	public static int fromMetaData(String tableName) {
 		int columnsNumber = -1;
-		MaintainConnection.connectLocalhostWithUserAndPassword(tableName);
+		MaintainConnection.connectLocalhost(tableName);
 		try {
 			Statement stmt = ConnectionStatus.getInstance().getConnection().createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName);

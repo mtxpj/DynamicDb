@@ -13,9 +13,10 @@ import com.mysql.jdbc.Statement;
 
 public class MetaTablesHandler {
 
-	public static void createOrUpdate(TableDefinition tableDefinition) {
+	public static int createOrUpdate(TableDefinition tableDefinition) {
 		int tableKey = addNewTableToTablesTable(tableDefinition);
 		addNewColumnsToColumnsTable(tableDefinition, tableKey);
+		return tableKey;
 	}
 
 	private static int addNewTableToTablesTable(TableDefinition tableDefinition) {
@@ -25,7 +26,7 @@ public class MetaTablesHandler {
 				.addNewTableToTablesTable(tableDefinition);
 		System.out.println(command);
 		try {
-			MaintainConnection.connectLocalhostWithUserAndPassword(DB);
+			MaintainConnection.connectLocalhost(DB);
 			ConnectionStatus.getInstance().getStatement()
 					.executeUpdate(command, Statement.RETURN_GENERATED_KEYS);
 			rs = ConnectionStatus.getInstance().getStatement()
@@ -46,7 +47,7 @@ public class MetaTablesHandler {
 				tableDefinition, tableKey);
 		System.out.println(command);
 		try {
-			MaintainConnection.connectLocalhostWithUserAndPassword(DB);
+			MaintainConnection.connectLocalhost(DB);
 			ConnectionStatus.getInstance().getStatement()
 					.executeUpdate(command);
 		} catch (SQLException e) {

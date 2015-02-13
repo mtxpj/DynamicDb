@@ -25,7 +25,7 @@ public interface DynamicDatabaseManager {
      * @param tableId
      * @return true if table exists in warehouse
      */
-    public boolean existsTable(String tableId);
+    public boolean existsTable(int tableKey);
 
     /**
      * @param row

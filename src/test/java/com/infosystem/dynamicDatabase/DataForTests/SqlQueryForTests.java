@@ -55,7 +55,7 @@ public class SqlQueryForTests {
 				+ "FOREIGN KEY ( data_type ) REFERENCES data_types(dt_id)\n)"
 				+ " DEFAULT CHARSET=utf8;";
 
-		MaintainConnection.connectLocalhostWithUserAndPassword(DataForTests
+		MaintainConnection.connectLocalhost(DataForTests
 				.getTestDb());
 		statement.executeUpdate(DROP_DB);
 		statement.executeUpdate(CREATE_DB);

@@ -17,20 +17,28 @@ import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.Sort;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 import com.infosystem.dynamicDatabase.model.filter.Filter;
+import com.mysql.jdbc.Statement;
 
 public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 
 	public String createOrUpdate(TableDefinition tableDefinition) {
-		if (existsTable(tableDefinition.getId())) {
+		if (existsTable(tableDefinition.getKey())) {
 			return "tabela o podanej nazwie już istnieje";
 		} else {
-			MetaTablesHandler.createOrUpdate(tableDefinition);
+			int tableKey = MetaTablesHandler.createOrUpdate(tableDefinition);
+			tableDefinition.setKey(tableKey);
 			String command = SqlBuilder.createOrUpdate(tableDefinition);
 			try {
-				MaintainConnection.connectLocalhostWithUserAndPassword(DB);
-				ConnectionStatus.getInstance().getStatement()
-						.executeUpdate(command);
-
+				MaintainConnection.connectLocalhost(DB);
+				ConnectionStatus
+						.getInstance()
+						.getStatement()
+						.executeUpdate(command, Statement.RETURN_GENERATED_KEYS);
+				ResultSet rs = ConnectionStatus.getInstance().getStatement()
+						.getGeneratedKeys();
+				if (rs.next()) {
+					tableDefinition.setKey(rs.getInt(1));
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("błąd SQL w metodzie createOrUpdate");
@@ -41,7 +49,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public boolean deleteTable(String tableId) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(DB);
+		MaintainConnection.connectLocalhost(DB);
 		String command = SqlBuilder.deleteTable(tableId);
 		try {
 			ConnectionStatus.getInstance().getStatement()
@@ -54,10 +62,10 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		return true;
 	}
 
-	public boolean existsTable(String tableId) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(DB);
+	public boolean existsTable(int tableKey) {
+		MaintainConnection.connectLocalhost(DB);
 		try {
-			return TableExist.ifExist(tableId);
+			return TableExist.ifExist(tableKey);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("błąd polecenia SQL w metodzie existsTable");
@@ -66,7 +74,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public Long insertDataRow(DataRow row) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(DB);
+		MaintainConnection.connectLocalhost(DB);
 		String command = SqlBuilder.insertDataRow(row);
 		try {
 			ConnectionStatus.getInstance().getStatement()
@@ -91,7 +99,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		List<DataRow> list = ResultsetManager.getRowsFromResultSet(rs,
 				columnList);
 		try {
-			MaintainConnection.connectLocalhostWithUserAndPassword(DB);
+			MaintainConnection.connectLocalhost(DB);
 			rs = ConnectionStatus.getInstance().getStatement()
 					.executeQuery(command);
 			if (qp.getColumnList() == null) {
@@ -111,7 +119,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public boolean deleteDataRow(String tableId, Long rowId) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(DB);
+		MaintainConnection.connectLocalhost(DB);
 		String command = SqlBuilder.deleteDataRow(tableId, rowId);
 		try {
 			ConnectionStatus.getInstance().getStatement()

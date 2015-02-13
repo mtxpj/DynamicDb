@@ -33,7 +33,7 @@ public class CreateWampDbForTests {
 			System.out.println("stworzono tablicę " + TABLE_NAME);
 		}
 
-		if (komendy.existsTable(tableDefinition.getId()) == true) {
+		if (komendy.existsTable(tableDefinition.getKey()) == true) {
 			System.out.println("tablica o nazwie " + TABLE_NAME + " istnieje");
 		} else {
 			System.out.println("tablica o nazwie " + TABLE_NAME

@@ -24,12 +24,12 @@ public class TableDefinitionTest {
 		List<ColumnDefinition> colDefList = fillColumnDefinitionListWithColumns();
 		td.setColumnList(colDefList);
 		// when
-		MaintainConnection.connectLocalhostWithUserAndPassword(DataForTests
+		MaintainConnection.connectLocalhost(DataForTests
 				.getTestDb());
 		DynamicDatabaseManagerMethods create = new DynamicDatabaseManagerMethods();
 		create.createOrUpdate(td);
 		// then
-		Assert.assertTrue(create.existsTable(TABLE_ONE));
+		Assert.assertTrue(create.existsTable(td.getKey()));
 	}
 
 	private List<ColumnDefinition> fillColumnDefinitionListWithColumns() {

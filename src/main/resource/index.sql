@@ -1,0 +1,1 @@
+CREATE INDEX idx_meta_columns ON all_columns ( tables_id );

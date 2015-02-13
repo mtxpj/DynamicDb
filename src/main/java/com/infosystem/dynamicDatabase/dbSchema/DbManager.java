@@ -20,7 +20,7 @@ public class DbManager {
 	}
 
 	public void deleteDb(String dbName) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(ConnectorData.hostUrl);
+		MaintainConnection.connectLocalhost(ConnectorData.hostUrl);
 		String sql = DbManagerSqlQuery.dropDb(dbName);
 		try {
 			ConnectionStatus.getInstance().getStatement().executeUpdate(sql);
@@ -31,7 +31,7 @@ public class DbManager {
 
 	public static boolean ifDbExists(String dbName) {
 		boolean existence = false;
-		MaintainConnection.connectLocalhostWithUserAndPassword(ConnectorData.hostUrl);
+		MaintainConnection.connectLocalhost(ConnectorData.hostUrl);
 		java.sql.DatabaseMetaData dbm;
 		try {
 			dbm = ConnectionStatus.getInstance().getConnection().getMetaData();
@@ -48,7 +48,7 @@ public class DbManager {
 	}
 
 	public static void useDb(String db) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(db);
+		MaintainConnection.connectLocalhost(db);
 		String sql = DbManagerSqlQuery.useDb(db);
 		try {
 			ConnectionStatus.getInstance().getStatement().execute(sql);

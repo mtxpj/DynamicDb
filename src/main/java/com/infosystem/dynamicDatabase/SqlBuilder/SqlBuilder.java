@@ -21,19 +21,27 @@ public class SqlBuilder {
 	public static String createOrUpdate(TableDefinition tableDefinition) {
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("CREATE TABLE IF NOT EXISTS ");
-		sqlCommand.append(tableDefinition.getId());
+		sqlCommand.append(String.valueOf(tableDefinition.getKey()));
 		sqlCommand.append(" (\nid INT NOT NULL AUTO_INCREMENT,\n");
 		List<ColumnDefinition> listaKolumn = tableDefinition.getColumnList();
-		for (ColumnDefinition columnDefinition : listaKolumn) {
-			sqlCommand.append(columnDefinition.getId() + " ");
-			sqlCommand
-					.append(getStartegiaSqlowa(columnDefinition.getDataType())
-							.przygotujSqlDoTworzeniaKolumny());
-			sqlCommand.append(new SyntaxCorrector()
-					.getProperColumnDefinitionSyntax(columnDefinition.getColumnDef()) + ", \n");
-		}
+		sqlCommand.append(getColumnListToCreateSql(listaKolumn));
 		sqlCommand.append("PRIMARY KEY ( id )\n) CHARSET=utf8;");
 		return sqlCommand.toString();
+	}
+
+	public static String getColumnListToCreateSql(
+			List<ColumnDefinition> listaKolumn) {
+		StringBuilder sb = new StringBuilder();
+		for (ColumnDefinition columnDefinition : listaKolumn) {
+			sb.append(columnDefinition.getId() + " ");
+			sb.append(getStartegiaSqlowa(columnDefinition.getDataType())
+					.przygotujSqlDoTworzeniaKolumny());
+			sb.append(new SyntaxCorrector()
+					.getProperColumnDefinitionSyntax(columnDefinition
+							.getColumnDef())
+					+ ", \n");
+		}
+		return sb.toString();
 	}
 
 	public static String deleteTable(String tableId) {

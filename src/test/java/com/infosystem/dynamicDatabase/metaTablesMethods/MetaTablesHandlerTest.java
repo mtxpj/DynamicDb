@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.infosystem.dynamicDatabase.DataForTests.SampleTableDefinitionProvider;
@@ -22,18 +21,18 @@ import com.infosystem.dynamicDatabase.modelMethods.DynamicDatabaseManagerMethods
 public class MetaTablesHandlerTest {
 	private static final String TABLE_NAME = SampleTableDefinitionProvider.TABLICA_PROBNA;
 	private static final int TABLES_NUMBER = 10;
+	private static int tableKey = -1;
 
-	@BeforeClass
-	public static void testCreate() {
+	@Test
+	public void testCreate() {
 		// given
-
-		// when
 		TableDefinition tdCreate = createSampleTableDefinition(TABLES_NUMBER);
+		// when
 		MetaTablesHandler.createOrUpdate(tdCreate);
-		boolean bool = new DynamicDatabaseManagerMethods().existsTable(tdCreate
-				.getId());
+		tableKey = tdCreate.getKey();
 		// assert
-		Assert.assertTrue(bool);
+		Assert.assertTrue(new DynamicDatabaseManagerMethods()
+				.existsTable(tdCreate.getKey()));
 	}
 
 	@Test
@@ -49,7 +48,7 @@ public class MetaTablesHandlerTest {
 		// create
 		createOrUpdate(tdCreate);
 		boolean bool = new DynamicDatabaseManagerMethods().existsTable(tdCreate
-				.getId());
+				.getKey());
 		// assert
 		assertTrue(bool);
 		// read
@@ -69,12 +68,11 @@ public class MetaTablesHandlerTest {
 		assertTrue(bool);
 	}
 
-	@AfterClass
-	public static void testAfterClassCleanUP() {
-		if (new DynamicDatabaseManagerMethods().existsTable(TABLE_NAME)) {
-			boolean bool = new DynamicDatabaseManagerMethods()
-					.deleteTable(TABLE_NAME);
-			assertTrue(bool);
+	@Test
+	public void testAfterClassCleanUP() {
+		if (new DynamicDatabaseManagerMethods().existsTable(tableKey)) {
+			assertTrue(new DynamicDatabaseManagerMethods()
+					.deleteTable(TABLE_NAME));
 		}
 	}
 }

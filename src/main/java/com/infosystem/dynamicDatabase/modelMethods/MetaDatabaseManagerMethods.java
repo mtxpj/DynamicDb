@@ -16,13 +16,13 @@ import com.infosystem.dynamicDatabase.model.TableDefinition;
 public class MetaDatabaseManagerMethods implements DynamicDatabaseManager {
 
 	public String createOrUpdate(TableDefinition tableDefinition) {
-		if (existsTable(tableDefinition.getId())) {
+		if (existsTable(tableDefinition.getKey())) {
 			// update:
 			return "tabela o podanej nazwie już istnieje";
 		}
 		String command = SqlBuilder.createOrUpdate(tableDefinition);
 		try {
-			MaintainConnection.connectLocalhostWithUserAndPassword(DB);
+			MaintainConnection.connectLocalhost(DB);
 			ConnectionStatus.getInstance().getStatement()
 					.executeUpdate(command);
 		} catch (SQLException e) {
@@ -33,10 +33,10 @@ public class MetaDatabaseManagerMethods implements DynamicDatabaseManager {
 		return null;
 	}
 
-	public boolean existsTable(String tableId) {
-		MaintainConnection.connectLocalhostWithUserAndPassword(DB);
+	public boolean existsTable(int tableKey) {
+		MaintainConnection.connectLocalhost(DB);
 		try {
-			return TableExist.ifExist(tableId);
+			return TableExist.ifExist(tableKey);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("błąd polecenia SQL w metodzie existsTable");

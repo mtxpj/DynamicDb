@@ -6,7 +6,7 @@ import com.infosystem.dynamicDatabase.constant.ConnectorData;
 
 public class MaintainConnection {
 
-	public static void connectLocalhostWithUserAndPassword(String dbName) {
+	public static void connectLocalhost(String dbName) {
 		if (ConnectionStatus.getInstance().getConnection() == null) {
 			LocalhostConnector.openConnectionWithUserAndPassword(dbName);
 		}
