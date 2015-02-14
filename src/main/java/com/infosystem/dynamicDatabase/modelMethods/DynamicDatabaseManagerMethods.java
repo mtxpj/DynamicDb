@@ -16,6 +16,7 @@ import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.Sort;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
+import com.infosystem.dynamicDatabase.model.dto.TableMetaDto;
 import com.infosystem.dynamicDatabase.model.filter.Filter;
 
 public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
@@ -127,6 +128,11 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	public void updateDataRow(DataRow row) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public TableMetaDto getTableMetaData(String tableId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

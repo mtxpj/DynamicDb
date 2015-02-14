@@ -12,6 +12,7 @@ import com.infosystem.dynamicDatabase.connection.MaintainConnection;
 import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
+import com.infosystem.dynamicDatabase.model.dto.TableMetaDto;
 
 public class MetaDatabaseManagerMethods implements DynamicDatabaseManager {
 
@@ -67,5 +68,10 @@ public class MetaDatabaseManagerMethods implements DynamicDatabaseManager {
 	public void updateDataRow(DataRow row) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public TableMetaDto getTableMetaData(String tableId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

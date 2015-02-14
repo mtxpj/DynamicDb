@@ -28,7 +28,7 @@ public class ColumnManagerTest {
 		Assert.assertEquals(actual.getTable_id(), expected.getTable_id());
 		Assert.assertEquals(actual.getId(), expected.getId());
 		Assert.assertEquals(actual.getOrder(), expected.getOrder());
-		Assert.assertEquals(actual.getColumnDef(), expected.getColumnDef());
+		Assert.assertEquals(actual.isRequired(), expected.isRequired());
 		Assert.assertEquals(actual.getHtmlLabel(), expected.getHtmlLabel());
 		Assert.assertEquals(actual.getPlainLabel(), expected.getPlainLabel());
 		Assert.assertEquals(actual.getDataType(), expected.getDataType());

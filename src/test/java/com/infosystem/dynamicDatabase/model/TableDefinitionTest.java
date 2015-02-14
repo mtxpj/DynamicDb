@@ -46,7 +46,7 @@ public class TableDefinitionTest {
 		ColumnDefinition colDef = new ColumnDefinition();
 		colDef.setId("column_" + i);
 		colDef.setOrder(i);
-		colDef.setColumnDef(false);
+		colDef.setRequired(false);
 		colDef.setHtmlLabel("html_label." + i);
 		colDef.setPlainLabel("plain_Label." + i);
 		colDef.setDataType(DataType.values()[i % 5]);

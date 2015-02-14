@@ -16,14 +16,14 @@ import com.infosystem.dynamicDatabase.modelMethods.DataHolderHandler;
 
 public class ResultsetManager {
 
-	public static ColumnDefinition getColumnDefinition(ResultSet rs) {
+	public static ColumnDefinition isRequiredinition(ResultSet rs) {
 		ColumnDefinition cd = new ColumnDefinition();
 		try {
 			if (rs.next()) {
 				cd.setTable_id(1);
 				cd.setId(rs.getString(2));
 				cd.setOrder(rs.getInt(3));
-				cd.setColumnDef(rs.getBoolean(4));
+				cd.setRequired(rs.getBoolean(4));
 				cd.setHtmlLabel(rs.getString(5));
 				cd.setPlainLabel(rs.getString(6));
 				cd.setDataType(DataType.valueOf(rs.getString(7)));

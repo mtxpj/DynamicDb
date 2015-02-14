@@ -30,7 +30,7 @@ public class SqlBuilder {
 					.append(getStartegiaSqlowa(columnDefinition.getDataType())
 							.przygotujSqlDoTworzeniaKolumny());
 			sqlCommand.append(new SyntaxCorrector()
-					.getProperColumnDefinitionSyntax(columnDefinition.getColumnDef()) + ", \n");
+					.getProperColumnDefinitionSyntax(columnDefinition.isRequired()) + ", \n");
 		}
 		sqlCommand.append("PRIMARY KEY ( id )\n) CHARSET=utf8;");
 		return sqlCommand.toString();

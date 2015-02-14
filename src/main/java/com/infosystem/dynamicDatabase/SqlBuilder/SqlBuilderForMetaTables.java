@@ -56,7 +56,7 @@ public class SqlBuilderForMetaTables {
 		sb.append("', ");
 		sb.append(columnOrderToString(cd));
 		sb.append(", ");
-		sb.append(cd.getColumnDef());
+		sb.append(cd.isRequired());
 		sb.append(", ");
 		sb.append(cd.getHtmlLabel());
 		sb.append(", ");

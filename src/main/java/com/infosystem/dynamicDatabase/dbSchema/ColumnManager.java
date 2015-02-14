@@ -1,6 +1,6 @@
 package com.infosystem.dynamicDatabase.dbSchema;
 
-import static com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager.getColumnDefinition;
+import static com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager.isRequiredinition;
 import static com.infosystem.dynamicDatabase.connection.MaintainConnection.connectLocalhostWithUserAndPassword;
 
 import java.sql.ResultSet;
@@ -37,6 +37,6 @@ public class ColumnManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return getColumnDefinition(rs);
+		return isRequiredinition(rs);
 	}
 }

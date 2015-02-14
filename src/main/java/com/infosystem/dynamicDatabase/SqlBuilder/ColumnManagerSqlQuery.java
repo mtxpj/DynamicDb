@@ -14,7 +14,7 @@ public class ColumnManagerSqlQuery {
 		sb.append("', ");
 		sb.append(String.valueOf(columnDefinition.getOrder()));
 		sb.append(", ");
-		sb.append(columnDefinition.getColumnDef());
+		sb.append(columnDefinition.isRequired());
 		sb.append(", '");
 		sb.append(columnDefinition.getHtmlLabel());
 		sb.append("', '");
