@@ -2,15 +2,15 @@ package com.infosystem.dynamicDatabase.model;
 
 public class Sort {
 	private String columnId;
-	private SortDir direction;
+	private SortDirection direction;
 
 	public Sort(String columnId) {
 		super();
 		this.columnId = columnId;
-		this.direction = SortDir.ASC;
+		this.direction = SortDirection.ASC;
 	}
 
-	public Sort(String columnId, SortDir direction) {
+	public Sort(String columnId, SortDirection direction) {
 		super();
 		this.columnId = columnId;
 		this.direction = direction;
@@ -24,11 +24,11 @@ public class Sort {
 		this.columnId = columnId;
 	}
 
-	protected SortDir getDirection() {
+	protected SortDirection getDirection() {
 		return direction;
 	}
 
-	protected void setDirection(SortDir direction) {
+	protected void setDirection(SortDirection direction) {
 		this.direction = direction;
 	}
 }

@@ -1,26 +1,28 @@
 package com.infosystem.dynamicDatabase.dbSchema;
 
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.infosystem.dynamicDatabase.SqlBuilder.DbManagerSqlQuery;
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
-import com.infosystem.dynamicDatabase.constant.ConnectorData;
 
 public class DbManager {
 
 	public static void createDb(String db) {
+		MaintainConnection.connectToDatabase("");
+		String createDb = DbManagerSqlQuery.createDb(db);
 		try {
 			ConnectionStatus.getInstance().getStatement()
-					.executeUpdate(DbManagerSqlQuery.createDb(db));
+					.executeUpdate(createDb);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void deleteDb(String dbName) {
-		MaintainConnection.connectLocalhost(ConnectorData.hostUrl);
+		MaintainConnection.connectToDatabase("");
 		String sql = DbManagerSqlQuery.dropDb(dbName);
 		try {
 			ConnectionStatus.getInstance().getStatement().executeUpdate(sql);
@@ -31,13 +33,13 @@ public class DbManager {
 
 	public static boolean ifDbExists(String dbName) {
 		boolean existence = false;
-		MaintainConnection.connectLocalhost(ConnectorData.hostUrl);
-		java.sql.DatabaseMetaData dbm;
+		MaintainConnection.connectToDatabase("");
 		try {
-			dbm = ConnectionStatus.getInstance().getConnection().getMetaData();
+			DatabaseMetaData dbm = ConnectionStatus.getInstance()
+					.getConnection().getMetaData();
 			ResultSet rs = dbm.getCatalogs();
 			while (rs.next()) {
-				if (rs.getString(1) == dbName) {
+				if (rs.getString(1).matches(dbName)) {
 					existence = true;
 				}
 			}
@@ -48,7 +50,7 @@ public class DbManager {
 	}
 
 	public static void useDb(String db) {
-		MaintainConnection.connectLocalhost(db);
+		MaintainConnection.connectToDatabase(db);
 		String sql = DbManagerSqlQuery.useDb(db);
 		try {
 			ConnectionStatus.getInstance().getStatement().execute(sql);

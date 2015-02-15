@@ -16,11 +16,11 @@ public class SqlQueryForTests {
 	@BeforeClass
 	public static void createDbs() throws SQLException {
 		Statement statement = ConnectionStatus.getInstance().getStatement();
-		final String CREATE_DB = "CREATE DATABASE " + DataForTests.getTestDb()
+		final String CREATE_DB = "CREATE DATABASE " + DataForTests.TEST_DB_NAME
 				+ ";";
-		final String DROP_DB = "DROP DATABASE " + DataForTests.getTestDb()
+		final String DROP_DB = "DROP DATABASE " + DataForTests.TEST_DB_NAME
 				+ ";";
-		final String USE_DB = "USE " + DataForTests.getTestDb();
+		final String USE_DB = "USE " + DataForTests.TEST_DB_NAME;
 
 		final String CREATE_BOOLEAN_TABLE = "CREATE TABLE boolean"
 				+ "(\nb_id INT NOT NULL AUTO_INCREMENT,\n"
@@ -55,8 +55,7 @@ public class SqlQueryForTests {
 				+ "FOREIGN KEY ( data_type ) REFERENCES data_types(dt_id)\n)"
 				+ " DEFAULT CHARSET=utf8;";
 
-		MaintainConnection.connectLocalhost(DataForTests
-				.getTestDb());
+		MaintainConnection.connectToDatabase("");
 		statement.executeUpdate(DROP_DB);
 		statement.executeUpdate(CREATE_DB);
 		statement.executeUpdate(USE_DB);

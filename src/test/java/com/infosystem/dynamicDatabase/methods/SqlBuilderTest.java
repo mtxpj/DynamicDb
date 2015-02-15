@@ -1,18 +1,15 @@
 package com.infosystem.dynamicDatabase.methods;
 
-import static com.infosystem.dynamicDatabase.DataForTests.SampleTableDefinitionProvider.TABLICA_PROBNA;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
-import java.sql.SQLException;
 
 import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.DataForTests.SampleTableDefinitionProvider;
 import com.infosystem.dynamicDatabase.SqlBuilder.SqlBuilder;
-import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.LocalhostConnector;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 
@@ -42,28 +39,28 @@ public class SqlBuilderTest {
 	@Test
 	public final void testDeleteTable() {
 		String expected = "DROP TABLE tablica_probna ;";
-		String actual = SqlBuilder.deleteTable(TABLICA_PROBNA);
+		String actual = SqlBuilder.deleteTable(DataForTests.TABLICA_PROBNA);
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public final void testExistsTable() {
 		String expected = "SELECT 1 FROM tablica_probna LIMIT 1 ;";
-		String actual = SqlBuilder.existsTable(TABLICA_PROBNA);
+		String actual = SqlBuilder.existsTable(DataForTests.TABLICA_PROBNA);
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public final void testInsertDataRow() {
 		// given
-		TableDefinition td = SampleTableDefinitionProvider
-				.createSampleTableDefinition(1);
-		try {
-			ConnectionStatus.getInstance().getStatement()
-					.executeUpdate(SqlBuilder.createOrUpdate(td));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		// TableDefinition td = SampleTableDefinitionProvider
+		// .createSampleTableDefinition(1);
+		// try {
+		// ConnectionStatus.getInstance().getStatement()
+		// .executeUpdate(SqlBuilder.createOrUpdate(td));
+		// } catch (SQLException e) {
+		// e.printStackTrace();
+		// }
 		String expected = "INSERT INTO tablica_probna (  )\nVALUES\n( l, k, j );";
 		// when
 		String actual = SqlBuilder.insertDataRow(SampleTableDefinitionProvider
@@ -76,7 +73,8 @@ public class SqlBuilderTest {
 	@Test
 	public final void testDeleteDataRow() {
 		String expected = "DELETE FROM tablica_probna WHERE id=1;";
-		String actual = SqlBuilder.deleteDataRow(TABLICA_PROBNA, (long) 1);
+		String actual = SqlBuilder.deleteDataRow(DataForTests.TABLICA_PROBNA,
+				(long) 1);
 		assertEquals(expected, actual);
 	}
 
@@ -92,6 +90,7 @@ public class SqlBuilderTest {
 		fail("Not yet implemented");
 	}
 
+	@Ignore
 	@AfterClass
 	public static void closingDown() {
 		LocalhostConnector.closeConnection();

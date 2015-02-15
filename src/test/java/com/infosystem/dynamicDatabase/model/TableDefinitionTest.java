@@ -1,5 +1,9 @@
 package com.infosystem.dynamicDatabase.model;
 
+import static com.infosystem.dynamicDatabase.DataForTests.DataForTests.TABLE_ONE;
+import static com.infosystem.dynamicDatabase.DataForTests.DataForTests.TABLE_ONE_PRIM_KEY;
+import static com.infosystem.dynamicDatabase.DataForTests.DataForTests.TEST_DB_NAME;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +17,6 @@ import com.infosystem.dynamicDatabase.modelMethods.DynamicDatabaseManagerMethods
 
 public class TableDefinitionTest {
 
-	private static final String TABLE_ONE = "table_one_id";
-	public static final int TABLE_ONE_PRIM_KEY = 1;
-
 	@Test
 	public void createNewTableTest() throws SQLException {
 		// given
@@ -24,8 +25,7 @@ public class TableDefinitionTest {
 		List<ColumnDefinition> colDefList = fillColumnDefinitionListWithColumns();
 		td.setColumnList(colDefList);
 		// when
-		MaintainConnection.connectLocalhost(DataForTests
-				.getTestDb());
+		MaintainConnection.connectToDatabase(TEST_DB_NAME);
 		DynamicDatabaseManagerMethods create = new DynamicDatabaseManagerMethods();
 		create.createOrUpdate(td);
 		// then
@@ -35,8 +35,7 @@ public class TableDefinitionTest {
 	private List<ColumnDefinition> fillColumnDefinitionListWithColumns() {
 		List<ColumnDefinition> colDefList = new ArrayList<ColumnDefinition>();
 		for (int i = 1; i < 10; i++) {
-			colDefList.add(createSampleColumnDefinition(i,
-					TABLE_ONE_PRIM_KEY));
+			colDefList.add(createSampleColumnDefinition(i, TABLE_ONE_PRIM_KEY));
 		}
 		return colDefList;
 	}

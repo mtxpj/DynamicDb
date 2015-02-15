@@ -1,7 +1,7 @@
 package com.infosystem.dynamicDatabase.dbSchema;
 
 import static com.infosystem.dynamicDatabase.RsultsetManager.ResultsetManager.isRequiredinition;
-import static com.infosystem.dynamicDatabase.connection.MaintainConnection.connectLocalhostWithUserAndPassword;
+import static com.infosystem.dynamicDatabase.connection.LocalhostConnector.openConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ public class ColumnManager {
 
 	public void addColumnToTable(String db, String tableName,
 			ColumnDefinition columnDefinition) throws SQLException {
-		connectLocalhostWithUserAndPassword(db);
+		openConnection(db);
 		String sql = new ColumnManagerSqlQuery().addColumnToTable(tableName,
 				columnDefinition);
 		try {
@@ -28,7 +28,7 @@ public class ColumnManager {
 	public ColumnDefinition getColumnFromColumnsTable(String columnId) {
 		ResultSet rs = null;
 		try {
-			connectLocalhostWithUserAndPassword(ConnectorData.DB);
+			openConnection(ConnectorData.DB);
 			String columnFromTable = new ColumnManagerSqlQuery()
 					.getColumnFromTable(ConnectorData.COLUMNS_TABLE_NAME,
 							columnId);

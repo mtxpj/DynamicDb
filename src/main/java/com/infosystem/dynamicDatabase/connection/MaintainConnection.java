@@ -6,9 +6,11 @@ import com.infosystem.dynamicDatabase.constant.ConnectorData;
 
 public class MaintainConnection {
 
-	public static void connectLocalhost(String dbName) {
+	public static void connectToDatabase(String dbName) {
 		if (ConnectionStatus.getInstance().getConnection() == null) {
-			LocalhostConnector.openConnectionWithUserAndPassword(dbName);
+			// TODO: check if is connected to dbName
+			LocalhostConnector.openConnection(dbName);
+		} else {
 		}
 		try {
 			String conUser = ConnectionStatus.getInstance().getConnection()
@@ -18,7 +20,7 @@ public class MaintainConnection {
 				System.out.println("user is not '" + expectedUser + "' but '"
 						+ conUser + "'.");
 				LocalhostConnector.closeConnection();
-				LocalhostConnector.openConnectionWithUserAndPassword(dbName);
+				LocalhostConnector.openConnection(dbName);
 			}
 		} catch (com.mysql.jdbc.exceptions.MySQLNonTransientException e) {
 			e.printStackTrace();

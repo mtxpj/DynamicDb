@@ -13,7 +13,7 @@ public class DbManagerSqlQueryTest {
 		// given
 		String expected = "CREATE DATABASE tdd_db;";
 		// when
-		String actual = DbManagerSqlQuery.createDb(DataForTests.getTestDb());
+		String actual = DbManagerSqlQuery.createDb(DataForTests.TEST_DB_NAME);
 		// then
 		Assert.assertEquals(expected, actual);
 	}
@@ -23,7 +23,7 @@ public class DbManagerSqlQueryTest {
 		// given
 		String actual = "DROP DATABASE tdd_db;";
 		// when
-		String expected = DbManagerSqlQuery.dropDb(DataForTests.getTestDb());
+		String expected = DbManagerSqlQuery.dropDb(DataForTests.TEST_DB_NAME);
 		// then
 		Assert.assertEquals(expected, actual);
 	}

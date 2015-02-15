@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.SqlBuilder.ColumnManagerSqlQuery;
 import com.infosystem.dynamicDatabase.constant.ConnectorData;
 import com.infosystem.dynamicDatabase.model.TableDefinitionTest;
@@ -22,7 +23,7 @@ public class ColumnManagerSqlQueryTest {
 		ColumnManagerSqlQuery cmsq = new ColumnManagerSqlQuery();
 		cmsq.addColumnToTable(ConnectorData.COLUMNS_TABLE_NAME,
 				TableDefinitionTest.createSampleColumnDefinition(1,
-						TableDefinitionTest.TABLE_ONE_PRIM_KEY));
+						DataForTests.TABLE_ONE_PRIM_KEY));
 		String actual = cmsq.getSb();
 		// then
 		Assert.assertEquals(expected, actual);

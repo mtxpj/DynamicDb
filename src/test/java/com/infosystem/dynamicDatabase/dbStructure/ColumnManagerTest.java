@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.infosystem.dynamicDatabase.DataForTests.DataForTests;
 import com.infosystem.dynamicDatabase.constant.ConnectorData;
 import com.infosystem.dynamicDatabase.dbSchema.ColumnManager;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
@@ -18,7 +19,7 @@ public class ColumnManagerTest {
 		// given
 		ColumnDefinition expected = TableDefinitionTest
 				.createSampleColumnDefinition(1,
-						TableDefinitionTest.TABLE_ONE_PRIM_KEY);
+						DataForTests.TABLE_ONE_PRIM_KEY);
 		// when
 		new ColumnManager().addColumnToTable(ConnectorData.DB,
 				ConnectorData.COLUMNS_TABLE_NAME, expected);

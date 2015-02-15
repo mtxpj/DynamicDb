@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
+import com.infosystem.dynamicDatabase.constant.ConnectorData;
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.DataRow;
 
@@ -17,10 +18,10 @@ public class GetColumnNames {
 
 	public static ArrayList<String> fromMetaData(String tableName) {
 		ArrayList<String> columnNames = new ArrayList<String>();
-		MaintainConnection.connectLocalhost(tableName);
+		MaintainConnection.connectToDatabase(ConnectorData.DB);
 		try {
 			Statement stmt = ConnectionStatus.getInstance().getConnection().createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName+";");
 			ResultSetMetaData rsMd = rs.getMetaData();
 			for (int i = 1; i <= rsMd.getColumnCount(); i++) {
 				columnNames.add(rsMd.getColumnName(i));

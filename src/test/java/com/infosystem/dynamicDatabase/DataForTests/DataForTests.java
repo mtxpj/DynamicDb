@@ -2,24 +2,14 @@ package com.infosystem.dynamicDatabase.DataForTests;
 
 public class DataForTests {
 
-	final static String LOCALHOST = "";
-	private static final String TEST_DB_NAME = "tdd_db";
-	private static final String SAMPLE_TABLE = "sample_table_name";
-	private static final String COLUMN_ID = "column_name_id";
+	public final static String LOCALHOST = "";
+	public static final String TEST_DB_NAME = "tdd_db";
+	public static final String SAMPLE_TABLE = "sample_table_name";
+	public static final String COLUMN_ID = "column_name_id";
+	public static final int TABLE_ONE_PRIM_KEY = 1;
+	public static final String TABLE_ONE = "table_one_id";
+	static final int KEY = 1;
+	public static final String TABLICA_PROBNA = "tablica_probna";
+	public static final int TABLES_NUMBER = 10;
 
-	public static String getLocalhost() {
-		return LOCALHOST;
-	}
-
-	public static String getSampleTable() {
-		return SAMPLE_TABLE;
-	}
-
-	public static String getTestDb() {
-		return TEST_DB_NAME;
-	}
-
-	public static String getColumnId() {
-		return COLUMN_ID;
-	}
 }

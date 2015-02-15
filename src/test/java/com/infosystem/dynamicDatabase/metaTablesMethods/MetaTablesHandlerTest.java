@@ -1,5 +1,7 @@
 package com.infosystem.dynamicDatabase.metaTablesMethods;
 
+import static com.infosystem.dynamicDatabase.DataForTests.DataForTests.TABLES_NUMBER;
+import static com.infosystem.dynamicDatabase.DataForTests.DataForTests.TABLICA_PROBNA;
 import static com.infosystem.dynamicDatabase.DataForTests.SampleTableDefinitionProvider.createSampleTableDefinition;
 import static com.infosystem.dynamicDatabase.metaTablesMethods.MetaTablesHandler.createOrUpdate;
 import static org.junit.Assert.assertEquals;
@@ -8,19 +10,16 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.infosystem.dynamicDatabase.DataForTests.SampleTableDefinitionProvider;
 import com.infosystem.dynamicDatabase.model.DataRow;
 import com.infosystem.dynamicDatabase.model.QueryParams;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 import com.infosystem.dynamicDatabase.modelMethods.DynamicDatabaseManagerMethods;
 
 public class MetaTablesHandlerTest {
-	private static final String TABLE_NAME = SampleTableDefinitionProvider.TABLICA_PROBNA;
-	private static final int TABLES_NUMBER = 10;
+	private static final String TABLE_NAME = TABLICA_PROBNA;
 	private static int tableKey = -1;
 
 	@Test

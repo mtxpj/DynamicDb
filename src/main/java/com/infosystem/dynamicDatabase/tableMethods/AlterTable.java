@@ -11,7 +11,7 @@ public class AlterTable {
 	public void addForeignKey(String table, String column, String refTable,
 			String refColumn) {
 		MaintainConnection
-				.connectLocalhost(ConnectorData.DB);
+				.connectToDatabase(ConnectorData.DB);
 		String sql = SqlBuilder.addForeignKey(table, column, refTable,
 				refColumn);
 		try {

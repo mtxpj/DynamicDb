@@ -30,7 +30,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 			tableDefinition.setKey(tableKey);
 			String command = SqlBuilder.createOrUpdate(tableDefinition);
 			try {
-				MaintainConnection.connectLocalhost(DB);
+				MaintainConnection.connectToDatabase(DB);
 				ConnectionStatus
 						.getInstance()
 						.getStatement()
@@ -50,7 +50,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public boolean deleteTable(String tableId) {
-		MaintainConnection.connectLocalhost(DB);
+		MaintainConnection.connectToDatabase(DB);
 		String command = SqlBuilder.deleteTable(tableId);
 		try {
 			ConnectionStatus.getInstance().getStatement()
@@ -64,7 +64,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public boolean existsTable(int tableKey) {
-		MaintainConnection.connectLocalhost(DB);
+		MaintainConnection.connectToDatabase(DB);
 		try {
 			return TableExist.ifExist(tableKey);
 		} catch (SQLException e) {
@@ -75,7 +75,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public Long insertDataRow(DataRow row) {
-		MaintainConnection.connectLocalhost(DB);
+		MaintainConnection.connectToDatabase(DB);
 		String command = SqlBuilder.insertDataRow(row);
 		try {
 			ConnectionStatus.getInstance().getStatement()
@@ -100,7 +100,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 		List<DataRow> list = ResultsetManager.getRowsFromResultSet(rs,
 				columnList);
 		try {
-			MaintainConnection.connectLocalhost(DB);
+			MaintainConnection.connectToDatabase(DB);
 			rs = ConnectionStatus.getInstance().getStatement()
 					.executeQuery(command);
 			if (qp.getColumnList() == null) {
@@ -120,7 +120,7 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public boolean deleteDataRow(String tableId, Long rowId) {
-		MaintainConnection.connectLocalhost(DB);
+		MaintainConnection.connectToDatabase(DB);
 		String command = SqlBuilder.deleteDataRow(tableId, rowId);
 		try {
 			ConnectionStatus.getInstance().getStatement()
@@ -141,6 +141,11 @@ public class DynamicDatabaseManagerMethods implements DynamicDatabaseManager {
 	public TableMetaDto getTableMetaData(String tableId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public boolean existsTable(String tableId) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

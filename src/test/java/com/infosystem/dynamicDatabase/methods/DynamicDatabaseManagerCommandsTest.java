@@ -29,7 +29,7 @@ public class DynamicDatabaseManagerCommandsTest {
 			exampleColumnList.add(i, exampleColumnDefinition);
 		}
 		tableDefinition.setColumnList(exampleColumnList);
-		LocalhostConnector.openConnectionWithUserAndPassword("test");
+		LocalhostConnector.openConnection("test");
 	}
 
 	@Test

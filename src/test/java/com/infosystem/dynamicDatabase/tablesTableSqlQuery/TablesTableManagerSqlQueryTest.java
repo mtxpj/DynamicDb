@@ -15,7 +15,7 @@ public class TablesTableManagerSqlQueryTest {
 		String expected = "INSERT INTO all_tables (table_id)  VALUES ( sample_table_name );";
 		// when
 		String actual = TableManagerSqlQuery.addTable(
-				ConnectorData.TABLES_TABLE_NAME, DataForTests.getSampleTable());
+				ConnectorData.TABLES_TABLE_NAME, DataForTests.SAMPLE_TABLE);
 		// then
 		Assert.assertEquals(expected, actual);
 
@@ -27,7 +27,7 @@ public class TablesTableManagerSqlQueryTest {
 		String expected = "DELETE FROM all_tables WHERE table_name=sample_table_name ;";
 		// when
 		String actual = TableManagerSqlQuery.removeTable(
-				ConnectorData.TABLES_TABLE_NAME, DataForTests.getSampleTable());
+				ConnectorData.TABLES_TABLE_NAME, DataForTests.SAMPLE_TABLE);
 		// then
 		Assert.assertEquals(expected, actual);
 	}

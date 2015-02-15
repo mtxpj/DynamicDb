@@ -1,9 +1,7 @@
-package com.infosystem.dynamicDatabase.modelMethods;
+package com.infosystem.dynamicDatabase.SqlBuilder;
 
 import java.util.List;
 
-import com.infosystem.dynamicDatabase.SqlBuilder.ComparatorInterpreter;
-import com.infosystem.dynamicDatabase.SqlBuilder.SyntaxCorrector;
 import com.infosystem.dynamicDatabase.model.filter.AndFilter;
 import com.infosystem.dynamicDatabase.model.filter.Filter;
 import com.infosystem.dynamicDatabase.model.filter.NotFilter;

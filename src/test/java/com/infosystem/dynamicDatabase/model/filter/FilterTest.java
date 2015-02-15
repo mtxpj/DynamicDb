@@ -6,12 +6,12 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.infosystem.dynamicDatabase.SqlBuilder.SqlFilterBuilder;
 import com.infosystem.dynamicDatabase.model.DataHolder;
 import com.infosystem.dynamicDatabase.model.filter.AndFilter;
 import com.infosystem.dynamicDatabase.model.filter.Comparator;
 import com.infosystem.dynamicDatabase.model.filter.Filter;
 import com.infosystem.dynamicDatabase.model.filter.ValueCompareFilter;
-import com.infosystem.dynamicDatabase.modelMethods.SqlFilterBuilder;
 
 public class FilterTest {
 

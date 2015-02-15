@@ -1,7 +1,5 @@
 package com.infosystem.dynamicDatabase.metaTablesMethods;
 
-import static com.infosystem.dynamicDatabase.constant.ConnectorData.DB;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,9 +8,10 @@ import java.sql.SQLException;
 
 import com.infosystem.dynamicDatabase.connection.ConnectionStatus;
 import com.infosystem.dynamicDatabase.connection.MaintainConnection;
+import com.infosystem.dynamicDatabase.dbSchema.DbManager;
 
 public class CreateMetatables {
-	public static void create() {
+	public static void createMetaTables(String db) {
 		String[] sql = { "/meta_tables.sql", "/meta_columns.sql", "/index.sql",
 				"/add_foreign_key.sql" };
 		for (String string : sql) {
@@ -23,7 +22,7 @@ public class CreateMetatables {
 				while (br.ready()) {
 					sb.append(br.readLine());
 				}
-				MaintainConnection.connectLocalhost(DB);
+				MaintainConnection.connectToDatabase(db);
 				ConnectionStatus.getInstance().getStatement()
 						.executeUpdate(sb.toString());
 			} catch (SQLException e) {
@@ -31,6 +30,15 @@ public class CreateMetatables {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public static void setDatabaseWithMetatables(String db) {
+		MaintainConnection.connectToDatabase("");
+		if (!DbManager.ifDbExists(db)) {
+			DbManager.createDb(db);
+			DbManager.useDb(db);
+			createMetaTables(db);
 		}
 	}
 }

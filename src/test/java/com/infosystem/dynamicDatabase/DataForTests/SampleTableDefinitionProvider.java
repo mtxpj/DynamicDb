@@ -1,5 +1,9 @@
 package com.infosystem.dynamicDatabase.DataForTests;
 
+import static com.infosystem.dynamicDatabase.DataForTests.DataForTests.KEY;
+import static com.infosystem.dynamicDatabase.DataForTests.DataForTests.TABLICA_PROBNA;
+import static com.infosystem.dynamicDatabase.model.DataType.STRING;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,9 +16,7 @@ import com.infosystem.dynamicDatabase.model.DataType;
 import com.infosystem.dynamicDatabase.model.TableDefinition;
 
 public class SampleTableDefinitionProvider {
-	public static final String TABLICA_PROBNA = "tablica_probna";
-	private static final int KEY = 1;
-
+	
 	public static TableDefinition createSampleTableDefinition(int colNumber) {
 		TableDefinition tableDefinition = new TableDefinition();
 		tableDefinition.setKey(KEY);
@@ -44,7 +46,7 @@ public class SampleTableDefinitionProvider {
 
 	static Map<String, DataHolder> getSampleDataHolder(int colNumber) {
 		List<ColumnDefinition> exampleColumnList = getSampleColumnList(colNumber);
-		DataType dataType = DataType.STRING;
+		DataType dataType = STRING;
 		DataHolder dataHolder = new DataHolder();
 		dataHolder.setDataType(dataType);
 		Map<String, DataHolder> data = new HashMap<String, DataHolder>();

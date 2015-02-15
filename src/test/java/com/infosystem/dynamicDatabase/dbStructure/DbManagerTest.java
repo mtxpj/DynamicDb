@@ -13,7 +13,7 @@ public class DbManagerTest {
 	@Test
 	public void shouldCreateDbProperlyTest() throws SQLException {
 		// given
-		String dbName = DataForTests.getTestDb();
+		String dbName = DataForTests.TEST_DB_NAME;
 		// when
 		DbManager.createDb(dbName);
 		boolean actual = DbManager.ifDbExists(dbName);

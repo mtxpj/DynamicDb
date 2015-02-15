@@ -26,7 +26,7 @@ public class MetaTablesHandler {
 				.addNewTableToTablesTable(tableDefinition);
 		System.out.println(command);
 		try {
-			MaintainConnection.connectLocalhost(DB);
+			MaintainConnection.connectToDatabase(DB);
 			ConnectionStatus.getInstance().getStatement()
 					.executeUpdate(command, Statement.RETURN_GENERATED_KEYS);
 			rs = ConnectionStatus.getInstance().getStatement()
@@ -47,7 +47,7 @@ public class MetaTablesHandler {
 				tableDefinition, tableKey);
 		System.out.println(command);
 		try {
-			MaintainConnection.connectLocalhost(DB);
+			MaintainConnection.connectToDatabase(DB);
 			ConnectionStatus.getInstance().getStatement()
 					.executeUpdate(command);
 		} catch (SQLException e) {

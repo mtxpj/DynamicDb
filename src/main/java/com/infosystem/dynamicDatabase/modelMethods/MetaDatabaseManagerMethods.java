@@ -23,7 +23,7 @@ public class MetaDatabaseManagerMethods implements DynamicDatabaseManager {
 		}
 		String command = SqlBuilder.createOrUpdate(tableDefinition);
 		try {
-			MaintainConnection.connectLocalhost(DB);
+			MaintainConnection.connectToDatabase(DB);
 			ConnectionStatus.getInstance().getStatement()
 					.executeUpdate(command);
 		} catch (SQLException e) {
@@ -35,7 +35,7 @@ public class MetaDatabaseManagerMethods implements DynamicDatabaseManager {
 	}
 
 	public boolean existsTable(int tableKey) {
-		MaintainConnection.connectLocalhost(DB);
+		MaintainConnection.connectToDatabase(DB);
 		try {
 			return TableExist.ifExist(tableKey);
 		} catch (SQLException e) {
@@ -73,5 +73,10 @@ public class MetaDatabaseManagerMethods implements DynamicDatabaseManager {
 	public TableMetaDto getTableMetaData(String tableId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public boolean existsTable(String tableId) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

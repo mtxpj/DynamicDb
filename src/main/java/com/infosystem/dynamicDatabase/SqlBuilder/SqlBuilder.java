@@ -30,7 +30,9 @@ public class SqlBuilder {
 					.append(getStartegiaSqlowa(columnDefinition.getDataType())
 							.przygotujSqlDoTworzeniaKolumny());
 			sqlCommand.append(new SyntaxCorrector()
-					.getProperColumnDefinitionSyntax(columnDefinition.isRequired()) + ", \n");
+					.getProperColumnDefinitionSyntax(columnDefinition
+							.isRequired())
+					+ ", \n");
 		}
 		sqlCommand.append("PRIMARY KEY ( id )\n) CHARSET=utf8;");
 		return sqlCommand.toString();
@@ -59,8 +61,8 @@ public class SqlBuilder {
 		sqlCommand.append("INSERT INTO ");
 		sqlCommand.append(row.getTableId());
 		sqlCommand.append(" ( ");
-		ArrayList<String> columnList = GetColumnNames.fromMetaData(row
-				.getTableId());
+		ArrayList<String> columnList = GetColumnNames.fromMetaData(String
+				.valueOf(row.getTableKey()));
 		for (String string : columnList) {
 			sqlCommand.append(string + ", ");
 		}

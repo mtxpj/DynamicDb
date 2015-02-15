@@ -19,7 +19,7 @@ public class TableManagerTest {
 	private static final long ROW_ID = 20;
 	private static final String TABLES_TABLE_NAME = ConnectorData.TABLES_TABLE_NAME;
 	private static final String SAMPLE_TABLE_NAME = DataForTests
-			.getSampleTable();
+			.SAMPLE_TABLE;
 	private static final String COLUMN_NAME = "table_id";
 
 	@Test
