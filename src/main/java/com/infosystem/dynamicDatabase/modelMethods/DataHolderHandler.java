@@ -20,6 +20,6 @@ public class DataHolderHandler {
 	}
 
 	public static DataType getDataTypeFromResultSet(ResultSet rs) {
-		return ResultsetManager.getColumnDefinition(rs).getDataType();
+		return ResultsetManager.isRequiredinition(rs).getDataType();
 	}
 }

@@ -2,7 +2,6 @@ package com.infosystem.dynamicDatabase.SqlBuilder;
 
 import static com.infosystem.dynamicDatabase.SqlBuilder.strategia.FabrykaStrategiiSqlowych.getStartegiaSqlowa;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,39 +18,22 @@ import com.infosystem.dynamicDatabase.modelMethods.GetColumnNames;
 
 public class SqlBuilder {
 
-	public static String createOrUpdate(TableDefinition td) {
+	public static String createOrUpdate(TableDefinition tableDefinition) {
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("CREATE TABLE IF NOT EXISTS ");
-		sqlCommand.append(String.valueOf(td.getKey()));
+		sqlCommand.append(tableDefinition.getId());
 		sqlCommand.append(" (\nid INT NOT NULL AUTO_INCREMENT,\n");
-		sqlCommand.append(getColumnListToCreateSql(td.getColumnList()));
+		List<ColumnDefinition> listaKolumn = tableDefinition.getColumnList();
+		for (ColumnDefinition columnDefinition : listaKolumn) {
+			sqlCommand.append(columnDefinition.getId() + " ");
+			sqlCommand
+					.append(getStartegiaSqlowa(columnDefinition.getDataType())
+							.przygotujSqlDoTworzeniaKolumny());
+			sqlCommand.append(new SyntaxCorrector()
+					.getProperColumnDefinitionSyntax(columnDefinition.isRequired()) + ", \n");
+		}
 		sqlCommand.append("PRIMARY KEY ( id )\n) CHARSET=utf8;");
 		return sqlCommand.toString();
-	}
-
-	public PreparedStatement createOrUpdateReturningPrepStatement(
-			TableDefinition td) {
-		PreparedStatement ps = null;
-		// TODO
-		return ps;
-	}
-
-	public static String getColumnListToCreateSql(
-			List<ColumnDefinition> listaKolumn) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < listaKolumn.size(); i++) {
-			StringBuilder column = new StringBuilder();
-			ColumnDefinition columnDefinition = listaKolumn.get(i);
-			column.append(columnDefinition.getId() + " ");
-			column.append(getStartegiaSqlowa(columnDefinition.getDataType())
-					.przygotujSqlDoTworzeniaKolumny());
-			column.append(new SyntaxCorrector()
-					.getProperColumnDefinitionSyntax(columnDefinition
-							.getColumnDef())
-					+ ", \n");
-			sb.append(column.toString());
-		}
-		return sb.toString();
 	}
 
 	public static String deleteTable(String tableId) {
@@ -75,10 +57,10 @@ public class SqlBuilder {
 		Map<String, DataHolder> dataHolder = row.getData();
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("INSERT INTO ");
-		sqlCommand.append(row.getTableKey());
+		sqlCommand.append(row.getTableId());
 		sqlCommand.append(" ( ");
-		ArrayList<String> columnList = GetColumnNames.fromMetaData(String
-				.valueOf(row.getTableKey()));
+		ArrayList<String> columnList = GetColumnNames.fromMetaData(row
+				.getTableId());
 		for (String string : columnList) {
 			sqlCommand.append(string + ", ");
 		}
