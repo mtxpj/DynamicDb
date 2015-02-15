@@ -2,6 +2,7 @@ package com.infosystem.dynamicDatabase.SqlBuilder;
 
 import static com.infosystem.dynamicDatabase.SqlBuilder.strategia.FabrykaStrategiiSqlowych.getStartegiaSqlowa;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,28 +19,37 @@ import com.infosystem.dynamicDatabase.modelMethods.GetColumnNames;
 
 public class SqlBuilder {
 
-	public static String createOrUpdate(TableDefinition tableDefinition) {
+	public static String createOrUpdate(TableDefinition td) {
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("CREATE TABLE IF NOT EXISTS ");
-		sqlCommand.append(String.valueOf(tableDefinition.getKey()));
+		sqlCommand.append(String.valueOf(td.getKey()));
 		sqlCommand.append(" (\nid INT NOT NULL AUTO_INCREMENT,\n");
-		List<ColumnDefinition> listaKolumn = tableDefinition.getColumnList();
-		sqlCommand.append(getColumnListToCreateSql(listaKolumn));
+		sqlCommand.append(getColumnListToCreateSql(td.getColumnList()));
 		sqlCommand.append("PRIMARY KEY ( id )\n) CHARSET=utf8;");
 		return sqlCommand.toString();
+	}
+
+	public PreparedStatement createOrUpdateReturningPrepStatement(
+			TableDefinition td) {
+		PreparedStatement ps = null;
+		// TODO
+		return ps;
 	}
 
 	public static String getColumnListToCreateSql(
 			List<ColumnDefinition> listaKolumn) {
 		StringBuilder sb = new StringBuilder();
-		for (ColumnDefinition columnDefinition : listaKolumn) {
-			sb.append(columnDefinition.getId() + " ");
-			sb.append(getStartegiaSqlowa(columnDefinition.getDataType())
+		for (int i = 0; i < listaKolumn.size(); i++) {
+			StringBuilder column = new StringBuilder();
+			ColumnDefinition columnDefinition = listaKolumn.get(i);
+			column.append(columnDefinition.getId() + " ");
+			column.append(getStartegiaSqlowa(columnDefinition.getDataType())
 					.przygotujSqlDoTworzeniaKolumny());
-			sb.append(new SyntaxCorrector()
+			column.append(new SyntaxCorrector()
 					.getProperColumnDefinitionSyntax(columnDefinition
 							.getColumnDef())
 					+ ", \n");
+			sb.append(column.toString());
 		}
 		return sb.toString();
 	}
@@ -65,10 +75,10 @@ public class SqlBuilder {
 		Map<String, DataHolder> dataHolder = row.getData();
 		StringBuilder sqlCommand = new StringBuilder();
 		sqlCommand.append("INSERT INTO ");
-		sqlCommand.append(row.getTableId());
+		sqlCommand.append(row.getTableKey());
 		sqlCommand.append(" ( ");
-		ArrayList<String> columnList = GetColumnNames.fromMetaData(row
-				.getTableId());
+		ArrayList<String> columnList = GetColumnNames.fromMetaData(String
+				.valueOf(row.getTableKey()));
 		for (String string : columnList) {
 			sqlCommand.append(string + ", ");
 		}

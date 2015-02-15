@@ -29,7 +29,7 @@ public class LocalhostConnectorTest {
 	public void shouldNotConnectToDbTest() throws SQLException {
 		// given
 		// when
-		LocalhostConnector.openConnection(WRONG_DB_NAME);
+		LocalhostConnector.openConnectionWithUserAndPassword(WRONG_DB_NAME);
 		// then
 		Assert.assertNull(ConnectionStatus.getInstance().getConnection());
 	}

@@ -9,34 +9,6 @@ import java.util.Properties;
 import com.infosystem.dynamicDatabase.constant.ConnectorData;
 
 public class LocalhostConnector {
-	public static void openConnection(String dbName) {
-
-		String databaseUrl = ConnectorData.hostUrl.concat(dbName);
-		
-		try {
-
-			Class.forName(ConnectorData.dbClass);
-			System.out.println("Connecting to database...");
-			Connection connection = DriverManager.getConnection(databaseUrl);
-			Statement statement = connection.createStatement();
-			ConnectionStatus.getInstance().setConnection(connection);
-			ConnectionStatus.getInstance().setStatement(statement);
-			if (connection != null) {
-				System.out.println("Connected to: " + dbName);
-			}
-		} catch (ClassNotFoundException exc) {
-			System.out.println("SQL driver not found");
-			exc.printStackTrace();
-
-		} catch (SQLException sqle) {
-			System.out.println("Connection failed");
-			sqle.printStackTrace();
-		} catch (Exception exc) {
-			System.out.println("Connection failed");
-			exc.printStackTrace();
-		}
-
-	}
 
 	public static void openConnectionWithUserAndPassword(String dbName) {
 		String databaseUrl = ConnectorData.hostUrl.concat(dbName);

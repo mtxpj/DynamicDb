@@ -3,7 +3,7 @@ package com.infosystem.dynamicDatabase.SqlBuilder;
 import com.infosystem.dynamicDatabase.model.ColumnDefinition;
 
 public class ColumnManagerSqlQuery {
-	StringBuilder sb = new StringBuilder();
+   StringBuilder sb = new StringBuilder();
 
 	public String addColumnToTable(String tableName,
 			ColumnDefinition columnDefinition) {
@@ -24,7 +24,7 @@ public class ColumnManagerSqlQuery {
 		sb.append("', ");
 		sb.append(String.valueOf(columnDefinition.getTable_id()));
 		sb.append(" );");
-		return sb.toString();
+		return getSb();
 	}
 
 	public String getSb() {

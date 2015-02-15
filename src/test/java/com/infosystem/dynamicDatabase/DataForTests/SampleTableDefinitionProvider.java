@@ -13,10 +13,12 @@ import com.infosystem.dynamicDatabase.model.TableDefinition;
 
 public class SampleTableDefinitionProvider {
 	public static final String TABLICA_PROBNA = "tablica_probna";
+	private static final int KEY = 1;
 
 	public static TableDefinition createSampleTableDefinition(int colNumber) {
 		TableDefinition tableDefinition = new TableDefinition();
-		tableDefinition.setId(TABLICA_PROBNA);
+		tableDefinition.setKey(KEY);
+		tableDefinition.setId(String.valueOf(KEY));
 		tableDefinition.setColumnList(getSampleColumnList(colNumber));
 		return tableDefinition;
 	}
@@ -58,6 +60,7 @@ public class SampleTableDefinitionProvider {
 		DataRow dataRow = new DataRow();
 		dataRow.setRowId((long) 1);
 		dataRow.setTableId(TABLICA_PROBNA);
+		dataRow.setTableKey(KEY);
 		dataRow.setData(data);
 		return dataRow;
 	}
